@@ -43,7 +43,7 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
       {Object.entries(timeLeft).map(([unit, value]) => (
         <div key={unit} className="flex flex-col items-center">
           <div className="text-3xl md:text-5xl font-extrabold p-3 md:p-4 bg-slate-900 rounded-lg min-w-[50px] md:min-w-[80px] text-center">
-            {formatNumber(value)}
+            {formatNumber(value as number)}
           </div>
           <span className="text-xs md:text-sm uppercase text-slate-400 mt-2">{unit}</span>
         </div>
