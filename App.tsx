@@ -9,18 +9,30 @@ import CommunityPage from './pages/CommunityPage';
 
 const App: React.FC = () => {
   const { isAdmin, isLoggedIn } = useAuth();
-  const [route, setRoute] = React.useState(window.location.pathname);
+  
+  // Get base path for GitHub Pages deployment
+  const basePath = import.meta.env.PROD ? '/PorterPlays' : '';
+  
+  // Remove base path from pathname to get clean route
+  const getCleanPath = (pathname: string) => {
+    if (basePath && pathname.startsWith(basePath)) {
+      return pathname.slice(basePath.length) || '/';
+    }
+    return pathname;
+  };
+  
+  const [route, setRoute] = React.useState(getCleanPath(window.location.pathname));
 
   React.useEffect(() => {
     const handlePopState = () => {
-      setRoute(window.location.pathname);
+      setRoute(getCleanPath(window.location.pathname));
     };
     
     // Listen for navigation changes
     window.addEventListener('popstate', handlePopState);
     
     // Also handle manual URL changes that don't fire popstate
-    const currentPath = window.location.pathname;
+    const currentPath = getCleanPath(window.location.pathname);
     if (route !== currentPath) {
       setRoute(currentPath);
     }
@@ -28,7 +40,7 @@ const App: React.FC = () => {
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };
-  }, [route]);
+  }, [route, basePath]);
 
   // Simple router logic
   if (route === '/admin') {

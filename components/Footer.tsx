@@ -1,19 +1,25 @@
 import React from 'react';
 import { DiscordIcon, LogoIcon, HeaderTelegramIcon, TwitterIcon, KickIcon } from './icons';
+import { createPath, navigateTo } from '../utils/navigation';
 
 export const Footer: React.FC = () => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    e.preventDefault();
+    navigateTo(path);
+  };
+
   return (
     <footer className="bg-slate-900/50 border-t border-slate-800">
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <a href="/" className="flex items-center gap-2 text-2xl font-bold uppercase tracking-widest">
+            <a href={createPath('/')} onClick={(e) => handleNavClick(e, '/')} className="flex items-center gap-2 text-2xl font-bold uppercase tracking-widest">
                 <LogoIcon />
                 <span>Porter Plays</span>
             </a>
           <nav className="flex items-center gap-6">
-            <a href="/leaderboards" className="font-semibold hover:text-brand-highlight transition-colors">Leaderboards</a>
-            <a href="/updates" className="font-semibold hover:text-brand-highlight transition-colors">Updates</a>
-            <a href="/community" className="font-semibold hover:text-brand-highlight transition-colors">Community</a>
+            <a href={createPath('/leaderboards')} onClick={(e) => handleNavClick(e, '/leaderboards')} className="font-semibold hover:text-brand-highlight transition-colors">Leaderboards</a>
+            <a href={createPath('/updates')} onClick={(e) => handleNavClick(e, '/updates')} className="font-semibold hover:text-brand-highlight transition-colors">Updates</a>
+            <a href={createPath('/community')} onClick={(e) => handleNavClick(e, '/community')} className="font-semibold hover:text-brand-highlight transition-colors">Community</a>
           </nav>
           <div className="flex items-center gap-4">
              <a href="https://discord.gg/porterplays" target="_blank" rel="noopener noreferrer" title="Discord" aria-label="Join our Discord server" className="text-slate-400 hover:text-brand-light transition-colors"><DiscordIcon /></a>

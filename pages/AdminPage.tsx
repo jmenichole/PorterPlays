@@ -3,6 +3,7 @@ import { LogoIcon, DashboardIcon, UsersIcon, ChartBarIcon, WrenchIcon } from '..
 import { useAuth } from '../contexts/AuthContext';
 import { kpiData, referralData, wagerAnalyticsData, mockUsers } from '../data/adminData';
 import { AdminKpi, ReferralStat, AnalyticsDataPoint, MockUser } from '../types';
+import { createPath, navigateTo } from '../utils/navigation';
 
 type AdminView = 'overview' | 'referrals' | 'analytics' | 'tools';
 
@@ -137,6 +138,11 @@ const AdminPage: React.FC = () => {
     const [view, setView] = useState<AdminView>('overview');
     const { user, logout } = useAuth();
 
+    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        navigateTo('/');
+    };
+
     const renderView = () => {
         switch (view) {
             case 'overview': return <DashboardOverview />;
@@ -164,7 +170,7 @@ const AdminPage: React.FC = () => {
         <div className="bg-brand-dark min-h-screen text-brand-light font-oxanium" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)', backgroundSize: '25px 25px'}}>
             <div className="flex">
                 <aside className="w-64 bg-slate-900/80 backdrop-blur-sm h-screen sticky top-0 flex flex-col p-4 border-r border-slate-800">
-                    <a href="/" className="flex items-center gap-2 text-xl font-bold uppercase tracking-widest px-3 mb-6">
+                    <a href={createPath('/')} onClick={handleNavClick} className="flex items-center gap-2 text-xl font-bold uppercase tracking-widest px-3 mb-6">
                         <LogoIcon />
                         <span>Porter Plays</span>
                     </a>

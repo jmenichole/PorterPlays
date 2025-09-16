@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { leaderboardData } from '../data/leaderboardData';
 import { Timeframe } from '../types';
 import { GoldMedal, SilverMedal, BronzeMedal } from './icons';
+import { createPath, navigateTo } from '../utils/navigation';
 
 const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -24,6 +25,11 @@ export const LeaderboardPreview: React.FC = () => {
         if (rank === 2) return <SilverMedal className="w-8 h-8" />;
         if (rank === 3) return <BronzeMedal className="w-8 h-8" />;
         return null;
+    };
+
+    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        navigateTo('/leaderboards');
     };
 
     return (
@@ -64,7 +70,8 @@ export const LeaderboardPreview: React.FC = () => {
 
                 <div className="text-center mt-10">
                     <a 
-                        href="/leaderboards" 
+                        href={createPath('/leaderboards')}
+                        onClick={handleNavClick}
                         className="inline-flex items-center justify-center bg-slate-700 hover:bg-slate-600 transition-colors text-white font-bold py-3 px-8 rounded-lg text-lg uppercase"
                     >
                         View Full Leaderboards

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Porter Plays | Thrill & Goated Leaderboards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'oxanium': ['Oxanium', 'sans-serif'],
+            },
+            colors: {
+              'brand-dark': '#1B1D29',
+              'brand-highlight': '#5CFFC1',
+              'brand-primary': '#5956FF',
+              'brand-light': '#FFFFFF',
+            },
+            animation: {
+              'float': 'float 6s ease-in-out infinite',
+              'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'glitch': 'glitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2',
+              'pulse-glow': 'pulse-glow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'float-in': 'float-in 0.5s ease-out forwards',
+            },
+            keyframes: {
+              float: {
+                '0%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-20px)' },
+                '100%': { transform: 'translateY(0px)' },
+              },
+              'float-in': {
+                '0%': { transform: 'translateY(20px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
+              },
+              pulse: {
+                '0%, 100%': { opacity: 1 },
+                '50%': { opacity: 0.5 },
+              },
+              'pulse-glow': {
+                '0%, 100%': {
+                  boxShadow: 'inset 0 0 5px rgba(92, 255, 193, 0.2), 0 0 0px rgba(92, 255, 193, 0)',
+                },
+                '50%': {
+                  boxShadow: 'inset 0 0 10px rgba(92, 255, 193, 0.5), 0 0 10px rgba(92, 255, 193, 0.3)',
+                },
+              },
+              glitch: {
+                '0%, 100%': { transform: 'translate(0, 0)' },
+                '20%': { transform: 'translate(-2px, 2px)' },
+                '40%': { transform: 'translate(-2px, -2px)' },
+                '60%': { transform: 'translate(2px, 2px)' },
+                '80%': { transform: 'translate(2px, -2px)' },
+              },
+            }
+          }
+        }
+      }
+    </script>
+    <script>
+      // GitHub Pages client-side routing fallback
+      // This redirects all 404s back to the main index.html which will handle routing
+      window.location.replace('/PorterPlays/');
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/"
+  }
+}
+</script>
+</head>
+  <body class="bg-brand-dark" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0); background-size: 25px 25px;">
+    <div id="root"></div>
+  </body>
+</html>
