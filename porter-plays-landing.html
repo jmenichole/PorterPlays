@@ -362,6 +362,12 @@
             box-shadow: 0 10px 25px rgba(89,86,255,0.3);
         }
         
+        /* Community Link Hover Effects */
+        .community-link:hover {
+            transform: translateY(-4px) !important;
+            box-shadow: 0 8px 25px rgba(89,86,255,0.3) !important;
+        }
+        
         /* Updates Section */
         .updates-section { padding: 6rem 0; }
         .news-grid { 
@@ -627,7 +633,7 @@
                 <div class="bot-header" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(89,86,255,0.2);">
                     <div class="bot-avatar" style="width: 50px; height: 50px; background: linear-gradient(135deg, #5956FF, #5CFFC1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🤖</div>
                     <div>
-                        <div style="color: #5CFFC1; font-weight: 700; font-size: 1.1rem;">Porter Guide</div>
+                        <div style="color: #5CFFC1; font-weight: 700; font-size: 1.1rem;">Wanna play? Follow steps below to get signed up</div>
                         <div style="color: #94a3b8; font-size: 0.9rem;" id="bot-status">Ready to help you get started!</div>
                     </div>
                     <div style="margin-left: auto;">
@@ -949,43 +955,54 @@
             <h2 class="section-title">Join The <span class="accent">Community</span></h2>
             <p class="section-description">Connect with the heart of our community through our feeds and social channels.</p>
             
-            <div class="community-feed">
-                <div class="feed-item">
-                    <div class="feed-source">🎰 @SHUFFLECOM</div>
-                    <div class="feed-content">
-                        <strong>$20,000 - MICROGAMING MARVELS! 🚀</strong><br><br>
-                        Step into a world of wonder with a lineup of top Microgaming hits.<br><br>
-                        Play the featured games, unlock multipliers, and watch as the most marvelous players share in a $20,000 prize pool!<br><br>
-                        <strong>Prize Pool:</strong> $20,000 USD<br><br>
-                        <strong>Code to get you started! 💸</strong><br>
-                        <span style="color: #9333ea; font-weight: 700;">MARVELMICRO20</span><br><br>
-                        <strong>$2.50 for the first 700! - $3,500 wager requirement past 7 days.</strong>
+            <!-- Community Links with Icons -->
+            <div class="community-links" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 3rem auto; max-width: 800px;">
+                <a href="https://discord.gg/porterplays" target="_blank" class="community-link" style="display: flex; flex-direction: column; align-items: center; padding: 2rem; background: linear-gradient(135deg, rgba(88,101,242,0.1), rgba(88,101,242,0.05)); border: 1px solid rgba(88,101,242,0.2); border-radius: 1rem; text-decoration: none; color: #5865f2; transition: all 0.3s ease; transform: translateY(0);">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">
+                        <svg width="60" height="60" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0)">
+                                <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="#5865f2"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0">
+                                    <rect width="71" height="55" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
                     </div>
-                    <div class="feed-time">Learn more here 📎</div>
-                </div>
+                    <h3 style="margin: 0; font-size: 1.2rem; font-weight: 700;">Discord</h3>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.8; text-align: center;">Join our community</p>
+                </a>
                 
-                <div class="feed-item">
-                    <div class="feed-source">🐐 @GOATED</div>
-                    <div class="feed-content">
-                        Fresh slots just landed. 🎰<br><br>
-                        Y'all ready to dive in?
+                <a href="https://t.me/porterplays" target="_blank" class="community-link" style="display: flex; flex-direction: column; align-items: center; padding: 2rem; background: linear-gradient(135deg, rgba(42,171,238,0.1), rgba(42,171,238,0.05)); border: 1px solid rgba(42,171,238,0.2); border-radius: 1rem; text-decoration: none; color: #2aabee; transition: all 0.3s ease; transform: translateY(0);">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m9.417 15.181-.397 5.584c.568 0 .814-.244 1.109-.537l2.663-2.545 5.518 4.041c1.012.564 1.725.267 1.998-.931L23.43 3.447c.229-1.124-.5-1.646-1.34-1.29L2.034 8.724c-1.143.434-1.118 1.023-.2 1.31l4.74 1.47 11.35-7.112c.543-.318 1.023-.145.588.225L9.417 15.18z" fill="#2aabee"/>
+                        </svg>
                     </div>
-                    <div class="feed-time">Today at 6:08 AM • 9/16</div>
-                </div>
+                    <h3 style="margin: 0; font-size: 1.2rem; font-weight: 700;">Telegram</h3>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.8; text-align: center;">Stay updated</p>
+                </a>
                 
-                <div class="feed-item">
-                    <div class="feed-source">🐐 PLAY GOATED</div>
-                    <div class="feed-content">
-                        <strong>GM</strong><br><br>
-                        <span style="color: #fbbf24; font-weight: 700; font-family: monospace; font-size: 1.1rem;">UEHIPUF</span><br><br>
-                        <strong>Amount:</strong> $10<br>
-                        <strong>Wager Req. last 7d:</strong> 5k<br><br>
-                        🐐 <strong>Must be registered under playGoated to claim</strong><br>
-                        🐐 Want in on the action? Join the discord<br><br>
-                        Sign up here or use code <strong style="color: #5CFFC1;">PLAYGOATED</strong> at goated.com
+                <a href="https://x.com/porterplays_" target="_blank" class="community-link" style="display: flex; flex-direction: column; align-items: center; padding: 2rem; background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); border: 1px solid rgba(255,255,255,0.2); border-radius: 1rem; text-decoration: none; color: #ffffff; transition: all 0.3s ease; transform: translateY(0);">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="#ffffff"/>
+                        </svg>
                     </div>
-                    <div class="feed-time">Yesterday at 10:04 PM</div>
-                </div>
+                    <h3 style="margin: 0; font-size: 1.2rem; font-weight: 700;">X (Twitter)</h3>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.8; text-align: center;">Follow updates</p>
+                </a>
+                
+                <a href="https://kick.com/porterplays" target="_blank" class="community-link" style="display: flex; flex-direction: column; align-items: center; padding: 2rem; background: linear-gradient(135deg, rgba(83,217,79,0.1), rgba(83,217,79,0.05)); border: 1px solid rgba(83,217,79,0.2); border-radius: 1rem; text-decoration: none; color: #53d94f; transition: all 0.3s ease; transform: translateY(0);">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19.81 3.528H15.698V5.33h2.647v3.966h-2.647v1.802h2.647v3.966h-2.647v1.802h4.112V3.528zM14.07 3.528H4.19v16.944h9.88V3.528zm-1.764 1.802v6.643l-4.2-6.643H5.908v13.34h1.764V8.63l4.236 6.642h.398V5.33h-1.764z" fill="#53d94f"/>
+                        </svg>
+                    </div>
+                    <h3 style="margin: 0; font-size: 1.2rem; font-weight: 700;">Kick</h3>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.8; text-align: center;">Watch streams</p>
+                </a>
             </div>
             
             <div class="social-links">
@@ -1550,7 +1567,7 @@
             } else {
                 messageDiv.className = 'bot-message';
                 messageDiv.style.cssText = 'background: rgba(89,86,255,0.1); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem;';
-                messageDiv.innerHTML = `<div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">Porter Guide:</div><div style="color: #cbd5e1; line-height: 1.6;">${message}</div>`;
+                messageDiv.innerHTML = `<div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">Porter Bot:</div><div style="color: #cbd5e1; line-height: 1.6;">${message}</div>`;
             }
             
             messagesContainer.appendChild(messageDiv);
