@@ -22,6 +22,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState<User | null>(null);
 
+  // Auto-login for testing admin page
+  React.useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const autoLogin = urlParams.get('autoLogin') || window.location.pathname === '/admin';
+    if (autoLogin) {
+      login();
+    }
+  }, []);
+
   const login = () => {
     // In a real app, this would be a Discord OAuth flow
     // For demo, logging in as an admin user.

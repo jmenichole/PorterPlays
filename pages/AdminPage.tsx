@@ -16,10 +16,11 @@ const formatCurrency = (amount: number) => {
 };
 
 const KpiCard: React.FC<{ item: AdminKpi }> = ({ item }) => (
-    <div className="bg-slate-800 p-6 rounded-lg border border-slate-700">
-        <p className="text-sm text-slate-400">{item.label}</p>
-        <p className="text-3xl font-bold mt-2">{item.value}</p>
-        <p className={`text-sm mt-1 ${item.changeType === 'increase' ? 'text-green-400' : 'text-red-400'}`}>
+    <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/60 p-6 rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all duration-300 hover:border-brand-primary/30 hover:shadow-xl group"
+         style={{boxShadow: '0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)'}}>
+        <p className="text-sm text-slate-400 uppercase tracking-wide font-semibold">{item.label}</p>
+        <p className="text-3xl font-bold mt-2 bg-gradient-to-r from-brand-highlight to-brand-primary bg-clip-text text-transparent group-hover:from-brand-primary group-hover:to-brand-highlight transition-all duration-300">{item.value}</p>
+        <p className={`text-sm mt-1 font-medium ${item.changeType === 'increase' ? 'text-green-400' : 'text-red-400'}`}>
             {item.change} vs last month
         </p>
     </div>
@@ -27,7 +28,10 @@ const KpiCard: React.FC<{ item: AdminKpi }> = ({ item }) => (
 
 const DashboardOverview: React.FC = () => (
     <div>
-        <h2 className="text-3xl font-bold mb-6">Dashboard Overview</h2>
+        <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-brand-highlight to-brand-primary bg-clip-text text-transparent"
+            style={{textShadow: '0 0 20px rgba(92,255,193,0.3)'}}>
+            Dashboard Overview
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {kpiData.map(item => <KpiCard key={item.label} item={item} />)}
         </div>
@@ -36,24 +40,29 @@ const DashboardOverview: React.FC = () => (
 
 const ReferralStats: React.FC = () => (
     <div>
-        <h2 className="text-3xl font-bold mb-6">Referral Sign-up Stats</h2>
-        <div className="bg-slate-800 rounded-lg border border-slate-700 overflow-x-auto">
+        <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-brand-highlight to-brand-primary bg-clip-text text-transparent"
+            style={{textShadow: '0 0 20px rgba(92,255,193,0.3)'}}>
+            Referral Sign-up Stats
+        </h2>
+        <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/60 rounded-xl border border-slate-700/50 overflow-hidden backdrop-blur-sm"
+             style={{boxShadow: '0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)'}}>
             <table className="w-full text-left">
-                <thead className="bg-slate-900/50">
+                <thead className="bg-gradient-to-r from-slate-900/80 to-slate-800/60"
+                       style={{borderBottom: '1px solid rgba(71, 85, 105, 0.3)'}}>
                     <tr>
-                        <th className="p-4 uppercase text-sm font-semibold text-slate-400">Site</th>
-                        <th className="p-4 uppercase text-sm font-semibold text-slate-400">Signups</th>
-                        <th className="p-4 uppercase text-sm font-semibold text-slate-400">Conversion Rate</th>
-                        <th className="p-4 uppercase text-sm font-semibold text-slate-400 text-right">Total Wagered</th>
+                        <th className="p-4 uppercase text-sm font-semibold text-slate-300 tracking-wide">Site</th>
+                        <th className="p-4 uppercase text-sm font-semibold text-slate-300 tracking-wide">Signups</th>
+                        <th className="p-4 uppercase text-sm font-semibold text-slate-300 tracking-wide">Conversion Rate</th>
+                        <th className="p-4 uppercase text-sm font-semibold text-slate-300 tracking-wide text-right">Total Wagered</th>
                     </tr>
                 </thead>
                 <tbody>
                     {referralData.map((stat, index) => (
-                        <tr key={stat.site} className="border-t border-slate-700 hover:bg-slate-700/50">
-                            <td className="p-4 font-bold text-brand-highlight">{stat.site}</td>
-                            <td className="p-4">{stat.signups.toLocaleString()}</td>
-                            <td className="p-4">{stat.conversionRate}</td>
-                            <td className="p-4 text-right font-semibold">{formatCurrency(stat.totalWagered)}</td>
+                        <tr key={stat.site} className="border-t border-slate-700/30 hover:bg-gradient-to-r hover:from-slate-700/30 hover:to-slate-600/20 transition-all duration-200 group">
+                            <td className="p-4 font-bold text-brand-highlight group-hover:text-brand-primary transition-colors">{stat.site}</td>
+                            <td className="p-4 font-medium">{stat.signups.toLocaleString()}</td>
+                            <td className="p-4 font-medium">{stat.conversionRate}</td>
+                            <td className="p-4 text-right font-bold text-brand-highlight">{formatCurrency(stat.totalWagered)}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -66,16 +75,31 @@ const AnalyticsView: React.FC = () => {
     const maxWagered = Math.max(...wagerAnalyticsData.map(d => d.wagered));
     return (
         <div>
-            <h2 className="text-3xl font-bold mb-6">Wager Analytics</h2>
-            <div className="bg-slate-800 p-6 rounded-lg border border-slate-700">
-                <h3 className="font-semibold mb-1 text-slate-300">Total Wagered - Last 30 Days</h3>
-                <p className="text-3xl font-bold mb-4 text-brand-highlight">{formatCurrency(wagerAnalyticsData.reduce((acc, curr) => acc + curr.wagered, 0))}</p>
-                <div className="w-full h-64 flex items-end gap-1">
+            <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-brand-highlight to-brand-primary bg-clip-text text-transparent"
+                style={{textShadow: '0 0 20px rgba(92,255,193,0.3)'}}>
+                Wager Analytics
+            </h2>
+            <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/60 p-6 rounded-xl border border-slate-700/50 backdrop-blur-sm"
+                 style={{boxShadow: '0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)'}}>
+                <h3 className="font-semibold mb-1 text-slate-300 uppercase tracking-wide">Total Wagered - Last 30 Days</h3>
+                <p className="text-3xl font-bold mb-4 bg-gradient-to-r from-brand-highlight to-brand-primary bg-clip-text text-transparent"
+                   style={{textShadow: '0 0 10px rgba(92,255,193,0.3)'}}>
+                    {formatCurrency(wagerAnalyticsData.reduce((acc, curr) => acc + curr.wagered, 0))}
+                </p>
+                <div className="w-full h-64 flex items-end gap-1 p-2 bg-slate-900/30 rounded-lg backdrop-blur-sm"
+                     style={{border: '1px solid rgba(71, 85, 105, 0.3)'}}>
                     {wagerAnalyticsData.map(data => (
-                        <div key={data.day} className="flex-1 bg-brand-primary hover:bg-opacity-80 transition-all" style={{ height: `${(data.wagered / maxWagered) * 100}%` }} title={`Day ${data.day}: ${formatCurrency(data.wagered)}`}></div>
+                        <div key={data.day} 
+                             className="flex-1 bg-gradient-to-t from-brand-primary to-brand-highlight hover:from-brand-highlight hover:to-brand-primary transition-all duration-300 rounded-t-sm"
+                             style={{ 
+                                height: `${(data.wagered / maxWagered) * 100}%`,
+                                boxShadow: '0 0 10px rgba(89,86,255,0.4)'
+                             }} 
+                             title={`Day ${data.day}: ${formatCurrency(data.wagered)}`}>
+                        </div>
                     ))}
                 </div>
-                <p className="text-center text-xs text-slate-500 mt-2">Day 1 &rarr; Day 30</p>
+                <p className="text-center text-xs text-slate-400 mt-2 font-medium tracking-wide">Day 1 &rarr; Day 30</p>
             </div>
         </div>
     )
@@ -94,9 +118,13 @@ const AdminTools: React.FC = () => {
     
     return (
         <div>
-            <h2 className="text-3xl font-bold mb-6">User Tools</h2>
-            <div className="bg-slate-800 p-6 rounded-lg border border-slate-700">
-                <h3 className="font-semibold text-slate-300 mb-2">User Lookup</h3>
+            <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-brand-highlight to-brand-primary bg-clip-text text-transparent"
+                style={{textShadow: '0 0 20px rgba(92,255,193,0.3)'}}>
+                User Tools
+            </h2>
+            <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/60 p-6 rounded-xl border border-slate-700/50 backdrop-blur-sm"
+                 style={{boxShadow: '0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)'}}>
+                <h3 className="font-semibold text-slate-300 mb-4 uppercase tracking-wide">User Lookup</h3>
                 <input
                     type="text"
                     placeholder="Search by username..."
@@ -105,25 +133,44 @@ const AdminTools: React.FC = () => {
                       setSearchTerm(e.target.value);
                       setSelectedUser(null);
                     }}
-                    className="w-full bg-slate-900 border border-slate-600 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                    className="w-full bg-gradient-to-r from-slate-900/80 to-slate-800/60 border border-slate-600/50 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary/50 transition-all duration-200 backdrop-blur-sm"
+                    style={{boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.2)'}}
                 />
                  {searchTerm && (
-                    <div className="mt-2 bg-slate-900 border border-slate-700 rounded-md max-h-48 overflow-y-auto">
+                    <div className="mt-3 bg-gradient-to-r from-slate-900/90 to-slate-800/70 border border-slate-700/50 rounded-lg max-h-48 overflow-y-auto backdrop-blur-sm"
+                         style={{boxShadow: '0 4px 15px rgba(0,0,0,0.2)'}}>
                         {filteredUsers.map(user => (
-                            <div key={user.id} onClick={() => { setSelectedUser(user); setSearchTerm(user.name); }} className="p-2 hover:bg-brand-primary cursor-pointer">{user.name}</div>
+                            <div key={user.id} 
+                                 onClick={() => { setSelectedUser(user); setSearchTerm(user.name); }} 
+                                 className="p-3 hover:bg-gradient-to-r hover:from-brand-primary/20 hover:to-brand-highlight/10 cursor-pointer transition-all duration-200 border-b border-slate-700/30 last:border-b-0 font-medium hover:text-brand-highlight">
+                                {user.name}
+                            </div>
                         ))}
                     </div>
                 )}
                 {selectedUser && (
-                    <div className="mt-6 p-4 bg-slate-900/50 rounded-lg border border-slate-700">
-                        <h4 className="text-xl font-bold">{selectedUser.name}</h4>
-                        <p className="text-sm text-slate-400">User ID: {selectedUser.id}</p>
-                        <p className="text-sm text-slate-400">Signed Up: {selectedUser.signupDate}</p>
-                        <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
-                            <div><span className="font-semibold text-slate-300">Wagered (Today):</span> {formatCurrency(selectedUser.wagered.today)}</div>
-                            <div><span className="font-semibold text-slate-300">Wagered (Week):</span> {formatCurrency(selectedUser.wagered.this_week)}</div>
-                            <div><span className="font-semibold text-slate-300">Wagered (Month):</span> {formatCurrency(selectedUser.wagered.this_month)}</div>
-                            <div><span className="font-semibold text-slate-300">Wagered (All Time):</span> {formatCurrency(selectedUser.wagered.all_time)}</div>
+                    <div className="mt-6 p-4 bg-gradient-to-br from-slate-900/60 to-slate-800/40 rounded-lg border border-slate-700/50 backdrop-blur-sm"
+                         style={{boxShadow: '0 4px 15px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05)'}}>
+                        <h4 className="text-xl font-bold text-brand-highlight mb-2">{selectedUser.name}</h4>
+                        <p className="text-sm text-slate-400 mb-1">User ID: <span className="text-slate-300 font-medium">{selectedUser.id}</span></p>
+                        <p className="text-sm text-slate-400 mb-4">Signed Up: <span className="text-slate-300 font-medium">{selectedUser.signupDate}</span></p>
+                        <div className="grid grid-cols-2 gap-3 text-sm">
+                            <div className="bg-slate-800/40 p-3 rounded-lg border border-slate-600/30">
+                                <span className="font-semibold text-slate-300 block">Wagered (Today):</span> 
+                                <span className="text-brand-highlight font-bold">{formatCurrency(selectedUser.wagered.today)}</span>
+                            </div>
+                            <div className="bg-slate-800/40 p-3 rounded-lg border border-slate-600/30">
+                                <span className="font-semibold text-slate-300 block">Wagered (Week):</span> 
+                                <span className="text-brand-highlight font-bold">{formatCurrency(selectedUser.wagered.this_week)}</span>
+                            </div>
+                            <div className="bg-slate-800/40 p-3 rounded-lg border border-slate-600/30">
+                                <span className="font-semibold text-slate-300 block">Wagered (Month):</span> 
+                                <span className="text-brand-highlight font-bold">{formatCurrency(selectedUser.wagered.this_month)}</span>
+                            </div>
+                            <div className="bg-slate-800/40 p-3 rounded-lg border border-slate-600/30">
+                                <span className="font-semibold text-slate-300 block">Wagered (All Time):</span> 
+                                <span className="text-brand-primary font-bold">{formatCurrency(selectedUser.wagered.all_time)}</span>
+                            </div>
                         </div>
                     </div>
                 )}
@@ -150,11 +197,16 @@ const AdminPage: React.FC = () => {
     const NavItem: React.FC<{ currentView: AdminView, targetView: AdminView, setView: (view: AdminView) => void, children: React.ReactNode }> = ({ currentView, targetView, setView, children }) => (
         <button
             onClick={() => setView(targetView)}
-            className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium w-full text-left transition-colors ${
+            className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium w-full text-left transition-all duration-300 ${
                 currentView === targetView
-                    ? 'bg-brand-primary text-white'
-                    : 'text-slate-300 hover:bg-slate-700 hover:text-white'
+                    ? 'bg-gradient-to-r from-brand-primary/80 to-brand-primary text-white shadow-lg' 
+                    : 'text-slate-300 hover:bg-gradient-to-r hover:from-slate-700/50 hover:to-slate-600/30 hover:text-white hover:shadow-md'
             }`}
+            style={{
+                boxShadow: currentView === targetView 
+                    ? '0 4px 15px rgba(89,86,255,0.3), inset 0 1px 0 rgba(255,255,255,0.1)' 
+                    : undefined
+            }}
         >
             {children}
         </button>
@@ -163,8 +215,10 @@ const AdminPage: React.FC = () => {
     return (
         <div className="bg-brand-dark min-h-screen text-brand-light font-oxanium" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)', backgroundSize: '25px 25px'}}>
             <div className="flex">
-                <aside className="w-64 bg-slate-900/80 backdrop-blur-sm h-screen sticky top-0 flex flex-col p-4 border-r border-slate-800">
-                    <a href="/" className="flex items-center gap-2 text-xl font-bold uppercase tracking-widest px-3 mb-6">
+                <aside className="w-64 bg-gradient-to-b from-slate-900/90 to-slate-900/70 backdrop-blur-sm h-screen sticky top-0 flex flex-col p-4 border-r border-slate-700/50 shadow-2xl"
+                       style={{boxShadow: '2px 0 20px rgba(0,0,0,0.3), inset 0 0 20px rgba(89,86,255,0.05)'}}>
+                    <a href="/" className="flex items-center gap-2 text-xl font-bold uppercase tracking-widest px-3 mb-6 text-brand-highlight" 
+                       style={{textShadow: '0 0 10px rgba(92,255,193,0.3)'}}>
                         <LogoIcon />
                         <span>Porter Plays</span>
                     </a>
@@ -183,15 +237,18 @@ const AdminPage: React.FC = () => {
                         </NavItem>
                     </nav>
                      <div className="mt-auto">
-                         <div className="border-t border-slate-700 pt-4 text-center">
-                            <p className="text-sm font-semibold">{user?.name}</p>
-                            <button onClick={logout} className="text-xs text-slate-400 hover:text-brand-highlight">Logout</button>
+                         <div className="border-t border-slate-700/50 pt-4 text-center bg-gradient-to-r from-slate-800/30 to-slate-700/20 rounded-lg p-3 backdrop-blur-sm"
+                              style={{boxShadow: 'inset 0 1px 3px rgba(255,255,255,0.05)'}}>
+                            <p className="text-sm font-semibold text-brand-highlight">{user?.name}</p>
+                            <button onClick={logout} className="text-xs text-slate-400 hover:text-brand-highlight transition-all duration-200 hover:shadow-sm">Logout</button>
                          </div>
                     </div>
                 </aside>
 
-                <main className="flex-1 p-8">
-                    {renderView()}
+                <main className="flex-1 p-8 relative">
+                    <div className="relative z-10">
+                        {renderView()}
+                    </div>
                 </main>
             </div>
         </div>
