@@ -73,7 +73,7 @@ export const Feedback: React.FC = () => {
         <>
             <button
                 onClick={() => setIsOpen(true)}
-                className="fixed bottom-5 right-5 bg-brand-primary hover:bg-opacity-80 text-white rounded-full p-4 shadow-lg z-50 transition-transform transform hover:scale-110"
+                className="fixed bottom-6 right-6 bg-gradient-to-r from-brand-primary to-brand-primary/80 hover:from-brand-primary/90 hover:to-brand-primary/70 text-brand-dark rounded-full p-4 shadow-xl shadow-brand-primary/25 hover:shadow-brand-primary/40 z-50 transition-all duration-300 transform hover:scale-110 border-2 border-brand-primary/30"
                 aria-label="Provide Feedback"
             >
                 <FeedbackIcon />
@@ -81,16 +81,16 @@ export const Feedback: React.FC = () => {
 
             {isOpen && (
                 <div 
-                    className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-opacity duration-300"
+                    className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity duration-300"
                     onClick={() => setIsOpen(false)}
                 >
                     <div 
-                        className="bg-slate-800 border border-slate-700 rounded-lg shadow-2xl p-6 w-full max-w-md relative animate-float-in"
+                        className="bg-gradient-to-br from-slate-800/95 to-slate-900/95 backdrop-blur-sm border border-slate-600/50 rounded-2xl shadow-2xl p-8 w-full max-w-lg relative animate-float-in"
                         onClick={(e) => e.stopPropagation()} // Prevents modal from closing when clicking inside
                     >
                         <button
                             onClick={() => setIsOpen(false)}
-                            className="absolute top-3 right-3 text-slate-400 hover:text-white"
+                            className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors duration-200 p-2 hover:bg-slate-700/50 rounded-lg"
                             aria-label="Close feedback form"
                         >
                             <CloseIcon />
@@ -98,30 +98,48 @@ export const Feedback: React.FC = () => {
                         
                         {!isSubmitted ? (
                             <form onSubmit={handleSubmit}>
-                                <h2 className="text-2xl font-bold mb-4">Share Your Feedback</h2>
-                                <p className="text-slate-400 mb-6">Have an idea or found a bug? Let us know!</p>
+                                <div className="text-center mb-8">
+                                    <div className="w-16 h-16 bg-gradient-to-br from-brand-primary/20 to-brand-highlight/20 rounded-2xl flex items-center justify-center border border-brand-primary/30 mx-auto mb-4">
+                                        <FeedbackIcon />
+                                    </div>
+                                    <h2 className="text-3xl font-bold mb-2">Share Your Feedback</h2>
+                                    <p className="text-slate-300">Have an idea or found a bug? We'd love to hear from you!</p>
+                                </div>
+                                
                                 <textarea
                                     value={feedback}
                                     onChange={(e) => setFeedback(e.target.value)}
                                     placeholder="Your feedback is valuable to us..."
-                                    className="w-full h-32 bg-slate-900 border border-slate-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
+                                    className="w-full h-36 bg-slate-900/50 border border-slate-600/50 rounded-xl p-4 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent resize-none text-slate-200 placeholder-slate-400 backdrop-blur-sm"
                                     required
                                     minLength={10}
                                     aria-label="Feedback input"
                                 />
-                                {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
+                                {error && <p className="text-red-400 text-sm mt-3 px-1">{error}</p>}
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="w-full mt-4 bg-brand-primary hover:bg-opacity-80 text-white font-bold py-3 rounded-lg transition-colors disabled:bg-slate-600 disabled:cursor-not-allowed"
+                                    className="w-full mt-6 bg-gradient-to-r from-brand-primary to-brand-primary/80 hover:from-brand-primary/90 hover:to-brand-primary/70 disabled:from-slate-600 disabled:to-slate-500 text-brand-dark disabled:text-slate-400 font-bold py-4 rounded-xl transition-all duration-300 disabled:cursor-not-allowed shadow-lg shadow-brand-primary/25 hover:shadow-brand-primary/40 hover:scale-105"
                                 >
-                                    {isSubmitting ? 'Sending...' : 'Send Feedback'}
+                                    {isSubmitting ? (
+                                        <span className="flex items-center justify-center gap-2">
+                                            <div className="w-4 h-4 border-2 border-brand-dark/30 border-t-brand-dark rounded-full animate-spin"></div>
+                                            Sending...
+                                        </span>
+                                    ) : (
+                                        'Send Feedback'
+                                    )}
                                 </button>
                             </form>
                         ) : (
-                            <div className="text-center py-8">
-                                <h2 className="text-2xl font-bold text-brand-highlight">Thank You!</h2>
-                                <p className="text-slate-300 mt-2">Your feedback has been received.</p>
+                            <div className="text-center py-12">
+                                <div className="w-16 h-16 bg-gradient-to-br from-brand-highlight/20 to-green-400/20 rounded-2xl flex items-center justify-center border border-brand-highlight/30 mx-auto mb-6">
+                                    <svg className="w-8 h-8 text-brand-highlight" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <h2 className="text-3xl font-bold text-brand-highlight mb-2">Thank You!</h2>
+                                <p className="text-xl text-slate-300">Your feedback has been received and will help us improve.</p>
                             </div>
                         )}
                     </div>
