@@ -2,18 +2,26 @@ import React from 'react';
 import { DiscordIcon, LogoIcon, HeaderTelegramIcon, TwitterIcon, KickIcon } from './icons';
 
 export const Footer: React.FC = () => {
+  // Create base-path-aware navigation handler
+  const navigate = (path: string) => {
+    const basePath = window.location.pathname.startsWith('/PorterPlays/') ? '/PorterPlays' : '';
+    const fullPath = basePath + path;
+    window.history.pushState(null, '', fullPath);
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  };
+
   return (
     <footer className="bg-slate-900/50 border-t border-slate-800">
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <a href="/" className="flex items-center gap-2 text-2xl font-bold uppercase tracking-widest">
+            <button onClick={() => navigate('/')} className="flex items-center gap-2 text-2xl font-bold uppercase tracking-widest cursor-pointer border-none bg-transparent text-inherit">
                 <LogoIcon />
                 <span>Porter Plays</span>
-            </a>
+            </button>
           <nav className="flex items-center gap-6">
-            <a href="/leaderboards" className="font-semibold hover:text-brand-highlight transition-colors">Leaderboards</a>
-            <a href="/updates" className="font-semibold hover:text-brand-highlight transition-colors">Updates</a>
-            <a href="/community" className="font-semibold hover:text-brand-highlight transition-colors">Community</a>
+            <button onClick={() => navigate('/leaderboards')} className="font-semibold hover:text-brand-highlight transition-colors cursor-pointer border-none bg-transparent text-inherit">Leaderboards</button>
+            <button onClick={() => navigate('/updates')} className="font-semibold hover:text-brand-highlight transition-colors cursor-pointer border-none bg-transparent text-inherit">Updates</button>
+            <button onClick={() => navigate('/community')} className="font-semibold hover:text-brand-highlight transition-colors cursor-pointer border-none bg-transparent text-inherit">Community</button>
           </nav>
           <div className="flex items-center gap-4">
              <a href="https://discord.gg/porterplays" target="_blank" rel="noopener noreferrer" title="Discord" aria-label="Join our Discord server" className="text-slate-400 hover:text-brand-light transition-colors"><DiscordIcon /></a>

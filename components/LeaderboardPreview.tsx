@@ -26,6 +26,14 @@ export const LeaderboardPreview: React.FC = () => {
         return null;
     };
 
+    // Create base-path-aware navigation handler
+    const navigate = (path: string) => {
+        const basePath = window.location.pathname.startsWith('/PorterPlays/') ? '/PorterPlays' : '';
+        const fullPath = basePath + path;
+        window.history.pushState(null, '', fullPath);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+    };
+
     return (
         <section className="py-16 md:py-20">
             <div className="container mx-auto px-4">
@@ -63,12 +71,12 @@ export const LeaderboardPreview: React.FC = () => {
                 </div>
 
                 <div className="text-center mt-10">
-                    <a 
-                        href="/leaderboards" 
-                        className="inline-flex items-center justify-center bg-slate-700 hover:bg-slate-600 transition-colors text-white font-bold py-3 px-8 rounded-lg text-lg uppercase"
+                    <button 
+                        onClick={() => navigate('/leaderboards')}
+                        className="inline-flex items-center justify-center bg-slate-700 hover:bg-slate-600 transition-colors text-white font-bold py-3 px-8 rounded-lg text-lg uppercase cursor-pointer border-none"
                     >
                         View Full Leaderboards
-                    </a>
+                    </button>
                 </div>
             </div>
         </section>

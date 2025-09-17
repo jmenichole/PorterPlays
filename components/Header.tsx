@@ -5,19 +5,27 @@ import { useAuth } from '../contexts/AuthContext';
 export const Header: React.FC = () => {
   const { isLoggedIn, user, login, logout, isAdmin } = useAuth();
 
+  // Create base-path-aware navigation handler
+  const navigate = (path: string) => {
+    const basePath = window.location.pathname.startsWith('/PorterPlays/') ? '/PorterPlays' : '';
+    const fullPath = basePath + path;
+    window.history.pushState(null, '', fullPath);
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  };
+
   return (
     <header className="bg-brand-dark/80 backdrop-blur-sm sticky top-0 z-50 border-b border-slate-800">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          <a href="/" className="flex items-center gap-2 text-2xl font-bold uppercase tracking-widest">
+          <button onClick={() => navigate('/')} className="flex items-center gap-2 text-2xl font-bold uppercase tracking-widest cursor-pointer border-none bg-transparent text-inherit">
             <LogoIcon />
             <span>Porter Plays</span>
-          </a>
+          </button>
 
           <nav className="hidden md:flex items-center gap-8">
-            <a href="/leaderboards" className="font-semibold hover:text-brand-highlight transition-colors">Leaderboards</a>
-            <a href="/updates" className="font-semibold hover:text-brand-highlight transition-colors">Updates</a>
-            <a href="/community" className="font-semibold hover:text-brand-highlight transition-colors">Community</a>
+            <button onClick={() => navigate('/leaderboards')} className="font-semibold hover:text-brand-highlight transition-colors cursor-pointer border-none bg-transparent text-inherit">Leaderboards</button>
+            <button onClick={() => navigate('/updates')} className="font-semibold hover:text-brand-highlight transition-colors cursor-pointer border-none bg-transparent text-inherit">Updates</button>
+            <button onClick={() => navigate('/community')} className="font-semibold hover:text-brand-highlight transition-colors cursor-pointer border-none bg-transparent text-inherit">Community</button>
           </nav>
 
           <div className="flex items-center gap-4">
@@ -30,12 +38,12 @@ export const Header: React.FC = () => {
               <div className="flex items-center gap-4">
                 <span className="hidden sm:block font-semibold">Welcome, {user?.name}</span>
                 {isAdmin && (
-                   <a
-                    href="/admin"
-                    className="bg-brand-primary hover:bg-opacity-80 transition-colors text-white font-bold py-2 px-4 rounded-lg"
+                   <button
+                    onClick={() => navigate('/admin')}
+                    className="bg-brand-primary hover:bg-opacity-80 transition-colors text-white font-bold py-2 px-4 rounded-lg cursor-pointer border-none"
                   >
                     Admin
-                  </a>
+                  </button>
                 )}
                 <button
                   onClick={logout}

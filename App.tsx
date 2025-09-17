@@ -9,20 +9,44 @@ import CommunityPage from './pages/CommunityPage';
 
 const App: React.FC = () => {
   const { isAdmin, isLoggedIn } = useAuth();
-  const [route, setRoute] = React.useState(window.location.pathname);
+  
+  // Get the base path from the document or environment
+  const getBasePath = () => {
+    const base = document.querySelector('base');
+    if (base && base.href) {
+      return new URL(base.href).pathname;
+    }
+    // Fallback for production build - check if running on GitHub Pages or similar
+    const pathname = window.location.pathname;
+    if (pathname.startsWith('/PorterPlays/')) {
+      return '/PorterPlays/';
+    }
+    return '/';
+  };
+
+  const getRouteFromPathname = (pathname: string) => {
+    const basePath = getBasePath();
+    // Remove base path if it exists at the start
+    if (pathname.startsWith(basePath)) {
+      return pathname.slice(basePath.length - 1); // Keep leading slash
+    }
+    return pathname;
+  };
+
+  const [route, setRoute] = React.useState(getRouteFromPathname(window.location.pathname));
 
   React.useEffect(() => {
     const handlePopState = () => {
-      setRoute(window.location.pathname);
+      setRoute(getRouteFromPathname(window.location.pathname));
     };
     
     // Listen for navigation changes
     window.addEventListener('popstate', handlePopState);
     
     // Also handle manual URL changes that don't fire popstate
-    const currentPath = window.location.pathname;
-    if (route !== currentPath) {
-      setRoute(currentPath);
+    const currentRoute = getRouteFromPathname(window.location.pathname);
+    if (route !== currentRoute) {
+      setRoute(currentRoute);
     }
     
     return () => {
