@@ -111,62 +111,96 @@ export const LeaderboardsContainer: React.FC = () => {
     const activeTabData = leaderboardTabs.find(tab => tab.id === activeTab);
 
     return (
-        <section className="py-20 md:py-24">
-            <div className="container mx-auto px-4">
-                <div className="text-center max-w-4xl mx-auto">
-                    <h2 className="text-4xl md:text-5xl font-extrabold uppercase tracking-wider">
-                       Climb The <span className="text-brand-primary">Ranks</span>
+        <section className="py-24 md:py-32 relative">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/20 to-transparent"></div>
+            <div className="container mx-auto px-4 relative z-10">
+                <div className="text-center max-w-5xl mx-auto mb-16">
+                    <h2 className="text-5xl md:text-6xl font-extrabold uppercase tracking-wider mb-6">
+                       Climb The <span className="bg-gradient-to-r from-brand-primary to-brand-highlight bg-clip-text text-transparent">Ranks</span>
                     </h2>
-                    <p className="mt-4 text-lg text-slate-300 max-w-2xl mx-auto">
-                        Compete on our partner sites for cash prizes and bragging rights. Select a leaderboard to view your standing.
+                    <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+                        Compete on our partner sites for <span className="text-brand-highlight font-semibold">cash prizes</span> and bragging rights. Select a leaderboard to view your standing.
                     </p>
                 </div>
                 
-                <div className="flex justify-center border-b border-slate-800 my-12">
-                    {leaderboardTabs.map(tab => (
-                        <TabButton
-                            key={tab.id}
-                            label={tab.label}
-                            isActive={activeTab === tab.id}
-                            onClick={() => setActiveTab(tab.id)}
-                            accentBgClass={tab.accentBgClass}
-                        />
-                    ))}
+                <div className="flex justify-center mb-16">
+                    <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-2 border border-slate-700/50">
+                        <div className="flex space-x-1">
+                            {leaderboardTabs.map(tab => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`px-6 md:px-8 py-4 font-bold text-lg transition-all duration-300 rounded-xl relative overflow-hidden ${
+                                        activeTab === tab.id
+                                            ? `${tab.accentTextClass} shadow-lg bg-slate-700/50`
+                                            : 'text-slate-400 hover:text-white hover:bg-slate-700/50'
+                                    }`}
+                                >
+                                    {tab.label}
+                                    {activeTab === tab.id && (
+                                        <div className={`absolute bottom-0 left-0 right-0 h-1 ${tab.accentBgClass} rounded-t-full`}></div>
+                                    )}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
                 {activeTabData && (
-                    <div key={activeTabData.id}>
-                        <div className="grid md:grid-cols-3 gap-8 md:gap-12 items-center mb-12">
-                            <div className="md:col-span-1 flex justify-center">
-                                {React.cloneElement(activeTabData.logo, { className: 'h-16 w-auto' })}
+                    <div key={activeTabData.id} className="animate-fade-in">
+                        <div className="grid lg:grid-cols-3 gap-8 lg:gap-12 items-center mb-16">
+                            <div className="lg:col-span-1 flex justify-center">
+                                <div className={`p-8 rounded-3xl bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-600/50 shadow-2xl backdrop-blur-sm`}>
+                                    {React.cloneElement(activeTabData.logo, { className: 'h-20 w-auto' })}
+                                </div>
                             </div>
-                            <div className="md:col-span-2 text-center md:text-left">
-                                <h3 className={`text-4xl font-bold ${activeTabData.accentTextClass}`}>{activeTabData.prizePool}</h3>
-                                <p className="mt-2 text-slate-300">{activeTabData.description}</p>
-                                 <a
+                            <div className="lg:col-span-2 text-center lg:text-left">
+                                <div className="mb-6">
+                                    <div className="inline-block bg-gradient-to-r from-slate-700/50 to-slate-800/50 rounded-full px-4 py-2 border border-slate-600/50 mb-4">
+                                        <span className="text-sm font-medium text-slate-300 uppercase tracking-wider">Prize Pool</span>
+                                    </div>
+                                    <h3 className={`text-5xl md:text-6xl font-extrabold ${activeTabData.accentTextClass} mb-4`}>
+                                        {activeTabData.prizePool}
+                                    </h3>
+                                </div>
+                                <p className="text-xl text-slate-300 leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0">
+                                    {activeTabData.description}
+                                </p>
+                                <a
                                     href={activeTabData.playUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className={`mt-4 inline-flex items-center justify-center bg-brand-primary hover:bg-opacity-80 transition-all duration-300 text-white font-bold py-3 px-8 rounded-lg text-lg uppercase transform hover:-translate-y-1 hover:shadow-lg ${activeTabData.shadowClass}`}
+                                    className={`inline-flex items-center justify-center bg-gradient-to-r from-brand-primary to-brand-primary/80 hover:from-brand-primary/90 hover:to-brand-primary/70 transition-all duration-300 text-brand-dark font-bold py-4 px-10 rounded-xl text-lg uppercase transform hover:-translate-y-2 hover:scale-105 shadow-lg shadow-brand-primary/25 hover:shadow-brand-primary/40 gap-3`}
                                 >
-                                    Play Now <ExternalLinkIcon />
+                                    <span>Play Now</span>
+                                    <ExternalLinkIcon />
                                 </a>
                             </div>
                         </div>
 
                         {activeTabData.endDate && (
-                            <div className="mb-8">
-                                <h4 className="text-center text-xl font-bold uppercase text-slate-400 mb-4">Competition Ends In</h4>
-                                <Countdown targetDate={activeTabData.endDate} />
+                            <div className="mb-12">
+                                <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm border border-slate-600/50 rounded-2xl p-8 text-center shadow-lg">
+                                    <h4 className="text-2xl font-bold uppercase text-slate-300 mb-6 tracking-wider">Competition Ends In</h4>
+                                    <Countdown targetDate={activeTabData.endDate} />
+                                </div>
                             </div>
                         )}
                         
                         {activeTabData.leaderboardData ? (
                             <Leaderboard data={activeTabData.leaderboardData} topPrizes={activeTabData.topPrizes} otherPrizes={activeTabData.otherPrizes} />
                         ) : (
-                            <div className="bg-slate-800/60 p-8 rounded-xl border border-slate-700 flex flex-col items-center justify-center text-center h-96">
-                                <h3 className="text-3xl font-bold">Leaderboard Coming Soon!</h3>
-                                <p className="text-slate-300 mt-2">Check back later for updates on the next competition.</p>
+                            <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm p-12 md:p-16 rounded-3xl border border-slate-600/50 flex flex-col items-center justify-center text-center shadow-2xl relative overflow-hidden">
+                                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-64 h-64 bg-gradient-to-r from-brand-primary/20 to-brand-highlight/20 rounded-full blur-3xl opacity-50"></div>
+                                <div className="relative z-10">
+                                    <div className="w-24 h-24 bg-gradient-to-br from-brand-primary/20 to-brand-highlight/20 rounded-3xl flex items-center justify-center border border-brand-primary/30 shadow-lg shadow-brand-primary/25 mb-6">
+                                        <svg className="w-12 h-12 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <h3 className="text-4xl md:text-5xl font-bold mb-4 text-slate-200">Leaderboard Coming Soon!</h3>
+                                    <p className="text-xl text-slate-300 leading-relaxed">Check back later for updates on the next competition.</p>
+                                </div>
                             </div>
                         )}
                     </div>

@@ -30,36 +30,57 @@ const sites = [
 
 export const CallToActionSection: React.FC = () => {
     return (
-        <section id="cta" className="py-20 md:py-24">
-            <div className="container mx-auto px-4">
-                <div className="bg-slate-800/50 border border-slate-700 rounded-2xl p-8 md:p-12 text-center shadow-[0_0_30px_rgba(92,255,193,0.1)]">
-                    <h3 className="text-sm font-bold uppercase tracking-widest text-brand-primary">
-                        New to Porter Plays?
-                    </h3>
-                    <h2 className="text-3xl md:text-4xl font-extrabold uppercase tracking-wider mt-2">
-                        Claim Your Exclusive <span className="text-brand-highlight">Sign-Up Bonuses</span>
-                    </h2>
-                    <p className="mt-4 text-lg text-slate-300 max-w-3xl mx-auto">
-                        Get started on our partner sites with special welcome offers. Using our codes is the best way to get extra value on your first deposit and directly support the Porter Plays community.
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-                        {sites.map(site => (
-                             <div key={site.name} className={`bg-slate-900/50 p-6 rounded-xl border-2 border-slate-700 transition-all duration-300 flex flex-col items-center text-center shadow-lg ${site.glowColor} transform hover:-translate-y-2`}>
-                                {site.logo}
-                                <div className="my-4">
-                                    <span className="text-slate-400 mr-2 uppercase text-sm">Use code:</span>
-                                    <span className={`${site.accentColor.replace('border-','text-')} font-bold text-xl tracking-widest`}>{site.code}</span>
+        <section id="cta" className="py-24 md:py-32 relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/5 to-brand-highlight/5 blur-3xl"></div>
+            <div className="container mx-auto px-4 relative z-10">
+                <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm border border-slate-600/50 rounded-3xl p-10 md:p-16 text-center shadow-2xl shadow-brand-primary/10 relative overflow-hidden">
+                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-64 h-64 bg-gradient-to-r from-brand-primary/20 to-brand-highlight/20 rounded-full blur-3xl opacity-50"></div>
+                    
+                    <div className="relative z-10">
+                        <div className="inline-block bg-gradient-to-r from-brand-primary/20 to-brand-highlight/20 rounded-full px-6 py-2 border border-brand-primary/30 mb-6">
+                            <span className="text-sm font-bold uppercase tracking-widest bg-gradient-to-r from-brand-primary to-brand-highlight bg-clip-text text-transparent">
+                                New to Porter Plays?
+                            </span>
+                        </div>
+                        
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-wider mb-8">
+                            Claim Your Exclusive <span className="bg-gradient-to-r from-brand-highlight to-brand-primary bg-clip-text text-transparent">Sign-Up Bonuses</span>
+                        </h2>
+                        
+                        <p className="text-xl md:text-2xl text-slate-300 max-w-4xl mx-auto mb-16 leading-relaxed">
+                            Get started on our partner sites with special welcome offers. Using our codes is the best way to get <span className="text-brand-highlight font-semibold">extra value</span> on your first deposit and directly support the Porter Plays community.
+                        </p>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {sites.map(site => (
+                                <div key={site.name} className={`bg-gradient-to-br from-slate-900/80 to-slate-800/80 p-8 rounded-2xl border-2 ${site.accentColor}/50 transition-all duration-500 flex flex-col items-center text-center shadow-2xl ${site.glowColor} hover:shadow-2xl transform hover:-translate-y-3 hover:scale-105 relative overflow-hidden group`}>
+                                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    
+                                    <div className="relative z-10 w-full">
+                                        <div className="mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                                            {site.logo}
+                                        </div>
+                                        
+                                        <div className="mb-8">
+                                            <span className="block text-slate-400 uppercase text-sm font-medium mb-2 tracking-wider">Use code:</span>
+                                            <div className={`inline-block bg-gradient-to-r ${site.accentColor.replace('border-','from-')}/20 ${site.accentColor.replace('border-','to-')}/10 rounded-lg px-4 py-2 border ${site.accentColor}/30`}>
+                                                <span className={`${site.accentColor.replace('border-','text-')} font-bold text-xl tracking-widest`}>{site.code}</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <a
+                                            href={site.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="w-full bg-gradient-to-r from-brand-primary to-brand-primary/80 hover:from-brand-primary/90 hover:to-brand-primary/70 transition-all duration-300 text-brand-dark font-bold py-4 px-6 rounded-xl text-lg uppercase flex items-center justify-center gap-2 shadow-lg shadow-brand-primary/25 hover:shadow-brand-primary/40 group"
+                                        >
+                                            <span>Play Now</span>
+                                            <ExternalLinkIcon />
+                                        </a>
+                                    </div>
                                 </div>
-                                <a
-                                    href={site.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="mt-auto w-full bg-brand-primary hover:bg-opacity-80 transition-all duration-300 text-white font-bold py-3 px-6 rounded-lg text-lg uppercase flex items-center justify-center"
-                                >
-                                    Play Now <ExternalLinkIcon />
-                                </a>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

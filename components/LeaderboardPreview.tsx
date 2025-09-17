@@ -20,54 +20,82 @@ export const LeaderboardPreview: React.FC = () => {
     }, []);
 
     const getRankDisplay = (rank: number) => {
-        if (rank === 1) return <GoldMedal className="w-8 h-8" />;
-        if (rank === 2) return <SilverMedal className="w-8 h-8" />;
-        if (rank === 3) return <BronzeMedal className="w-8 h-8" />;
+        if (rank === 1) return <GoldMedal className="w-10 h-10" />;
+        if (rank === 2) return <SilverMedal className="w-10 h-10" />;
+        if (rank === 3) return <BronzeMedal className="w-10 h-10" />;
         return null;
     };
 
     return (
-        <section className="py-16 md:py-20">
-            <div className="container mx-auto px-4">
-                <div className="text-center max-w-3xl mx-auto">
-                    <h2 className="text-3xl md:text-4xl font-extrabold uppercase tracking-wider">
-                        Leaderboard <span className="text-brand-primary">Snapshot</span>
+        <section className="py-20 md:py-24 relative">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/20 to-transparent"></div>
+            <div className="container mx-auto px-4 relative z-10">
+                <div className="text-center max-w-4xl mx-auto mb-16">
+                    <h2 className="text-4xl md:text-5xl font-extrabold uppercase tracking-wider mb-6">
+                        Leaderboard <span className="bg-gradient-to-r from-brand-primary to-brand-highlight bg-clip-text text-transparent">Snapshot</span>
                     </h2>
-                    <p className="mt-4 text-lg text-slate-300">
-                        Here's a look at the current top contenders. Think you can beat them?
+                    <p className="text-xl md:text-2xl text-slate-300 leading-relaxed">
+                        Here's a look at the current top contenders. Think you can <span className="text-brand-highlight font-semibold">beat them?</span>
                     </p>
                 </div>
 
-                <div className="max-w-4xl mx-auto mt-10">
-                    <div className="space-y-3">
+                <div className="max-w-5xl mx-auto">
+                    <div className="grid gap-6 md:gap-8">
                         {topPlayers.map((player, index) => {
                             const rank = index + 1;
-                            let rowClasses = 'grid grid-cols-12 gap-4 items-center transition-all duration-300 rounded-lg px-4 py-4';
+                            let cardClasses = 'relative overflow-hidden rounded-2xl p-6 md:p-8 transition-all duration-500 hover:scale-105 backdrop-blur-sm border-2';
+                            let glowClasses = '';
                             
-                            if (rank === 1) rowClasses += ' bg-amber-400/10 shadow-[0_0_25px_rgba(251,191,36,0.4)] ring-1 ring-amber-400/50';
-                            if (rank === 2) rowClasses += ' bg-slate-400/10 shadow-[0_0_20px_rgba(148,163,184,0.4)] ring-1 ring-slate-400/50';
-                            if (rank === 3) rowClasses += ' bg-amber-700/10 shadow-[0_0_20px_rgba(205,127,50,0.4)] ring-1 ring-amber-700/50';
+                            if (rank === 1) {
+                                cardClasses += ' bg-gradient-to-br from-amber-400/20 via-yellow-500/10 to-amber-600/20 border-amber-400/50 shadow-2xl shadow-amber-400/25';
+                                glowClasses = 'absolute inset-0 bg-gradient-to-r from-amber-400/10 to-yellow-500/10 blur-xl';
+                            } else if (rank === 2) {
+                                cardClasses += ' bg-gradient-to-br from-slate-400/20 via-gray-300/10 to-slate-500/20 border-slate-400/50 shadow-2xl shadow-slate-400/25';
+                                glowClasses = 'absolute inset-0 bg-gradient-to-r from-slate-400/10 to-gray-300/10 blur-xl';
+                            } else {
+                                cardClasses += ' bg-gradient-to-br from-amber-700/20 via-orange-600/10 to-amber-800/20 border-amber-700/50 shadow-2xl shadow-amber-700/25';
+                                glowClasses = 'absolute inset-0 bg-gradient-to-r from-amber-700/10 to-orange-600/10 blur-xl';
+                            }
 
                             return (
-                                <div key={player.uid} className={rowClasses}>
-                                    <div className="col-span-2 flex items-center gap-4">
-                                        {getRankDisplay(rank)}
-                                        <span className="font-bold text-xl text-slate-300 hidden sm:inline">#{rank}</span>
+                                <div key={player.uid} className={cardClasses}>
+                                    <div className={glowClasses}></div>
+                                    <div className="relative z-10 flex items-center justify-between">
+                                        <div className="flex items-center gap-6">
+                                            <div className="flex items-center gap-4">
+                                                {getRankDisplay(rank)}
+                                                <div className="hidden sm:flex flex-col">
+                                                    <span className="text-sm font-medium text-slate-400 uppercase tracking-wider">Rank</span>
+                                                    <span className="text-2xl font-bold">{rank}</span>
+                                                </div>
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <span className="text-sm font-medium text-slate-400 uppercase tracking-wider mb-1">Player</span>
+                                                <span className="text-2xl md:text-3xl font-bold">{player.name}</span>
+                                            </div>
+                                        </div>
+                                        <div className="text-right">
+                                            <span className="block text-sm font-medium text-slate-400 uppercase tracking-wider mb-1">Total Wagered</span>
+                                            <span className="text-2xl md:text-3xl font-bold text-brand-highlight">
+                                                {formatCurrency(player.wagered[Timeframe.ALL_TIME])}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div className="col-span-6 font-semibold text-lg truncate">{player.name}</div>
-                                    <div className="col-span-4 text-right font-bold text-xl text-brand-highlight">{formatCurrency(player.wagered[Timeframe.ALL_TIME])}</div>
                                 </div>
                             );
                         })}
                     </div>
                 </div>
 
-                <div className="text-center mt-10">
+                <div className="text-center mt-16">
                     <a 
                         href="/leaderboards" 
-                        className="inline-flex items-center justify-center bg-slate-700 hover:bg-slate-600 transition-colors text-white font-bold py-3 px-8 rounded-lg text-lg uppercase"
+                        className="inline-flex items-center justify-center bg-gradient-to-r from-brand-primary to-brand-highlight hover:from-brand-primary/90 hover:to-brand-highlight/90 text-brand-dark font-bold py-4 px-10 rounded-xl text-lg uppercase tracking-wider transition-all duration-300 shadow-lg shadow-brand-primary/25 hover:shadow-brand-primary/40 hover:scale-105"
                     >
                         View Full Leaderboards
+                        <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
                     </a>
                 </div>
             </div>
