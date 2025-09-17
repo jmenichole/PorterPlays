@@ -109,15 +109,19 @@ export const GoatedLogo: React.FC<{className?: string}> = ({ className }) => (
 );
 
 export const ThrillLogo: React.FC<{className?: string}> = ({ className }) => (
-    <svg className={className ?? "h-12 w-auto"} viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg" fontFamily="Oxanium, sans-serif" fontSize="30" fontWeight="bold" fill="#22d3ee">
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle">THRILL</text>
-    </svg>
+    <img 
+        src="/idIqxjkqLX_logos.png" 
+        alt="Thrill"
+        className={className ?? "h-12 w-auto"}
+    />
 );
 
 export const ShuffleLogo: React.FC<{className?: string}> = ({ className }) => (
-    <svg className={className ?? "h-12 w-auto"} viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg" fontFamily="Oxanium, sans-serif" fontSize="30" fontWeight="bold" fill="#10B981">
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle">SHUFFLE</text>
-    </svg>
+    <img 
+        src="/idnz9_cfSx_logos.png" 
+        alt="Shuffle"
+        className={className ?? "h-12 w-auto"}
+    />
 );
 
 export const AnnouncementsLogo: React.FC<{className?: string}> = ({ className }) => (
