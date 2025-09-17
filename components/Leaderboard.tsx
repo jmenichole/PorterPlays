@@ -79,6 +79,15 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ data, topPrizes, other
 
     const leaderboardToDisplay = sortedData.slice(0, 15);
 
+    // Helper to mask the middle of a username with asterisks
+    function maskUsername(name: string): string {
+        if (name.length <= 2) return name;
+        const mid = Math.floor(name.length / 2);
+        const maskLength = name.length > 4 ? 2 : 1;
+        const start = mid - Math.floor(maskLength / 2);
+        return name.substring(0, start) + '*'.repeat(maskLength) + name.substring(start + maskLength);
+    }
+
     return (
         <div>
             <div className="flex justify-center gap-2 md:gap-4 mb-8">
@@ -128,7 +137,7 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ data, topPrizes, other
                             return (
                                 <div key={player.uid} className={rowClasses}>
                                     <div className="col-span-2">{rankDisplay}</div>
-                                    <div className="col-span-5 font-semibold text-base truncate">{player.name}</div>
+                                    <div className="col-span-5 font-semibold text-base truncate">{maskUsername(player.name)}</div>
                                     <div className="col-span-3 text-right font-bold text-lg text-brand-highlight">{formatCurrency(player.wagered[activeTimeframe])}</div>
                                     <div className="col-span-2 text-right font-bold text-slate-300">{prize ? `$${prize.toLocaleString()}` : '-'}</div>
                                 </div>

@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porter Plays | Thrill & Goated Leaderboards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: #1B1D29; 
+            color: #fff; 
+            font-family: 'Oxanium', sans-serif;
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0);
+            background-size: 25px 25px;
+        }
+        
+        /* Header */
+        .header { 
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            background: rgba(27,29,41,0.95); 
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(92,255,193,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .nav { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        .logo { font-size: 1.75rem; font-weight: 800; color: #5CFFC1; text-shadow: 0 0 10px rgba(92,255,193,0.3); }
+        .nav-links { display: flex; gap: 3rem; list-style: none; }
+        .nav-links a { 
+            color: #fff; 
+            text-decoration: none; 
+            font-weight: 600; 
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #5CFFC1, #5956FF);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: #5CFFC1; transform: translateY(-2px); }
+        .nav-links a:hover::after { width: 100%; }
+        .admin-btn { 
+            background: linear-gradient(135deg, #5956FF, #764ba2); 
+            color: white; 
+            padding: 0.75rem 1.5rem; 
+            border-radius: 0.75rem; 
+            text-decoration: none; 
+            font-weight: 700; 
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(89,86,255,0.3);
+            border: 1px solid rgba(89,86,255,0.5);
+        }
+        .admin-btn:hover { 
+            background: linear-gradient(135deg, #4a47e6, #6a42a0); 
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(89,86,255,0.4);
+        }
+        
+        /* Hero Section */
+        .hero { 
+            text-align: center; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 10rem 2rem 6rem; 
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(89,86,255,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero h1 { 
+            font-size: 4rem; 
+            font-weight: 900; 
+            line-height: 1.1; 
+            text-transform: uppercase; 
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 20px rgba(92,255,193,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        .hero .highlight { 
+            color: #5CFFC1; 
+            background: linear-gradient(135deg, #5CFFC1, #5956FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p { 
+            margin-top: 2rem; 
+            font-size: 1.4rem; 
+            color: #cbd5e1; 
+            max-width: 900px; 
+            margin-left: auto; 
+            margin-right: auto;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 3rem;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(89,86,255,0.2), rgba(92,255,193,0.2));
+            border: 1px solid rgba(89,86,255,0.3);
+            color: #5CFFC1;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(89,86,255,0.2);
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #5CFFC1;
+            text-shadow: 0 0 15px rgba(92,255,193,0.3);
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            font-size: 1rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+        
+        /* Enhanced CTA Buttons */
+        .cta-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, rgba(89,86,255,0.05), rgba(92,255,193,0.05));
+            border-radius: 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
+        
+        /* Full Leaderboards */
+        .leaderboard-preview { padding: 6rem 0; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        .section-title { 
+            text-align: center; 
+            font-size: 3rem; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+            letter-spacing: 0.05em; 
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 15px rgba(89,86,255,0.3);
+        }
+        .section-title .accent { 
+            color: #5956FF;
+            background: linear-gradient(135deg, #5956FF, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-description { 
+            text-align: center; 
+            font-size: 1.25rem; 
+            color: #cbd5e1; 
+            max-width: 700px; 
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+        
+        .leaderboard-card { 
+            max-width: 1000px; 
+            margin: 3rem auto; 
+            background: linear-gradient(145deg, rgba(35,38,58,0.9), rgba(30,32,48,0.9)); 
+            border-radius: 1.5rem; 
+            border: 2px solid rgba(89,86,255,0.3);
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.4),
+                0 0 40px rgba(89,86,255,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .leaderboard-header {
+            background: linear-gradient(135deg, rgba(89,86,255,0.2), rgba(92,255,193,0.1));
+            border-bottom: 2px solid #5956FF;
+            box-shadow: 0 2px 10px rgba(89,86,255,0.3);
+        }
+        .leaderboard-row { 
+            border-bottom: 1px solid rgba(203,213,225,0.08);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .leaderboard-row:last-child { border-bottom: none; }
+        .leaderboard-row:hover {
+            background: rgba(89,86,255,0.1);
+            transform: translateX(5px);
+        }
+        .leaderboard-row.gold { 
+            background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(251,191,36,0.05)); 
+            box-shadow: 0 0 25px rgba(251,191,36,0.4);
+            border-left: 4px solid #fbbf24;
+        }
+        .leaderboard-row.silver { 
+            background: linear-gradient(135deg, rgba(148,163,184,0.15), rgba(148,163,184,0.05)); 
+            box-shadow: 0 0 20px rgba(148,163,184,0.4);
+            border-left: 4px solid #94a3b8;
+        }
+        .leaderboard-row.bronze { 
+            background: linear-gradient(135deg, rgba(205,127,50,0.15), rgba(205,127,50,0.05)); 
+            box-shadow: 0 0 20px rgba(205,127,50,0.4);
+            border-left: 4px solid #cd7f32;
+        }
+        .rank { 
+            font-size: 1.6rem; 
+            font-weight: 800; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.75rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .medal { width: 2.5rem; height: 2.5rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+        .username { 
+            font-weight: 700; 
+            font-size: 1.2rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        .wagered { 
+            text-align: right; 
+            font-weight: 800; 
+            font-size: 1.3rem; 
+            color: #5CFFC1;
+            text-shadow: 0 0 10px rgba(92,255,193,0.5);
+        }
+        
+        .view-full-btn { 
+            display: inline-block; 
+            margin: 3rem auto 0; 
+            background: linear-gradient(135deg, #64748b, #475569); 
+            color: white; 
+            padding: 1rem 3rem; 
+            border-radius: 0.75rem; 
+            text-decoration: none; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            letter-spacing: 0.05em;
+        }
+        .view-full-btn:hover { 
+            background: linear-gradient(135deg, #475569, #334155); 
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+        
+        /* Community Section */
+        .community-section { 
+            padding: 6rem 0; 
+            background: linear-gradient(145deg, rgba(35,38,58,0.6), rgba(30,32,48,0.4));
+            border-radius: 2rem;
+            margin: 4rem auto;
+            max-width: 1400px;
+            border: 1px solid rgba(92,255,193,0.1);
+        }
+        .community-feed { 
+            max-width: 1000px; 
+            margin: 3rem auto; 
+            display: grid; 
+            gap: 1.5rem; 
+        }
+        .feed-item { 
+            background: linear-gradient(145deg, rgba(30,32,48,0.9), rgba(25,27,38,0.9)); 
+            padding: 2rem; 
+            border-radius: 1rem; 
+            border-left: 4px solid #5CFFC1;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(92,255,193,0.1);
+        }
+        .feed-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            border-left-color: #5956FF;
+        }
+        .feed-source { 
+            font-size: 1rem; 
+            color: #5956FF; 
+            font-weight: 700; 
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .feed-content { 
+            color: #cbd5e1; 
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        .feed-time { 
+            font-size: 0.875rem; 
+            color: #64748b; 
+            margin-top: 1rem;
+            font-style: italic;
+        }
+        
+        .social-links { 
+            display: flex; 
+            justify-content: center; 
+            gap: 2rem; 
+            margin-top: 3rem; 
+            flex-wrap: wrap;
+        }
+        .social-links a { 
+            background: linear-gradient(145deg, rgba(89,86,255,0.2), rgba(89,86,255,0.1)); 
+            padding: 1.25rem 2rem; 
+            border-radius: 1rem; 
+            color: #5956FF; 
+            text-decoration: none; 
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(89,86,255,0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .social-links a:hover { 
+            background: linear-gradient(145deg, rgba(89,86,255,0.3), rgba(89,86,255,0.2)); 
+            transform: translateY(-3px);
+            border-color: rgba(89,86,255,0.6);
+            box-shadow: 0 10px 25px rgba(89,86,255,0.3);
+        }
+        
+        /* Updates Section */
+        .updates-section { padding: 6rem 0; }
+        .news-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 2.5rem; 
+            margin-top: 3rem; 
+        }
+        .news-card { 
+            background: linear-gradient(145deg, rgba(30,32,48,0.9), rgba(25,27,38,0.8)); 
+            border-radius: 1.25rem; 
+            overflow: hidden;
+            border: 2px solid rgba(203,213,225,0.1);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .news-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            border-color: rgba(89,86,255,0.3);
+        }
+        .news-header { 
+            padding: 2rem; 
+            border-bottom: 1px solid rgba(203,213,225,0.1);
+            background: linear-gradient(135deg, rgba(89,86,255,0.1), rgba(92,255,193,0.05));
+        }
+        .news-category { 
+            font-size: 0.875rem; 
+            color: #5956FF; 
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .news-title { 
+            font-size: 1.3rem; 
+            font-weight: 800; 
+            margin: 1rem 0;
+            line-height: 1.4;
+        }
+        .news-content { padding: 2rem; }
+        .news-excerpt { 
+            color: #cbd5e1; 
+            line-height: 1.7; 
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+        .news-date { 
+            font-size: 0.9rem; 
+            color: #64748b;
+            font-weight: 600;
+        }
+        
+        /* Onboarding Bot Styles */
+        .bot-action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(89,86,255,0.4);
+        }
+        
+        .quick-link-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(89,86,255,0.4);
+            box-shadow: 0 20px 40px rgba(89,86,255,0.2);
+        }
+        
+        .bot-messages {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(89,86,255,0.5) rgba(30,32,48,0.3);
+        }
+        
+        .bot-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .bot-messages::-webkit-scrollbar-track {
+            background: rgba(30,32,48,0.3);
+            border-radius: 3px;
+        }
+        
+        .bot-messages::-webkit-scrollbar-thumb {
+            background: rgba(89,86,255,0.5);
+            border-radius: 3px;
+        }
+        
+        .bot-messages::-webkit-scrollbar-thumb:hover {
+            background: rgba(89,86,255,0.7);
+        }
+        
+        #bot-input:focus {
+            outline: none;
+            border-color: rgba(89,86,255,0.6);
+            box-shadow: 0 0 0 3px rgba(89,86,255,0.2);
+        }
+        
+        @keyframes botTyping {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+        
+        .bot-avatar {
+            animation: botTyping 2s infinite ease-in-out;
+        }
+        
+        /* Footer */
+        .footer { 
+            background: linear-gradient(145deg, rgba(15,17,25,0.95), rgba(10,12,20,0.9)); 
+            padding: 4rem 0 2rem; 
+            margin-top: 6rem;
+            border-top: 1px solid rgba(92,255,193,0.1);
+        }
+        .footer-content { 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: 0 2rem; 
+            text-align: center; 
+        }
+        .footer-text { 
+            color: #64748b;
+            font-size: 1rem;
+        }
+        
+        /* Enhanced Casino Feature Cards */
+        .casino-feature-card {
+            border-radius: 1.25rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+        .casino-feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        .casino-feature-card a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+        
+        /* Responsive Enhancements */
+        .leaderboard-tab {
+            background: linear-gradient(145deg, rgba(89,86,255,0.2), rgba(89,86,255,0.1));
+            border: 2px solid rgba(89,86,255,0.5);
+            color: #5956FF;
+            padding: 1rem 2rem;
+            margin: 0 0.75rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .leaderboard-tab.active, .leaderboard-tab:hover {
+            background: linear-gradient(145deg, #5956FF, #4a47e6);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(89,86,255,0.4);
+        }
+        .prize-column { 
+            color: #5CFFC1; 
+            font-weight: 800;
+            text-shadow: 0 0 10px rgba(92,255,193,0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .nav-links { display: none; }
+            .nav { padding: 0 1rem; }
+            .hero { padding: 8rem 1rem 4rem; }
+            .container { padding: 0 1rem; }
+            .leaderboard-row { grid-template-columns: 60px 1fr 100px; padding: 0.75rem; }
+            .rank { font-size: 1.25rem; }
+            .username { font-size: 1rem; }
+            .wagered { font-size: 1rem; }
+            .leaderboard-header { grid-template-columns: 60px 1fr 100px 80px; }
+            .social-links { gap: 1rem; }
+            .social-links a { padding: 1rem 1.5rem; font-size: 1rem; }
+            .casino-feature-card { margin-bottom: 2rem; }
+            .casino-feature-card > div:first-child { padding: 1.5rem 1rem 0.5rem; }
+            .hero-stats { gap: 2rem; }
+            .stat-number { font-size: 2rem; }
+            .section-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">PorterPlays</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#leaderboards">Leaderboards</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#updates">Updates</a></li>
+            </ul>
+            <a href="#admin" class="admin-btn" onclick="showAdminLogin()">Admin Login</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Your Arena for <span class="highlight">Competitive Play</span></h1>
+            <p>Welcome to the official hub for Porter Plays leaderboards. Track your performance, compete for exclusive prize pools, and secure your place at the top.</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">$5K+</div>
+                    <div class="stat-label">Monthly Prizes</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Active Players</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Partner Casinos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Onboarding Bot Section -->
+    <section id="onboarding" class="onboarding-section" style="padding: 6rem 0; background: linear-gradient(135deg, rgba(89,86,255,0.1), rgba(92,255,193,0.05)); position: relative;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <div style="display: inline-block; background: linear-gradient(135deg, rgba(89,86,255,0.2), rgba(92,255,193,0.2)); border: 1px solid rgba(89,86,255,0.3); color: #5CFFC1; padding: 0.5rem 1.5rem; border-radius: 25px; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem;">🤖 AI Assistant</div>
+                <h2 class="section-title">Porter's <span class="accent">Onboarding Bot</span></h2>
+                <p class="section-description">Let our AI guide you through the complete setup process - from casino registration to joining our community channels.</p>
+            </div>
+            
+            <!-- Bot Interface -->
+            <div class="bot-container" style="max-width: 800px; margin: 0 auto; background: linear-gradient(145deg, rgba(27,29,41,0.8), rgba(35,38,58,0.6)); border: 2px solid rgba(89,86,255,0.2); border-radius: 1.5rem; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                <!-- Bot Header -->
+                <div class="bot-header" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(89,86,255,0.2);">
+                    <div class="bot-avatar" style="width: 50px; height: 50px; background: linear-gradient(135deg, #5956FF, #5CFFC1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🤖</div>
+                    <div>
+                        <div style="color: #5CFFC1; font-weight: 700; font-size: 1.1rem;">Porter's Assistant</div>
+                        <div style="color: #94a3b8; font-size: 0.9rem;" id="bot-status">Ready to help you get started!</div>
+                    </div>
+                    <div style="margin-left: auto;">
+                        <button class="btn-secondary" onclick="resetBot()" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Reset</button>
+                    </div>
+                </div>
+                
+                <!-- Bot Messages -->
+                <div id="bot-messages" class="bot-messages" style="min-height: 300px; max-height: 400px; overflow-y: auto; margin-bottom: 1.5rem; padding-right: 0.5rem;">
+                    <div class="bot-message" style="background: rgba(89,86,255,0.1); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem;">
+                        <div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">👋 Welcome to Porter Plays!</div>
+                        <div style="color: #cbd5e1; line-height: 1.6;">
+                            I'm here to help you get the most out of your Porter Plays experience. I can guide you through:
+                            <br><br>
+                            • 🎰 Setting up accounts on Thrill, Goated & Shuffle
+                            <br>• 💬 Joining our Discord and Telegram communities  
+                            <br>• 🏆 Understanding leaderboards and rewards
+                            <br>• 🎁 Claiming exclusive bonuses and codes
+                            <br><br>
+                            What would you like to start with?
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bot Quick Actions -->
+                <div class="bot-actions" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                    <button class="bot-action-btn" onclick="startOnboarding('casino')" style="background: linear-gradient(135deg, rgba(20,184,166,0.2), rgba(20,184,166,0.1)); border: 1px solid rgba(20,184,166,0.3); color: #14b8a6; padding: 1rem; border-radius: 0.75rem; font-weight: 600; transition: all 0.3s ease; cursor: pointer;">
+                        🎰 Casino Setup
+                    </button>
+                    <button class="bot-action-btn" onclick="startOnboarding('community')" style="background: linear-gradient(135deg, rgba(147,51,234,0.2), rgba(147,51,234,0.1)); border: 1px solid rgba(147,51,234,0.3); color: #9333ea; padding: 1rem; border-radius: 0.75rem; font-weight: 600; transition: all 0.3s ease; cursor: pointer;">
+                        💬 Join Community
+                    </button>
+                    <button class="bot-action-btn" onclick="startOnboarding('leaderboards')" style="background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(251,191,36,0.1)); border: 1px solid rgba(251,191,36,0.3); color: #fbbf24; padding: 1rem; border-radius: 0.75rem; font-weight: 600; transition: all 0.3s ease; cursor: pointer;">
+                        🏆 Leaderboard Guide
+                    </button>
+                    <button class="bot-action-btn" onclick="startOnboarding('help')" style="background: linear-gradient(135deg, rgba(92,255,193,0.2), rgba(92,255,193,0.1)); border: 1px solid rgba(92,255,193,0.3); color: #5CFFC1; padding: 1rem; border-radius: 0.75rem; font-weight: 600; transition: all 0.3s ease; cursor: pointer;">
+                        ❓ Get Help
+                    </button>
+                </div>
+                
+                <!-- Bot Input -->
+                <div class="bot-input-container" style="display: flex; gap: 1rem; align-items: center;">
+                    <input type="text" id="bot-input" placeholder="Type a message or question..." style="flex: 1; background: rgba(30,32,48,0.8); border: 1px solid rgba(89,86,255,0.3); border-radius: 0.75rem; padding: 1rem; color: white; font-size: 1rem;" onkeypress="handleBotInput(event)">
+                    <button onclick="sendBotMessage()" style="background: linear-gradient(135deg, #5956FF, #5CFFC1); color: white; border: none; border-radius: 0.75rem; padding: 1rem 1.5rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Send</button>
+                </div>
+            </div>
+            
+            <!-- Quick Links -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div class="quick-link-card" style="background: linear-gradient(135deg, rgba(89,86,255,0.1), rgba(92,255,193,0.05)); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 2rem; text-align: center; transition: all 0.3s ease;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🚀</div>
+                    <h3 style="color: #5CFFC1; font-weight: 700; margin-bottom: 1rem;">Quick Start</h3>
+                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">Get set up in under 5 minutes with our guided tour.</p>
+                    <button onclick="startOnboarding('quickstart')" class="btn-primary" style="padding: 0.75rem 1.5rem;">Start Now</button>
+                </div>
+                
+                <div class="quick-link-card" style="background: linear-gradient(135deg, rgba(89,86,255,0.1), rgba(92,255,193,0.05)); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 2rem; text-align: center; transition: all 0.3s ease;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">📚</div>
+                    <h3 style="color: #5CFFC1; font-weight: 700; margin-bottom: 1rem;">Learn More</h3>
+                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">Dive deep into strategies, bonuses, and advanced features.</p>
+                    <button onclick="startOnboarding('advanced')" class="btn-secondary" style="padding: 0.75rem 1.5rem;">Explore</button>
+                </div>
+                
+                <div class="quick-link-card" style="background: linear-gradient(135deg, rgba(89,86,255,0.1), rgba(92,255,193,0.05)); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 2rem; text-align: center; transition: all 0.3s ease;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">💬</div>
+                    <h3 style="color: #5CFFC1; font-weight: 700; margin-bottom: 1rem;">Need Help?</h3>
+                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">Connect with our community for personalized support.</p>
+                    <a href="https://discord.gg/porterplays" target="_blank" class="btn-primary" style="padding: 0.75rem 1.5rem; text-decoration: none; display: inline-block;">Join Discord</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Play Now Casino Cards -->
+    <section class="casino-cards-section" style="padding: 8rem 0; background: linear-gradient(145deg, rgba(35,38,58,0.6), rgba(30,32,48,0.4)); border-radius: 2rem; margin: 4rem auto; max-width: 1400px; position: relative;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <div style="display: inline-block; background: linear-gradient(135deg, rgba(89,86,255,0.15), rgba(92,255,193,0.15)); border: 1px solid rgba(89,86,255,0.2); color: #5CFFC1; padding: 0.5rem 1.5rem; border-radius: 25px; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem;">🎯 Exclusive Access</div>
+                <h2 class="section-title" style="margin-bottom: 1rem;">Choose Your <span class="accent">Casino</span></h2>
+                <p class="section-description" style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">Select your preferred platform and unlock exclusive Porter Plays benefits, bonuses, and VIP rewards.</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 3rem; margin-top: 4rem;">
+                <!-- Thrill Card -->
+                <div class="casino-feature-card" style="background: linear-gradient(145deg, rgba(20,184,166,0.15), rgba(13,148,136,0.1)); border: 2px solid rgba(20,184,166,0.25); transform: translateY(0); transition: all 0.4s ease;">
+                    <div class="casino-header" style="text-align: center; padding: 2.5rem 2rem 1.5rem; background: linear-gradient(135deg, rgba(20,184,166,0.1), rgba(13,148,136,0.05)); border-radius: 1rem 1rem 0 0;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #14b8a6, #0f766e); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; box-shadow: 0 8px 25px rgba(20,184,166,0.3);">
+                            <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="45" stroke="white" stroke-width="3" fill="none"/>
+                                <path d="M30 35h40v30h-40z" fill="white" rx="4"/>
+                                <circle cx="40" cy="45" r="3" fill="#14b8a6"/>
+                                <circle cx="60" cy="45" r="3" fill="#14b8a6"/>
+                                <circle cx="40" cy="55" r="3" fill="#14b8a6"/>
+                                <circle cx="60" cy="55" r="3" fill="#14b8a6"/>
+                                <path d="M45 35L55 25L65 35" stroke="white" stroke-width="2" fill="none"/>
+                                <text x="50" y="82" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">T</text>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 2rem; font-weight: 900; color: #14b8a6; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">THRILL</h3>
+                        <p style="color: #cbd5e1; font-size: 1.1rem; font-weight: 600;">Premium Gaming Experience</p>
+                    </div>
+                    <div class="casino-features" style="padding: 2rem;">
+                        <div style="background: rgba(20,184,166,0.05); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.5rem;">
+                            <div style="color: #14b8a6; font-weight: 800; font-size: 1.1rem; margin-bottom: 0.5rem;">💰 MONTHLY PRIZE POOL</div>
+                            <div style="color: #5CFFC1; font-weight: 900; font-size: 1.8rem;">$5,000</div>
+                        </div>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(20,184,166,0.1);"><span style="color: #14b8a6; margin-right: 0.75rem;">✓</span> Welcome Bonus Package</li>
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(20,184,166,0.1);"><span style="color: #14b8a6; margin-right: 0.75rem;">✓</span> VIP Transfer Program</li>
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(20,184,166,0.1);"><span style="color: #14b8a6; margin-right: 0.75rem;">✓</span> Regular Cash Drops</li>
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center;"><span style="color: #14b8a6; margin-right: 0.75rem;">✓</span> Exclusive Slot Challenges</li>
+                        </ul>
+                    </div>
+                    <div style="padding: 2rem;">
+                        <a href="https://thrill.com/en/register?c=porterplays" target="_blank" style="display: block; background: linear-gradient(135deg, #14b8a6 0%, #0f766e 100%); color: white; padding: 1.25rem; border-radius: 0.75rem; text-decoration: none; font-weight: 800; text-align: center; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.05em; font-size: 1.1rem; box-shadow: 0 8px 25px rgba(20,184,166,0.3);">🚀 Play Now • Code: PORTERPLAYS</a>
+                    </div>
+                </div>
+                
+                <!-- Goated Card -->
+                <div class="casino-feature-card" style="background: linear-gradient(145deg, rgba(251,191,36,0.15), rgba(245,158,11,0.1)); border: 2px solid rgba(251,191,36,0.25); transform: translateY(0); transition: all 0.4s ease;">
+                    <div class="casino-header" style="text-align: center; padding: 2.5rem 2rem 1.5rem; background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(245,158,11,0.05)); border-radius: 1rem 1rem 0 0;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #fbbf24, #f59e0b); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; box-shadow: 0 8px 25px rgba(251,191,36,0.3);">
+                            <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M50 15C35 15 25 25 25 40C25 50 30 58 40 62L35 75H65L60 62C70 58 75 50 75 40C75 25 65 15 50 15Z" fill="white"/>
+                                <circle cx="40" cy="35" r="3" fill="#fbbf24"/>
+                                <circle cx="60" cy="35" r="3" fill="#fbbf24"/>
+                                <path d="M42 45Q50 50 58 45" stroke="#fbbf24" stroke-width="2" fill="none"/>
+                                <path d="M35 20L30 15M65 20L70 15" stroke="white" stroke-width="3"/>
+                                <text x="50" y="85" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="white">GOAT</text>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 2rem; font-weight: 900; color: #fbbf24; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">GOATED</h3>
+                        <p style="color: #cbd5e1; font-size: 1.1rem; font-weight: 600;">VIP Transfer Specialists</p>
+                    </div>
+                    <div class="casino-features" style="padding: 2rem;">
+                        <div style="background: rgba(251,191,36,0.05); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.5rem;">
+                            <div style="color: #fbbf24; font-weight: 800; font-size: 1.1rem; margin-bottom: 0.5rem;">💰 VIP TRANSFER BONUS</div>
+                            <div style="color: #5CFFC1; font-weight: 900; font-size: 1.8rem;">UP TO $500</div>
+                        </div>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(251,191,36,0.1);"><span style="color: #fbbf24; margin-right: 0.75rem;">✓</span> 30-Day Completion Bonus</li>
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(251,191,36,0.1);"><span style="color: #fbbf24; margin-right: 0.75rem;">✓</span> Same Games & Providers</li>
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(251,191,36,0.1);"><span style="color: #fbbf24; margin-right: 0.75rem;">✓</span> Transfer from Any Casino</li>
+                            <li style="padding: 0.75rem 0; color: #5CFFC1; font-weight: 700; display: flex; align-items: center;"><span style="color: #fbbf24; margin-right: 0.75rem;">🔥</span> Must use PLAYGOATED code</li>
+                        </ul>
+                    </div>
+                    <div style="padding: 2rem;">
+                        <a href="https://www.goated.com/r/PLAYGOATED" target="_blank" style="display: block; background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); color: white; padding: 1.25rem; border-radius: 0.75rem; text-decoration: none; font-weight: 800; text-align: center; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.05em; font-size: 1.1rem; box-shadow: 0 8px 25px rgba(251,191,36,0.3);">🐐 Play Now • Code: PLAYGOATED</a>
+                    </div>
+                </div>
+                
+                <!-- Shuffle Card -->
+                <div class="casino-feature-card" style="background: linear-gradient(145deg, rgba(147,51,234,0.15), rgba(124,58,237,0.1)); border: 2px solid rgba(147,51,234,0.25); transform: translateY(0); transition: all 0.4s ease;">
+                    <div class="casino-header" style="text-align: center; padding: 2.5rem 2rem 1.5rem; background: linear-gradient(135deg, rgba(147,51,234,0.1), rgba(124,58,237,0.05)); border-radius: 1rem 1rem 0 0;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #9333ea, #7c3aed); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; box-shadow: 0 8px 25px rgba(147,51,234,0.3);">
+                            <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 30L50 15L80 30L80 70L50 85L20 70Z" stroke="white" stroke-width="3" fill="none"/>
+                                <path d="M20 30L50 45L80 30" stroke="white" stroke-width="2"/>
+                                <path d="M50 45L50 85" stroke="white" stroke-width="2"/>
+                                <circle cx="35" cy="25" r="2" fill="white"/>
+                                <circle cx="65" cy="25" r="2" fill="white"/>
+                                <circle cx="50" cy="40" r="2" fill="white"/>
+                                <path d="M25 35Q30 40 35 45Q40 50 35 55Q30 60 25 65" stroke="white" stroke-width="1.5" fill="none"/>
+                                <path d="M75 35Q70 40 65 45Q60 50 65 55Q70 60 75 65" stroke="white" stroke-width="1.5" fill="none"/>
+                                <text x="50" y="95" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="white">SFL</text>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 2rem; font-weight: 900; color: #9333ea; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">SHUFFLE</h3>
+                        <p style="color: #cbd5e1; font-size: 1.1rem; font-weight: 600;">Innovative Gaming Hub</p>
+                    </div>
+                    <div class="casino-features" style="padding: 2rem;">
+                        <div style="background: rgba(147,51,234,0.05); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.5rem;">
+                            <div style="color: #9333ea; font-weight: 800; font-size: 1.1rem; margin-bottom: 0.5rem;">🚀 PARTNERSHIP</div>
+                            <div style="color: #5CFFC1; font-weight: 900; font-size: 1.8rem;">COMING SOON</div>
+                        </div>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(147,51,234,0.1);"><span style="color: #9333ea; margin-right: 0.75rem;">✓</span> Exclusive Promotions</li>
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(147,51,234,0.1);"><span style="color: #9333ea; margin-right: 0.75rem;">✓</span> Partnership Benefits</li>
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(147,51,234,0.1);"><span style="color: #9333ea; margin-right: 0.75rem;">✓</span> Porter Plays Access</li>
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center;"><span style="color: #9333ea; margin-right: 0.75rem;">✓</span> Exclusive Member Rewards</li>
+                        </ul>
+                    </div>
+                    <div style="padding: 2rem;">
+                        <a href="https://shuffle.com/?r=playShuffle" target="_blank" style="display: block; background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%); color: white; padding: 1.25rem; border-radius: 0.75rem; text-decoration: none; font-weight: 800; text-align: center; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.05em; font-size: 1.1rem; box-shadow: 0 8px 25px rgba(147,51,234,0.3);">🎰 Play Now • Code: PLAYSHUFFLE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="community-section">
+        <div class="container">
+            <h2 class="section-title">Join The <span class="accent">Community</span></h2>
+            <p class="section-description">Connect with the heart of our community through our feeds and social channels.</p>
+            
+            <div class="community-feed">
+                <div class="feed-item">
+                    <div class="feed-source">🎰 @SHUFFLECOM</div>
+                    <div class="feed-content">
+                        <strong>$20,000 - MICROGAMING MARVELS! 🚀</strong><br><br>
+                        Step into a world of wonder with a lineup of top Microgaming hits.<br><br>
+                        Play the featured games, unlock multipliers, and watch as the most marvelous players share in a $20,000 prize pool!<br><br>
+                        <strong>Prize Pool:</strong> $20,000 USD<br><br>
+                        <strong>Code to get you started! 💸</strong><br>
+                        <span style="color: #9333ea; font-weight: 700;">MARVELMICRO20</span><br><br>
+                        <strong>$2.50 for the first 700! - $3,500 wager requirement past 7 days.</strong>
+                    </div>
+                    <div class="feed-time">Learn more here 📎</div>
+                </div>
+                
+                <div class="feed-item">
+                    <div class="feed-source">� @GOATED</div>
+                    <div class="feed-content">
+                        Fresh slots just landed. 🎰<br><br>
+                        Y'all ready to dive in?
+                    </div>
+                    <div class="feed-time">Today at 6:08 AM • 9/16</div>
+                </div>
+                
+                <div class="feed-item">
+                    <div class="feed-source">� PLAY GOATED</div>
+                    <div class="feed-content">
+                        <strong>GM</strong><br><br>
+                        <span style="color: #fbbf24; font-weight: 700; font-family: monospace; font-size: 1.1rem;">UEHIPUF</span><br><br>
+                        <strong>Amount:</strong> $10<br>
+                        <strong>Wager Req. last 7d:</strong> 5k<br><br>
+                        🐐 <strong>Must be registered under playGoated to claim</strong><br>
+                        🐐 Want in on the action? Join the discord<br><br>
+                        Sign up here or use code <strong style="color: #5CFFC1;">PLAYGOATED</strong> at goated.com
+                    </div>
+                    <div class="feed-time">Yesterday at 10:04 PM</div>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://discord.gg/porterplays" target="_blank">Discord</a>
+                <a href="https://t.me/porterplays" target="_blank">Telegram</a>
+                <a href="https://x.com/porterplays_" target="_blank">Twitter</a>
+                <a href="https://kick.com/porterplays" target="_blank">Kick</a>
+            </div>
+            
+            <!-- Discord Help & Streaming Schedule -->
+            <div style="margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <!-- Discord Help -->
+                <div style="background: linear-gradient(135deg, rgba(88,101,242,0.1), rgba(88,101,242,0.05)); border: 1px solid rgba(88,101,242,0.2); border-radius: 1rem; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💬</div>
+                    <h3 style="color: #5865f2; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">Need Help Joining?</h3>
+                    <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 1rem;">Use our Telegram bot to walk through the Discord signup process</p>
+                    <a href="https://t.me/porterplaysbot" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #5865f2, #4752c4); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease;">Get Help via TG Bot</a>
+                </div>
+                
+                <!-- Streaming Schedule -->
+                <div style="background: linear-gradient(135deg, rgba(92,255,193,0.1), rgba(92,255,193,0.05)); border: 1px solid rgba(92,255,193,0.2); border-radius: 1rem; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📺</div>
+                    <h3 style="color: #5CFFC1; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">Porter's Stream Schedule</h3>
+                    <div style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.4;">
+                        <div style="margin-bottom: 0.5rem;"><strong>Weekends:</strong> Varies</div>
+                        <div style="margin-bottom: 0.5rem;"><strong>Special Events:</strong> Announced in Discord</div>
+                        <div style="color: #94a3b8; font-size: 0.85rem; font-style: italic;">Schedule subject to change</div>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </section>
+    <!-- Full Leaderboards Section -->
+    <section id="full-leaderboards" class="leaderboard-preview">
+        <div class="container">
+            <h2 class="section-title">Full <span class="accent">Leaderboards</span></h2>
+            
+            <!-- Leaderboard Tabs -->
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <button id="thrill-tab" class="leaderboard-tab active" onclick="switchLeaderboard('thrill')">Thrill Leaderboard</button>
+                <button id="goated-tab" class="leaderboard-tab" onclick="switchLeaderboard('goated')">Goated Leaderboard</button>
+            </div>
+            
+            <div class="leaderboard-card">
+                <div class="leaderboard-header" style="display: grid; grid-template-columns: 80px 1fr 120px 100px; align-items: center; padding: 1rem; background: rgba(89,86,255,0.1); border-bottom: 2px solid #5956FF; font-weight: 700; color: #5CFFC1;">
+                    <div>Rank</div>
+                    <div>Username</div>
+                    <div style="text-align: right;">Wagered</div>
+                    <div style="text-align: right;">Prize</div>
+                </div>
+                <div id="full-leaderboard-rows"></div>
+            </div>
+            
+            <!-- Play Now Button -->
+            <div style="text-align: center; margin-top: 2rem;">
+                <a id="play-now-btn" href="https://thrill.com/?r=porterplays" target="_blank" class="view-full-btn">Play Now on Thrill</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboards Section -->
+    <section id="full-leaderboards" class="leaderboard-preview">
+        <div class="container">
+            <h2 class="section-title">Full <span class="accent">Leaderboards</span></h2>
+            
+            <!-- Leaderboard Tabs -->
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <button id="thrill-tab" class="leaderboard-tab active" onclick="switchLeaderboard('thrill')">Thrill Leaderboard</button>
+                <button id="goated-tab" class="leaderboard-tab" onclick="switchLeaderboard('goated')">Goated Leaderboard</button>
+            </div>
+            
+            <div class="leaderboard-card">
+                <div class="leaderboard-header" style="display: grid; grid-template-columns: 80px 1fr 120px 100px; align-items: center; padding: 1rem; background: rgba(89,86,255,0.1); border-bottom: 2px solid #5956FF; font-weight: 700; color: #5CFFC1;">
+                    <div>Rank</div>
+                    <div>Username</div>
+                    <div style="text-align: right;">Wagered</div>
+                    <div style="text-align: right;">Prize</div>
+                </div>
+                <div id="full-leaderboard-rows"></div>
+            </div>
+            
+            <!-- Play Now Button -->
+            <div style="text-align: center; margin-top: 2rem;">
+                <a id="play-now-btn" href="https://thrill.com/?r=porterplays" target="_blank" class="view-full-btn">Play Now on Thrill</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">&copy; 2025 Porter Plays. All rights reserved.</p>
+            <p class="footer-text" style="margin-top: 1rem; font-size: 0.875rem;">
+                Please gamble responsibly, as it can be addictive. For support, please visit 
+                <a href="https://www.begambleaware.org" target="_blank" rel="noopener noreferrer" style="color: #5CFFC1; text-decoration: underline;">BeGambleAware.org</a>.
+            </p>
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="https://jmenichole.github.io/Portfolio/" target="_blank" style="color: #94a3b8; font-size: 0.8rem; text-decoration: none; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.25rem;">
+                    made for degens by degens <span style="color: #e11d48;">♥</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Modal (Hidden) -->
+    <div id="admin-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; align-items: center; justify-content: center;">
+        <div style="background: #1B1D29; padding: 2rem; border-radius: 1rem; max-width: 500px; width: 90%;">
+            <h3 style="margin-bottom: 1rem; text-align: center;">Admin Login</h3>
+            <input type="text" placeholder="Username" style="width: 100%; padding: 0.75rem; margin-bottom: 1rem; border: 1px solid #64748b; border-radius: 0.5rem; background: #2a2d3a; color: white;">
+            <input type="password" placeholder="Password" style="width: 100%; padding: 0.75rem; margin-bottom: 1.5rem; border: 1px solid #64748b; border-radius: 0.5rem; background: #2a2d3a; color: white;">
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <button onclick="loginAdmin()" style="background: #5956FF; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 0.5rem; cursor: pointer;">Login</button>
+                <button onclick="closeAdminModal()" style="background: #64748b; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 0.5rem; cursor: pointer;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard (Hidden) -->
+    <div id="admin-dashboard" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2500; padding: 2rem; overflow-y: auto;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <!-- Dashboard Header -->
+            <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 2rem; background: linear-gradient(135deg, rgba(89,86,255,0.2), rgba(92,255,193,0.1)); border-radius: 1rem; padding: 1.5rem;">
+                <div>
+                    <h2 style="color: #5CFFC1; font-weight: 700; margin-bottom: 0.5rem;">Porter Plays Admin Dashboard</h2>
+                    <div style="color: #94a3b8; font-size: 0.9rem;" id="admin-user-info">Authenticated via Discord</div>
+                </div>
+                <button onclick="closeAdminDashboard()" style="background: rgba(239,68,68,0.2); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); padding: 0.75rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Close Dashboard</button>
+            </div>
+            
+            <!-- Dashboard Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                <!-- User Management -->
+                <div class="admin-card" style="background: linear-gradient(145deg, rgba(27,29,41,0.8), rgba(35,38,58,0.6)); border: 2px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 1.5rem;">
+                    <h3 style="color: #5CFFC1; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        👥 User Management
+                    </h3>
+                    <div class="admin-stats" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="text-align: center; padding: 1rem; background: rgba(20,184,166,0.1); border-radius: 0.5rem;">
+                            <div style="color: #14b8a6; font-weight: 800; font-size: 1.5rem;">1,247</div>
+                            <div style="color: #94a3b8; font-size: 0.9rem;">Total Users</div>
+                        </div>
+                        <div style="text-align: center; padding: 1rem; background: rgba(92,255,193,0.1); border-radius: 0.5rem;">
+                            <div style="color: #5CFFC1; font-weight: 800; font-size: 1.5rem;">89</div>
+                            <div style="color: #94a3b8; font-size: 0.9rem;">Active Today</div>
+                        </div>
+                    </div>
+                    <button style="background: linear-gradient(135deg, #5956FF, #5CFFC1); color: white; border: none; padding: 0.75rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600; width: 100%;">Manage Users</button>
+                </div>
+                
+                <!-- Leaderboard Control -->
+                <div class="admin-card" style="background: linear-gradient(145deg, rgba(27,29,41,0.8), rgba(35,38,58,0.6)); border: 2px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 1.5rem;">
+                    <h3 style="color: #5CFFC1; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        🏆 Leaderboards
+                    </h3>
+                    <div style="margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 0.5rem;">
+                            <span style="color: #cbd5e1;">Thrill Leaderboard</span>
+                            <span style="color: #14b8a6; font-weight: 600;">Active</span>
+                        </div>
+                        <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 0.5rem;">
+                            <span style="color: #cbd5e1;">Goated Leaderboard</span>
+                            <span style="color: #fbbf24; font-weight: 600;">Active</span>
+                        </div>
+                        <div style="display: flex; justify-content: between; align-items: center;">
+                            <span style="color: #cbd5e1;">Shuffle Leaderboard</span>
+                            <span style="color: #64748b; font-weight: 600;">Coming Soon</span>
+                        </div>
+                    </div>
+                    <button style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; border: none; padding: 0.75rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600; width: 100%;">Update Leaderboards</button>
+                </div>
+                
+                <!-- Analytics -->
+                <div class="admin-card" style="background: linear-gradient(145deg, rgba(27,29,41,0.8), rgba(35,38,58,0.6)); border: 2px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 1.5rem;">
+                    <h3 style="color: #5CFFC1; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        📊 Analytics
+                    </h3>
+                    <div style="margin-bottom: 1rem;">
+                        <div style="color: #cbd5e1; margin-bottom: 0.5rem;">Today's Stats:</div>
+                        <div style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">
+                            • New Registrations: 12<br>
+                            • Bot Interactions: 156<br>
+                            • Casino Referrals: 8<br>
+                            • Discord Joins: 5
+                        </div>
+                    </div>
+                    <button style="background: linear-gradient(135deg, #9333ea, #7c3aed); color: white; border: none; padding: 0.75rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600; width: 100%;">View Full Analytics</button>
+                </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="admin-card" style="background: linear-gradient(145deg, rgba(27,29,41,0.8), rgba(35,38,58,0.6)); border: 2px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 2rem;">
+                <h3 style="color: #5CFFC1; font-weight: 700; margin-bottom: 1.5rem;">📈 Recent Activity</h3>
+                <div style="display: grid; gap: 1rem;">
+                    <div style="display: flex; justify-content: between; align-items: center; padding: 1rem; background: rgba(89,86,255,0.1); border-radius: 0.5rem;">
+                        <div>
+                            <div style="color: #cbd5e1; font-weight: 600;">User "GamingPro23" completed Thrill registration</div>
+                            <div style="color: #94a3b8; font-size: 0.9rem;">2 minutes ago</div>
+                        </div>
+                        <div style="color: #14b8a6; font-weight: 600;">✓</div>
+                    </div>
+                    <div style="display: flex; justify-content: between; align-items: center; padding: 1rem; background: rgba(89,86,255,0.1); border-radius: 0.5rem;">
+                        <div>
+                            <div style="color: #cbd5e1; font-weight: 600;">Bot helped 5 users join Discord server</div>
+                            <div style="color: #94a3b8; font-size: 0.9rem;">8 minutes ago</div>
+                        </div>
+                        <div style="color: #5865f2; font-weight: 600;">🤖</div>
+                    </div>
+                    <div style="display: flex; justify-content: between; align-items: center; padding: 1rem; background: rgba(89,86,255,0.1); border-radius: 0.5rem;">
+                        <div>
+                            <div style="color: #cbd5e1; font-weight: 600;">Leaderboard updated with new rankings</div>
+                            <div style="color: #94a3b8; font-size: 0.9rem;">15 minutes ago</div>
+                        </div>
+                        <div style="color: #fbbf24; font-weight: 600;">🏆</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Real leaderboard data from your codebase
+        const thrillLeaderboardData = [
+            {"uid":"3gxwu9EOTJ1aeVtbrz4u","name":"DannyT","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":2384807.377583352}},
+            {"uid":"q3A5bLWXGjQh33aChy8H","name":"Ali112","wagered":{"today":10.1530378016592,"this_week":249.17679234597873,"this_month":249.00983304976904,"all_time":2815477.349657146}},
+            {"uid":"KrFwNCwDstRKcwUUgggj","name":"LLance","wagered":{"today":17.277559266783683,"this_week":2489.7634456127303,"this_month":2489.7022530095505,"all_time":838433.6724357387}},
+            {"uid":"IRI3mHtRuj747bQBrFxm","name":"issakvn","wagered":{"today":1.15,"this_week":850.3479487904528,"this_month":850.3474496919429,"all_time":699095.9430487986}},
+            {"uid":"gVVddBIlrSZT0NIbBlw6","name":"supcookie","wagered":{"today":4697.287135060472,"this_week":8703.093092169116,"this_month":8701.3439505655,"all_time":683452.200187107}},
+            {"uid":"nceIJz5BH5tcg2fdcKXR","name":"DegenDP","wagered":{"today":745.16,"this_week":66567.121669549,"this_month":66567.1321325934,"all_time":544789.9678912829}},
+            {"uid":"sFmLR2Wwt2CYqO8dQBS8","name":"kanon29","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":389500.5556681914}},
+            {"uid":"Quv8mk5OjZLyffHcnHU8","name":"Bbb325","wagered":{"today":0,"this_week":3353.4638708378434,"this_month":3353.4632753506303,"all_time":360186.30489071354}},
+            {"uid":"4Z2bBDWGpZ6tDQX3wjVj","name":"Gemini","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":353026.78840248537}},
+            {"uid":"mWlfNiGV3SUQltd0Pkkt","name":"Spaghetti","wagered":{"today":0,"this_week":4.482993464300001,"this_month":4.482993423938751,"all_time":309238.86042578187}},
+            {"uid":"Edw7Xxj7JKI2AzYoFmVb","name":"BeggarsBeDamned","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":308589.1251822396}},
+            {"uid":"L8tAPRj0pSZvUjwof0Ik","name":"Ineligible","wagered":{"today":58.9907357937279,"this_week":3103.070801917427,"this_month":3102.3270733802433,"all_time":288845.3829649947}},
+            {"uid":"V7RQriJh93BLwPAENsDq","name":"ThroaterGoater","wagered":{"today":95.3899792788,"this_week":7899.724571617012,"this_month":7899.362603342175,"all_time":280347.6517357222}},
+            {"uid":"1vNwZrlwNTc5ypbz2Rur","name":"Danbigmon","wagered":{"today":0,"this_week":73.1249448324729,"this_month":73.12494572997093,"all_time":272428.7215649626}},
+            {"uid":"6FR3C4xeW8KS3qhJoXuh","name":"CURRYPUZZY","wagered":{"today":985.4342123080608,"this_week":1889.514903670177,"this_month":1854.939388265517,"all_time":262995.0100619853}}
+        ];
+
+        // Goated leaderboard data (20% of Thrill values)
+        const goatedLeaderboardData = thrillLeaderboardData.map(entry => ({
+            ...entry,
+            wagered: {
+                today: entry.wagered.today * 0.2,
+                this_week: entry.wagered.this_week * 0.2,
+                this_month: entry.wagered.this_month * 0.2,
+                all_time: entry.wagered.all_time * 0.2,
+            },
+        }));
+
+        let currentLeaderboard = 'thrill';
+        
+        // Prize pools
+        const thrillPrizes = { 1: 5000, 2: 3000, 3: 2000 };
+        const goatedPrizes = { 1: 2500, 2: 1500, 3: 1000 };
+        const otherPrizes = [500, 400, 300, 200, 100, 75, 50, 25, 25, 25, 25, 25];
+
+        function maskUsername(name) {
+            if (name.length <= 2) return name;
+            const mid = Math.floor(name.length / 2);
+            const maskLength = name.length > 4 ? 2 : 1;
+            const start = mid - Math.floor(maskLength / 2);
+            return name.substring(0, start) + '*'.repeat(maskLength) + name.substring(start + maskLength);
+        }
+
+        function formatCurrency(amount) {
+            return '$' + amount.toLocaleString();
+        }
+
+        function getRankClass(rank) {
+            if (rank === 1) return 'gold';
+            if (rank === 2) return 'silver';
+            if (rank === 3) return 'bronze';
+            return '';
+        }
+
+        function getMedalIcon(rank) {
+            if (rank === 1) return '🥇';
+            if (rank === 2) return '🥈';
+            if (rank === 3) return '🥉';
+            return '';
+        }
+
+        function getPrize(rank, leaderboard) {
+            const topPrizes = leaderboard === 'thrill' ? thrillPrizes : goatedPrizes;
+            if (rank <= 3) return topPrizes[rank];
+            if (rank <= 15) return otherPrizes[rank - 4];
+            return 0;
+        }
+
+        // Remove leaderboard preview loading function since section was removed
+        // loadLeaderboardPreview();
+
+        // Initialize page
+        function loadFullLeaderboard() {
+            const data = currentLeaderboard === 'thrill' ? thrillLeaderboardData : goatedLeaderboardData;
+            const rows = data.slice(0, 15).map((player, index) => {
+                const rank = index + 1;
+                const prize = getPrize(rank, currentLeaderboard);
+                return `
+                    <div class="leaderboard-row ${getRankClass(rank)}" style="display: grid; grid-template-columns: 80px 1fr 120px 100px; align-items: center; padding: 1rem; border-bottom: 1px solid rgba(203,213,225,0.1);">
+                        <div class="rank">
+                            <span class="medal">${getMedalIcon(rank)}</span>
+                            #${rank}
+                        </div>
+                        <div class="username">${maskUsername(player.name)}</div>
+                        <div class="wagered">${formatCurrency(player.wagered.all_time)}</div>
+                        <div class="prize-column" style="text-align: right;">${prize > 0 ? formatCurrency(prize) : '-'}</div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('full-leaderboard-rows').innerHTML = rows;
+        }
+
+        // Switch between leaderboards
+        function switchLeaderboard(board) {
+            currentLeaderboard = board;
+            
+            // Update tab styling
+            document.getElementById('thrill-tab').classList.toggle('active', board === 'thrill');
+            document.getElementById('goated-tab').classList.toggle('active', board === 'goated');
+            
+            // Update play button
+            const playBtn = document.getElementById('play-now-btn');
+            if (board === 'thrill') {
+                playBtn.href = 'https://thrill.com/?r=porterplays';
+                playBtn.textContent = 'Play Now on Thrill';
+            } else {
+                playBtn.href = 'https://www.goated.com/r/PLAYGOATED';
+                playBtn.textContent = 'Play Now on Goated';
+            }
+            
+            loadFullLeaderboard();
+        }
+
+        // Admin functions
+        function showAdminLogin() {
+            document.getElementById('admin-modal').style.display = 'flex';
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').style.display = 'none';
+        }
+
+        function loginAdmin() {
+            // Simulate admin login - in real app, this would authenticate
+            alert('Admin panel access granted! (Demo)');
+            closeAdminModal();
+            // Here you would redirect to admin panel or show admin interface
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLeaderboardPreview();
+            loadFullLeaderboard();
+        });
+
+        // Onboarding Bot System
+        let botState = 'welcome';
+        let userProgress = {};
+        const approvedAdmins = ['1153034319271559328', '791456651781472256', '1063145938455117826'];
+        
+        const botResponses = {
+            casino: {
+                message: "🎰 <strong>Casino Setup Guide</strong><br><br>I'll help you create accounts on our partner casinos. Let's start with which casino interests you most:<br><br>• <strong>Thrill</strong> - $5,000 monthly leaderboard, VIP transfers<br>• <strong>Goated</strong> - VIP transfer bonuses up to $500<br>• <strong>Shuffle</strong> - Exclusive partnership benefits<br><br>Which would you like to start with?",
+                actions: ['Setup Thrill', 'Setup Goated', 'Setup Shuffle', 'Compare All']
+            },
+            thrill: {
+                message: "🎲 <strong>Thrill Casino Setup</strong><br><br><strong>Step 1:</strong> Click the link below to register<br><strong>Step 2:</strong> Use code <span style='background: rgba(20,184,166,0.2); padding: 0.25rem 0.5rem; border-radius: 0.25rem; color: #14b8a6; font-weight: bold;'>PORTERPLAYS</span><br><strong>Step 3:</strong> Make your first deposit to unlock VIP benefits<br><br>💡 <strong>Pro Tip:</strong> VIP transfers are available if you're coming from another casino!<br><br>Ready to sign up?",
+                actions: ['Open Thrill Registration', 'Learn About VIP Transfer', 'Back to Casino List']
+            },
+            goated: {
+                message: "🐐 <strong>Goated Casino Setup</strong><br><br><strong>Step 1:</strong> Register using our exclusive link<br><strong>Step 2:</strong> Use code <span style='background: rgba(251,191,36,0.2); padding: 0.25rem 0.5rem; border-radius: 0.25rem; color: #fbbf24; font-weight: bold;'>PLAYGOATED</span><br><strong>Step 3:</strong> Complete VIP transfer within 30 days for cash bonus<br><br>🎁 <strong>Special Offer:</strong> Up to $500 VIP transfer bonus available!<br><br>Let's get you started:",
+                actions: ['Open Goated Registration', 'VIP Transfer Info', 'Back to Casino List']
+            },
+            shuffle: {
+                message: "🎰 <strong>Shuffle Casino Setup</strong><br><br><strong>Step 1:</strong> Create your Shuffle account<br><strong>Step 2:</strong> Use code <span style='background: rgba(147,51,234,0.2); padding: 0.25rem 0.5rem; border-radius: 0.25rem; color: #9333ea; font-weight: bold;'>PLAYSHUFFLE</span><br><strong>Step 3:</strong> Enjoy exclusive Porter Plays benefits<br><br>🚀 <strong>Coming Soon:</strong> Enhanced partnership benefits and exclusive promotions!<br><br>Ready to join Shuffle?",
+                actions: ['Open Shuffle Registration', 'Learn About Benefits', 'Back to Casino List']
+            },
+            community: {
+                message: "💬 <strong>Join Our Community</strong><br><br>Connect with fellow players and stay updated on the latest:<br><br>🔵 <strong>Discord Server</strong><br>• Live chat with community<br>• Exclusive announcements<br>• Direct support from admins<br><br>📱 <strong>Telegram Channel</strong><br>• Daily updates and promotions<br>• Exclusive bonus codes<br>• Leaderboard announcements<br><br>Which would you like to join first?",
+                actions: ['Join Discord', 'Join Telegram', 'Join Both', 'Learn More']
+            },
+            leaderboards: {
+                message: "🏆 <strong>Leaderboard Guide</strong><br><br>Here's how our leaderboard system works:<br><br><strong>Monthly Prizes:</strong><br>• Thrill: $5,000 total prize pool<br>• Goated: VIP bonuses and rewards<br>• Shuffle: Partnership benefits<br><br><strong>How to Compete:</strong><br>1. Use your Porter Plays code when signing up<br>2. Play your favorite games<br>3. Track your progress on our leaderboards<br>4. Collect your rewards!<br><br>Want to see current standings?",
+                actions: ['View Live Leaderboards', 'Prize Breakdown', 'How to Join', 'Back to Main Menu']
+            },
+            quickstart: {
+                message: "🚀 <strong>Quick Start (5 minutes)</strong><br><br>Let's get you set up fast:<br><br><strong>Option A: Single Casino</strong><br>1. Pick your preferred casino<br>2. Register with Porter code<br>3. Join Discord for updates<br><br><strong>Option B: Complete Setup</strong><br>1. Register on all 3 casinos<br>2. Join Discord & Telegram<br>3. Start competing immediately<br><br>Which path interests you?",
+                actions: ['Single Casino Setup', 'Complete Setup', 'I Need More Info']
+            }
+        };
+
+        function addBotMessage(message, isUser = false) {
+            const messagesContainer = document.getElementById('bot-messages');
+            const messageDiv = document.createElement('div');
+            
+            if (isUser) {
+                messageDiv.className = 'user-message';
+                messageDiv.style.cssText = 'background: rgba(92,255,193,0.1); border: 1px solid rgba(92,255,193,0.2); border-radius: 1rem; padding: 1rem; margin-bottom: 1rem; margin-left: 2rem; text-align: right;';
+                messageDiv.innerHTML = `<div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">You:</div><div style="color: #cbd5e1;">${message}</div>`;
+            } else {
+                messageDiv.className = 'bot-message';
+                messageDiv.style.cssText = 'background: rgba(89,86,255,0.1); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem;';
+                messageDiv.innerHTML = `<div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">Porter's Assistant:</div><div style="color: #cbd5e1; line-height: 1.6;">${message}</div>`;
+            }
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function startOnboarding(type) {
+            const response = botResponses[type];
+            if (response) {
+                addBotMessage(response.message);
+                botState = type;
+                
+                // Add action buttons if available
+                if (response.actions) {
+                    setTimeout(() => {
+                        const actionsDiv = document.createElement('div');
+                        actionsDiv.style.cssText = 'display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; justify-content: center;';
+                        
+                        response.actions.forEach(action => {
+                            const btn = document.createElement('button');
+                            btn.textContent = action;
+                            btn.style.cssText = 'background: linear-gradient(135deg, rgba(89,86,255,0.2), rgba(92,255,193,0.1)); border: 1px solid rgba(89,86,255,0.3); color: #5CFFC1; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease;';
+                            btn.onmouseover = () => btn.style.background = 'linear-gradient(135deg, rgba(89,86,255,0.3), rgba(92,255,193,0.2))';
+                            btn.onmouseout = () => btn.style.background = 'linear-gradient(135deg, rgba(89,86,255,0.2), rgba(92,255,193,0.1))';
+                            btn.onclick = () => handleBotAction(action);
+                            actionsDiv.appendChild(btn);
+                        });
+                        
+                        const messagesContainer = document.getElementById('bot-messages');
+                        const lastMessage = messagesContainer.lastElementChild;
+                        lastMessage.appendChild(actionsDiv);
+                    }, 500);
+                }
+            }
+        }
+
+        function handleBotAction(action) {
+            addBotMessage(action, true);
+            
+            const actionMap = {
+                'Setup Thrill': () => startOnboarding('thrill'),
+                'Setup Goated': () => startOnboarding('goated'),
+                'Setup Shuffle': () => startOnboarding('shuffle'),
+                'Open Thrill Registration': () => {
+                    addBotMessage("🚀 Opening Thrill registration in a new window. Don't forget to use code <strong>PORTERPLAYS</strong>!");
+                    window.open('https://thrill.com/en/register?c=porterplays', '_blank');
+                },
+                'Open Goated Registration': () => {
+                    addBotMessage("🐐 Opening Goated registration in a new window. Remember to use code <strong>PLAYGOATED</strong>!");
+                    window.open('https://www.goated.com/r/PLAYGOATED', '_blank');
+                },
+                'Open Shuffle Registration': () => {
+                    addBotMessage("🎰 Opening Shuffle registration in a new window. Use code <strong>PLAYSHUFFLE</strong> for benefits!");
+                    window.open('https://shuffle.com/?r=playShuffle', '_blank');
+                },
+                'Join Discord': () => {
+                    addBotMessage("🔵 Opening Discord server invite! Welcome to the community!");
+                    window.open('https://discord.gg/porterplays', '_blank');
+                },
+                'Join Telegram': () => {
+                    addBotMessage("📱 Opening Telegram channel! Stay updated with our latest news!");
+                    window.open('https://t.me/porterplaysgame', '_blank');
+                },
+                'View Live Leaderboards': () => {
+                    addBotMessage("📊 Scrolling to live leaderboards section!");
+                    document.getElementById('full-leaderboards').scrollIntoView({ behavior: 'smooth' });
+                },
+                'Back to Casino List': () => startOnboarding('casino'),
+                'Back to Main Menu': () => {
+                    addBotMessage("👋 Back to the main menu! What would you like to explore next?");
+                    botState = 'welcome';
+                }
+            };
+            
+            const handler = actionMap[action];
+            if (handler) {
+                setTimeout(handler, 800);
+            }
+        }
+
+        function sendBotMessage() {
+            const input = document.getElementById('bot-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addBotMessage(message, true);
+            input.value = '';
+            
+            // Simple AI-like responses
+            setTimeout(() => {
+                const lowerMessage = message.toLowerCase();
+                
+                if (lowerMessage.includes('thrill')) {
+                    startOnboarding('thrill');
+                } else if (lowerMessage.includes('goated')) {
+                    startOnboarding('goated');
+                } else if (lowerMessage.includes('shuffle')) {
+                    startOnboarding('shuffle');
+                } else if (lowerMessage.includes('discord') || lowerMessage.includes('community')) {
+                    startOnboarding('community');
+                } else if (lowerMessage.includes('leaderboard') || lowerMessage.includes('prize')) {
+                    startOnboarding('leaderboards');
+                } else if (lowerMessage.includes('help') || lowerMessage.includes('support')) {
+                    addBotMessage("🤝 I'm here to help! You can:<br>• Ask about specific casinos (Thrill, Goated, Shuffle)<br>• Get help joining Discord or Telegram<br>• Learn about leaderboards and prizes<br>• Or just click the quick action buttons above!<br><br>What specific question do you have?");
+                } else {
+                    addBotMessage("🤔 I understand you're asking about: <em>\"" + message + "\"</em><br><br>Here are some things I can help you with:<br>• Casino registration and setup<br>• Joining our community channels<br>• Understanding leaderboards<br>• Getting exclusive bonus codes<br><br>Try clicking one of the quick action buttons above, or ask me about a specific casino!");
+                }
+            }, 1000);
+        }
+
+        function handleBotInput(event) {
+            if (event.key === 'Enter') {
+                sendBotMessage();
+            }
+        }
+
+        function resetBot() {
+            const messagesContainer = document.getElementById('bot-messages');
+            messagesContainer.innerHTML = `
+                <div class="bot-message" style="background: rgba(89,86,255,0.1); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem;">
+                    <div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">👋 Welcome back to Porter Plays!</div>
+                    <div style="color: #cbd5e1; line-height: 1.6;">
+                        I'm here to help you get the most out of your Porter Plays experience. I can guide you through:
+                        <br><br>
+                        • 🎰 Setting up accounts on Thrill, Goated & Shuffle
+                        <br>• 💬 Joining our Discord and Telegram communities  
+                        <br>• 🏆 Understanding leaderboards and rewards
+                        <br>• 🎁 Claiming exclusive bonuses and codes
+                        <br><br>
+                        What would you like to start with?
+                    </div>
+                </div>
+            `;
+            botState = 'welcome';
+            userProgress = {};
+            document.getElementById('bot-status').textContent = 'Ready to help you get started!';
+        }
+
+        // Discord Admin Authentication
+        function showAdminLogin() {
+            const modal = document.getElementById('admin-modal');
+            if (modal) {
+                modal.style.display = 'flex';
+                // Replace the basic login with Discord OAuth
+                modal.innerHTML = `
+                    <div style="background: #1B1D29; padding: 2rem; border-radius: 1rem; max-width: 500px; width: 90%; text-align: center;">
+                        <h3 style="margin-bottom: 2rem; color: #5CFFC1;">Admin Login</h3>
+                        <div style="margin-bottom: 2rem;">
+                            <div style="color: #5865f2; font-size: 3rem; margin-bottom: 1rem;">
+                                <svg width="60" height="60" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.280 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="#5865f2"/>
+                                </svg>
+                            </div>
+                            <h4 style="color: white; margin-bottom: 1rem;">Sign in with Discord</h4>
+                            <p style="color: #94a3b8; margin-bottom: 2rem; font-size: 0.9rem;">Admin access is restricted to verified Porter Plays team members</p>
+                        </div>
+                        <button onclick="initiateDiscordLogin()" style="background: #5865f2; color: white; border: none; border-radius: 0.5rem; padding: 1rem 2rem; font-weight: 600; cursor: pointer; margin-bottom: 1rem; width: 100%; font-size: 1rem;">
+                            Login with Discord
+                        </button>
+                        <button onclick="closeAdminModal()" style="background: transparent; color: #94a3b8; border: 1px solid #64748b; border-radius: 0.5rem; padding: 0.75rem 1.5rem; cursor: pointer; width: 100%;">
+                            Cancel
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function initiateDiscordLogin() {
+            // In a real implementation, you would redirect to Discord OAuth
+            // For demo purposes, we'll simulate the process
+            const clientId = 'YOUR_DISCORD_CLIENT_ID'; // You'll need to replace this
+            const redirectUri = encodeURIComponent(window.location.origin + '/admin/callback');
+            const scope = encodeURIComponent('identify');
+            
+            // For demo, we'll simulate a successful login
+            simulateDiscordLogin();
+        }
+
+        function simulateDiscordLogin() {
+            // This simulates the Discord OAuth flow
+            // In production, you'd handle the real OAuth callback
+            const modal = document.getElementById('admin-modal');
+            modal.innerHTML = `
+                <div style="background: #1B1D29; padding: 2rem; border-radius: 1rem; max-width: 500px; width: 90%; text-align: center;">
+                    <div style="color: #5CFFC1; font-size: 2rem; margin-bottom: 1rem;">✅</div>
+                    <h3 style="margin-bottom: 1rem; color: #5CFFC1;">Authentication Successful!</h3>
+                    <p style="color: #cbd5e1; margin-bottom: 2rem;">Welcome back, Admin! Opening dashboard...</p>
+                    <div style="text-align: left; background: rgba(89,86,255,0.1); border-radius: 0.5rem; padding: 1rem; margin-bottom: 2rem;">
+                        <div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">🔒 In Production This Would:</div>
+                        <div style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.6;">
+                            • Verify Discord ID against approved list<br>
+                            • Generate secure admin session token<br>
+                            • Log admin access for security audit<br>
+                            • Auto-approve IDs: 1153...328, 791...256, 1063...826
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Auto-close modal and open dashboard after 3 seconds
+            setTimeout(() => {
+                closeAdminModal();
+                openAdminDashboard();
+            }, 3000);
+        }
+
+        function openAdminDashboard() {
+            const dashboard = document.getElementById('admin-dashboard');
+            if (dashboard) {
+                dashboard.style.display = 'block';
+                // Update admin info
+                const adminInfo = document.getElementById('admin-user-info');
+                if (adminInfo) {
+                    adminInfo.textContent = 'Authenticated via Discord • Admin Level Access';
+                }
+            }
+        }
+
+        function closeAdminDashboard() {
+            const dashboard = document.getElementById('admin-dashboard');
+            if (dashboard) {
+                dashboard.style.display = 'none';
+            }
+        }
+
+        function closeAdminModal() {
+            const modal = document.getElementById('admin-modal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Click outside modal to close
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('admin-modal');
+            if (modal && event.target === modal) {
+                closeAdminModal();
+            }
+        });
+    </script>
+</body>
+</html>
