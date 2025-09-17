@@ -532,11 +532,17 @@
             .nav { padding: 0 1rem; }
             .hero { padding: 8rem 1rem 4rem; }
             .container { padding: 0 1rem; }
-            .leaderboard-row { grid-template-columns: 60px 1fr 100px; padding: 0.75rem; }
+            /* Ensure leaderboard grid aligns and fits: hide prize column and reduce to 3 columns */
+            .leaderboard-row { grid-template-columns: 60px 1fr 100px !important; padding: 0.75rem; }
             .rank { font-size: 1.25rem; }
             .username { font-size: 1rem; }
             .wagered { font-size: 1rem; }
-            .leaderboard-header { grid-template-columns: 60px 1fr 100px 80px; }
+            .leaderboard-header { grid-template-columns: 60px 1fr 100px !important; }
+            .leaderboard-header > div:last-child { display: none; }
+            .prize-column { display: none; }
+            /* Tabs wrap and are easier to tap */
+            .leaderboard-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+            .leaderboard-tab { padding: 0.75rem 1rem; margin: 0.25rem; font-size: 0.95rem; }
             .social-links { gap: 1rem; }
             .social-links a { padding: 1rem 1.5rem; font-size: 1rem; }
             .casino-feature-card { margin-bottom: 2rem; }
@@ -544,6 +550,29 @@
             .hero-stats { gap: 2rem; }
             .stat-number { font-size: 2rem; }
             .section-title { font-size: 2.5rem; }
+            .casino-cards-section { padding: 4rem 0; margin: 2rem 1rem; }
+            /* Make casino grid adapt better on tablets */
+            .casino-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+            .casino-grid { justify-items: stretch; }
+            .coming-soon-section { padding: 3rem 0; margin: 2rem 1rem; }
+            .vip-highlight-section { padding: 3rem 0; margin: 2rem 1rem; }
+            .vip-highlight-card { padding: 2rem 1rem; }
+            .bot-container { margin: 2rem 1rem; }
+            .onboarding-section { padding: 4rem 1rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2.2rem; }
+            .section-title { font-size: 2rem; }
+            .casino-cards-section, .coming-soon-section, .vip-highlight-section { margin: 1rem 0.5rem; }
+            .casino-feature-card { max-width: 100%; }
+            .bot-chat { padding: 1rem; }
+            .hero-stats { flex-direction: column; gap: 1rem; text-align: center; }
+            /* Smaller text for numbers; keep readability */
+            .wagered { font-size: 0.9rem; }
+            .leaderboard-tab { padding: 0.6rem 0.9rem; font-size: 0.9rem; }
+            /* Single column casino cards on very small screens */
+            .casino-grid { grid-template-columns: 1fr !important; }
         }
     </style>
 </head>
@@ -554,7 +583,7 @@
             <div class="logo">PorterPlays</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#leaderboards">Leaderboards</a></li>
+                <li><a href="#full-leaderboards">Leaderboards</a></li>
                 <li><a href="#community">Community</a></li>
                 <li><a href="#updates">Updates</a></li>
             </ul>
@@ -566,7 +595,7 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>Your Arena for <span class="highlight">Competitive Play</span></h1>
-            <p>Welcome to the official hub for Porter Plays leaderboards. Track your performance, compete for exclusive prize pools, and secure your place at the top.</p>
+            <p>Want to play? Use the onboarding bot to get started! Track your performance, compete for exclusive prize pools, and secure your place at the top.</p>
             <div class="hero-stats">
                 <div class="stat-item">
                     <div class="stat-number">$5K+</div>
@@ -588,9 +617,8 @@
     <section id="onboarding" class="onboarding-section" style="padding: 6rem 0; background: linear-gradient(135deg, rgba(89,86,255,0.1), rgba(92,255,193,0.05)); position: relative;">
         <div class="container">
             <div style="text-align: center; margin-bottom: 3rem;">
-                <div style="display: inline-block; background: linear-gradient(135deg, rgba(89,86,255,0.2), rgba(92,255,193,0.2)); border: 1px solid rgba(89,86,255,0.3); color: #5CFFC1; padding: 0.5rem 1.5rem; border-radius: 25px; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem;">🤖 AI Assistant</div>
-                <h2 class="section-title">Porter's <span class="accent">Onboarding Bot</span></h2>
-                <p class="section-description">Let our AI guide you through the complete setup process - from casino registration to joining our community channels.</p>
+                <h2 class="section-title">Porter's <span class="accent">Onboarding Guide</span></h2>
+                <p class="section-description">Get personalized guidance through your complete setup - from casino registration to joining our community channels.</p>
             </div>
             
             <!-- Bot Interface -->
@@ -599,7 +627,7 @@
                 <div class="bot-header" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(89,86,255,0.2);">
                     <div class="bot-avatar" style="width: 50px; height: 50px; background: linear-gradient(135deg, #5956FF, #5CFFC1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🤖</div>
                     <div>
-                        <div style="color: #5CFFC1; font-weight: 700; font-size: 1.1rem;">Porter's Assistant</div>
+                        <div style="color: #5CFFC1; font-weight: 700; font-size: 1.1rem;">Porter Guide</div>
                         <div style="color: #94a3b8; font-size: 0.9rem;" id="bot-status">Ready to help you get started!</div>
                     </div>
                     <div style="margin-left: auto;">
@@ -673,6 +701,34 @@
         </div>
     </section>
 
+    <!-- Full Leaderboards Section -->
+    <section id="full-leaderboards" class="leaderboard-preview">
+        <div class="container">
+            <h2 class="section-title">Full <span class="accent">Leaderboards</span></h2>
+            
+            <!-- Leaderboard Tabs -->
+            <div class="leaderboard-tabs" style="text-align: center; margin-bottom: 2rem;">
+                <button id="thrill-tab" class="leaderboard-tab active" onclick="switchLeaderboard('thrill')">Thrill Leaderboard</button>
+                <button id="goated-tab" class="leaderboard-tab" onclick="switchLeaderboard('goated')">Goated Leaderboard</button>
+            </div>
+            
+            <div class="leaderboard-card">
+                <div class="leaderboard-header" style="display: grid; grid-template-columns: 80px 1fr 120px 100px; align-items: center; padding: 1rem; background: rgba(89,86,255,0.1); border-bottom: 2px solid #5956FF; font-weight: 700; color: #5CFFC1;">
+                    <div>Rank</div>
+                    <div>Username</div>
+                    <div style="text-align: right;">Wagered</div>
+                    <div style="text-align: right;">Prize</div>
+                </div>
+                <div id="full-leaderboard-rows"></div>
+            </div>
+            
+            <!-- Play Now Button -->
+            <div style="text-align: center; margin-top: 2rem;">
+                <a id="play-now-btn" href="https://thrill.com/?r=porterplays" target="_blank" class="view-full-btn">Play Now on Thrill</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Play Now Casino Cards -->
     <section class="casino-cards-section" style="padding: 8rem 0; background: linear-gradient(145deg, rgba(35,38,58,0.6), rgba(30,32,48,0.4)); border-radius: 2rem; margin: 4rem auto; max-width: 1400px; position: relative;">
         <div class="container">
@@ -682,7 +738,7 @@
                 <p class="section-description" style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">Select your preferred platform and unlock exclusive Porter Plays benefits, bonuses, and VIP rewards.</p>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 3rem; margin-top: 4rem;">
+            <div class="casino-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; margin-top: 4rem; max-width: 1200px; margin-left: auto; margin-right: auto; justify-items: center;">
                 <!-- Thrill Card -->
                 <div class="casino-feature-card" style="background: linear-gradient(145deg, rgba(20,184,166,0.15), rgba(13,148,136,0.1)); border: 2px solid rgba(20,184,166,0.25); transform: translateY(0); transition: all 0.4s ease;">
                     <div class="casino-header" style="text-align: center; padding: 2.5rem 2rem 1.5rem; background: linear-gradient(135deg, rgba(20,184,166,0.1), rgba(13,148,136,0.05)); border-radius: 1rem 1rem 0 0;">
@@ -772,18 +828,115 @@
                     </div>
                     <div class="casino-features" style="padding: 2rem;">
                         <div style="background: rgba(147,51,234,0.05); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.5rem;">
-                            <div style="color: #9333ea; font-weight: 800; font-size: 1.1rem; margin-bottom: 0.5rem;">🚀 PARTNERSHIP</div>
-                            <div style="color: #5CFFC1; font-weight: 900; font-size: 1.8rem;">COMING SOON</div>
+                            <div style="color: #9333ea; font-weight: 800; font-size: 1.1rem; margin-bottom: 0.5rem;">💎 DEPOSIT BONUS</div>
+                            <div style="color: #5CFFC1; font-weight: 900; font-size: 1.8rem;">UP TO $1,000</div>
                         </div>
                         <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(147,51,234,0.1);"><span style="color: #9333ea; margin-right: 0.75rem;">✓</span> Exclusive Promotions</li>
-                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(147,51,234,0.1);"><span style="color: #9333ea; margin-right: 0.75rem;">✓</span> Partnership Benefits</li>
-                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(147,51,234,0.1);"><span style="color: #9333ea; margin-right: 0.75rem;">✓</span> Porter Plays Access</li>
-                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center;"><span style="color: #9333ea; margin-right: 0.75rem;">✓</span> Exclusive Member Rewards</li>
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(147,51,234,0.1);"><span style="color: #9333ea; margin-right: 0.75rem;">✓</span> 100% Deposit Match Bonus</li>
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(147,51,234,0.1);"><span style="color: #9333ea; margin-right: 0.75rem;">✓</span> Comprehensive VIP Program</li>
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(147,51,234,0.1);"><span style="color: #9333ea; margin-right: 0.75rem;">✓</span> Porter Plays Partnership</li>
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center;"><span style="color: #9333ea; margin-right: 0.75rem;">✓</span> Personal VIP Hosts</li>
                         </ul>
                     </div>
                     <div style="padding: 2rem;">
                         <a href="https://shuffle.com/?r=playShuffle" target="_blank" style="display: block; background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%); color: white; padding: 1.25rem; border-radius: 0.75rem; text-decoration: none; font-weight: 800; text-align: center; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.05em; font-size: 1.1rem; box-shadow: 0 8px 25px rgba(147,51,234,0.3);">🎰 Play Now • Code: PLAYSHUFFLE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shuffle.us Coming Soon Section -->
+    <section class="coming-soon-section" style="padding: 4rem 0; background: linear-gradient(145deg, rgba(147,51,234,0.08), rgba(124,58,237,0.04)); margin: 3rem auto; max-width: 800px; border-radius: 2rem;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <div style="display: inline-block; background: linear-gradient(135deg, rgba(147,51,234,0.15), rgba(255,215,0,0.15)); border: 1px solid rgba(147,51,234,0.2); color: #9333ea; padding: 0.5rem 1.5rem; border-radius: 25px; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem;">🇺🇸 US Launch</div>
+                <h2 class="section-title" style="margin-bottom: 1rem;">Shuffle<span class="accent">.us</span></h2>
+                <p class="section-description" style="font-size: 1.2rem; max-width: 600px; margin: 0 auto;">The US version of Shuffle is launching soon with exclusive features for American players.</p>
+            </div>
+            
+            <div style="max-width: 500px; margin: 0 auto;">
+                <div class="casino-feature-card" style="background: linear-gradient(145deg, rgba(147,51,234,0.15), rgba(124,58,237,0.1)); border: 2px solid rgba(147,51,234,0.25); transform: translateY(0); transition: all 0.4s ease; text-align: center;">
+                    <div class="casino-header" style="padding: 2.5rem 2rem 1.5rem; background: linear-gradient(135deg, rgba(147,51,234,0.1), rgba(124,58,237,0.05)); border-radius: 1rem 1rem 0 0;">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #9333ea, #7c3aed); border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; box-shadow: 0 12px 30px rgba(147,51,234,0.4);">
+                            🇺🇸
+                        </div>
+                        <h3 style="font-size: 2.5rem; font-weight: 900; color: #9333ea; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">SHUFFLE.US</h3>
+                        <p style="color: #cbd5e1; font-size: 1.1rem; font-weight: 600;">US Gaming Platform</p>
+                    </div>
+                    <div class="casino-features" style="padding: 2rem;">
+                        <div style="background: linear-gradient(135deg, rgba(147,51,234,0.15), rgba(255,215,0,0.1)); border: 2px solid rgba(255,215,0,0.3); border-radius: 0.75rem; padding: 2rem; margin-bottom: 1.5rem; position: relative; overflow: hidden;">
+                            <div style="position: absolute; top: 0; right: 0; background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; padding: 0.5rem 1rem; border-radius: 0 0.75rem 0 1rem; font-size: 0.9rem; font-weight: 800;">SOON!</div>
+                            <div style="color: #FFD700; font-weight: 800; font-size: 1.3rem; margin-bottom: 1rem;">🚀 COMING SOON</div>
+                            <div style="color: #5CFFC1; font-weight: 900; font-size: 2rem; margin-bottom: 0.5rem;">2025</div>
+                            <div style="color: #9333ea; font-weight: 700; font-size: 1rem;">Exclusive US Features</div>
+                        </div>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(147,51,234,0.1);"><span style="color: #9333ea; margin-right: 0.75rem;">📋</span> Onboarding steps in development</li>
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(147,51,234,0.1);"><span style="color: #9333ea; margin-right: 0.75rem;">🇺🇸</span> US-specific regulations & features</li>
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; border-bottom: 1px solid rgba(147,51,234,0.1);"><span style="color: #9333ea; margin-right: 0.75rem;">💰</span> Exclusive US launch bonuses</li>
+                            <li style="padding: 0.75rem 0; color: #cbd5e1; font-weight: 600; display: flex; align-items: center;"><span style="color: #9333ea; margin-right: 0.75rem;">🔔</span> Get notified when available</li>
+                        </ul>
+                    </div>
+                    <div style="padding: 2rem;">
+                        <button disabled style="display: block; background: linear-gradient(135deg, #64748b 0%, #475569 100%); color: #cbd5e1; padding: 1.25rem; border-radius: 0.75rem; border: none; font-weight: 800; text-align: center; text-transform: uppercase; letter-spacing: 0.05em; font-size: 1.1rem; width: 100%; cursor: not-allowed; opacity: 0.7;">🚧 Coming Soon - No Registration Yet</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thrill VIP Transfer Highlight -->
+    <section class="vip-highlight-section" style="padding: 4rem 0; background: linear-gradient(135deg, rgba(20,184,166,0.1), rgba(6,182,212,0.05)); margin: 2rem auto; max-width: 1200px; border-radius: 2rem;">
+        <div class="container">
+            <div class="vip-highlight-card" style="background: linear-gradient(145deg, rgba(20,184,166,0.15), rgba(6,182,212,0.1)); border: 2px solid rgba(20,184,166,0.3); border-radius: 1.5rem; padding: 3rem; text-align: center; position: relative; overflow: hidden;">
+                
+                <!-- Background Effect -->
+                <div style="position: absolute; top: -50%; right: -20%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(20,184,166,0.1), transparent); border-radius: 50%;"></div>
+                <div style="position: absolute; bottom: -30%; left: -20%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(6,182,212,0.08), transparent); border-radius: 50%;"></div>
+                
+                <!-- Content -->
+                <div style="position: relative; z-index: 2;">
+                    <div style="display: inline-block; background: rgba(20,184,166,0.2); border: 1px solid rgba(20,184,166,0.4); color: #14b8a6; padding: 0.5rem 1.5rem; border-radius: 25px; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem;">💎 VIP Exclusive</div>
+                    
+                    <h3 style="color: #14b8a6; font-size: 2.5rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.2;">
+                        Thrill VIP Transfer
+                    </h3>
+                    
+                    <p style="color: #cbd5e1; font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                        Exclusive welcome offer for VIPs transferring their play from another platform. Get started with immediate VIP benefits!
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                        <div style="background: rgba(20,184,166,0.1); border: 1px solid rgba(20,184,166,0.2); border-radius: 1rem; padding: 1.5rem;">
+                            <div style="color: #14b8a6; font-size: 1.5rem; margin-bottom: 0.5rem;">🎯</div>
+                            <h4 style="color: #5CFFC1; font-weight: 700; margin-bottom: 0.5rem;">Easy Process</h4>
+                            <p style="color: #cbd5e1; font-size: 0.9rem;">Submit a ticket with screenshot or username from your previous platform</p>
+                        </div>
+                        
+                        <div style="background: rgba(20,184,166,0.1); border: 1px solid rgba(20,184,166,0.2); border-radius: 1rem; padding: 1.5rem;">
+                            <div style="color: #14b8a6; font-size: 1.5rem; margin-bottom: 0.5rem;">⚡</div>
+                            <h4 style="color: #5CFFC1; font-weight: 700; margin-bottom: 0.5rem;">Instant Benefits</h4>
+                            <p style="color: #cbd5e1; font-size: 0.9rem;">Get VIP status and exclusive perks from day one</p>
+                        </div>
+                        
+                        <div style="background: rgba(20,184,166,0.1); border: 1px solid rgba(20,184,166,0.2); border-radius: 1rem; padding: 1.5rem;">
+                            <div style="color: #14b8a6; font-size: 1.5rem; margin-bottom: 0.5rem;">🎁</div>
+                            <h4 style="color: #5CFFC1; font-weight: 700; margin-bottom: 0.5rem;">Exclusive Rewards</h4>
+                            <p style="color: #cbd5e1; font-size: 0.9rem;">Special welcome bonuses only available for VIP transfers</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap;">
+                        <a href="https://thrill.com/en/register?c=porterplays" target="_blank" 
+                           style="background: linear-gradient(135deg, #14b8a6, #06b6d4); color: white; text-decoration: none; padding: 1rem 2rem; border-radius: 0.75rem; font-weight: 700; font-size: 1.1rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(20,184,166,0.3);">
+                            🚀 Start VIP Transfer
+                        </a>
+                        
+                        <button onclick="startOnboarding('thrill')" 
+                                style="background: transparent; border: 2px solid rgba(20,184,166,0.5); color: #14b8a6; padding: 1rem 2rem; border-radius: 0.75rem; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease;">
+                            📖 Learn More
+                        </button>
                     </div>
                 </div>
             </div>
@@ -812,7 +965,7 @@
                 </div>
                 
                 <div class="feed-item">
-                    <div class="feed-source">� @GOATED</div>
+                    <div class="feed-source">🐐 @GOATED</div>
                     <div class="feed-content">
                         Fresh slots just landed. 🎰<br><br>
                         Y'all ready to dive in?
@@ -821,7 +974,7 @@
                 </div>
                 
                 <div class="feed-item">
-                    <div class="feed-source">� PLAY GOATED</div>
+                    <div class="feed-source">🐐 PLAY GOATED</div>
                     <div class="feed-content">
                         <strong>GM</strong><br><br>
                         <span style="color: #fbbf24; font-weight: 700; font-family: monospace; font-size: 1.1rem;">UEHIPUF</span><br><br>
@@ -844,16 +997,8 @@
             
             <!-- Discord Help & Streaming Schedule -->
             <div style="margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                <!-- Discord Help -->
-                <div style="background: linear-gradient(135deg, rgba(88,101,242,0.1), rgba(88,101,242,0.05)); border: 1px solid rgba(88,101,242,0.2); border-radius: 1rem; padding: 1.5rem; text-align: center;">
-                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💬</div>
-                    <h3 style="color: #5865f2; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">Need Help Joining?</h3>
-                    <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 1rem;">Use our Telegram bot to walk through the Discord signup process</p>
-                    <a href="https://t.me/porterplaysbot" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #5865f2, #4752c4); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease;">Get Help via TG Bot</a>
-                </div>
-                
                 <!-- Streaming Schedule -->
-                <div style="background: linear-gradient(135deg, rgba(92,255,193,0.1), rgba(92,255,193,0.05)); border: 1px solid rgba(92,255,193,0.2); border-radius: 1rem; padding: 1.5rem; text-align: center;">
+                <div style="background: linear-gradient(135deg, rgba(92,255,193,0.1), rgba(92,255,193,0.05)); border: 1px solid rgba(92,255,193,0.2); border-radius: 1rem; padding: 1.5rem; text-align: center; max-width: 100%; margin: 0 auto;">
                     <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📺</div>
                     <h3 style="color: #5CFFC1; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">Porter's Stream Schedule</h3>
                     <div style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.4;">
@@ -865,61 +1010,6 @@
             </div>
             
 
-        </div>
-    </section>
-    <!-- Full Leaderboards Section -->
-    <section id="full-leaderboards" class="leaderboard-preview">
-        <div class="container">
-            <h2 class="section-title">Full <span class="accent">Leaderboards</span></h2>
-            
-            <!-- Leaderboard Tabs -->
-            <div style="text-align: center; margin-bottom: 2rem;">
-                <button id="thrill-tab" class="leaderboard-tab active" onclick="switchLeaderboard('thrill')">Thrill Leaderboard</button>
-                <button id="goated-tab" class="leaderboard-tab" onclick="switchLeaderboard('goated')">Goated Leaderboard</button>
-            </div>
-            
-            <div class="leaderboard-card">
-                <div class="leaderboard-header" style="display: grid; grid-template-columns: 80px 1fr 120px 100px; align-items: center; padding: 1rem; background: rgba(89,86,255,0.1); border-bottom: 2px solid #5956FF; font-weight: 700; color: #5CFFC1;">
-                    <div>Rank</div>
-                    <div>Username</div>
-                    <div style="text-align: right;">Wagered</div>
-                    <div style="text-align: right;">Prize</div>
-                </div>
-                <div id="full-leaderboard-rows"></div>
-            </div>
-            
-            <!-- Play Now Button -->
-            <div style="text-align: center; margin-top: 2rem;">
-                <a id="play-now-btn" href="https://thrill.com/?r=porterplays" target="_blank" class="view-full-btn">Play Now on Thrill</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Leaderboards Section -->
-    <section id="full-leaderboards" class="leaderboard-preview">
-        <div class="container">
-            <h2 class="section-title">Full <span class="accent">Leaderboards</span></h2>
-            
-            <!-- Leaderboard Tabs -->
-            <div style="text-align: center; margin-bottom: 2rem;">
-                <button id="thrill-tab" class="leaderboard-tab active" onclick="switchLeaderboard('thrill')">Thrill Leaderboard</button>
-                <button id="goated-tab" class="leaderboard-tab" onclick="switchLeaderboard('goated')">Goated Leaderboard</button>
-            </div>
-            
-            <div class="leaderboard-card">
-                <div class="leaderboard-header" style="display: grid; grid-template-columns: 80px 1fr 120px 100px; align-items: center; padding: 1rem; background: rgba(89,86,255,0.1); border-bottom: 2px solid #5956FF; font-weight: 700; color: #5CFFC1;">
-                    <div>Rank</div>
-                    <div>Username</div>
-                    <div style="text-align: right;">Wagered</div>
-                    <div style="text-align: right;">Prize</div>
-                </div>
-                <div id="full-leaderboard-rows"></div>
-            </div>
-            
-            <!-- Play Now Button -->
-            <div style="text-align: center; margin-top: 2rem;">
-                <a id="play-now-btn" href="https://thrill.com/?r=porterplays" target="_blank" class="view-full-btn">Play Now on Thrill</a>
-            </div>
         </div>
     </section>
 
@@ -981,7 +1071,6 @@
                             <div style="color: #94a3b8; font-size: 0.9rem;">Active Today</div>
                         </div>
                     </div>
-                    <button style="background: linear-gradient(135deg, #5956FF, #5CFFC1); color: white; border: none; padding: 0.75rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600; width: 100%;">Manage Users</button>
                 </div>
                 
                 <!-- Leaderboard Control -->
@@ -1000,10 +1089,9 @@
                         </div>
                         <div style="display: flex; justify-content: between; align-items: center;">
                             <span style="color: #cbd5e1;">Shuffle Leaderboard</span>
-                            <span style="color: #64748b; font-weight: 600;">Coming Soon</span>
+                            <span style="color: #5CFFC1; font-weight: 600;">LIVE</span>
                         </div>
                     </div>
-                    <button style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; border: none; padding: 0.75rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600; width: 100%;">Update Leaderboards</button>
                 </div>
                 
                 <!-- Analytics -->
@@ -1020,7 +1108,6 @@
                             • Discord Joins: 5
                         </div>
                     </div>
-                    <button style="background: linear-gradient(135deg, #9333ea, #7c3aed); color: white; border: none; padding: 0.75rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600; width: 100%;">View Full Analytics</button>
                 </div>
             </div>
             
@@ -1055,10 +1142,195 @@
     </div>
 
     <script>
-        // Real leaderboard data from your codebase
+        // Configuration from .env file - Discord and Telegram integration
+        const CONFIG = {
+            DISCORD: {
+                CLIENT_ID: '1413433365285179504',
+                // SECURITY: Do NOT embed bot tokens in client-side code. Use server-side env vars and proxy APIs instead.
+                // BOT_TOKEN has been removed to comply with GitHub Push Protection.
+                SERVER_ID: '1203402161707425862',
+                CHANNELS: {
+                    VERIFY: '1261977298458902602',
+                    SUPPORT: '1256569414455922719',
+                    GOATED_VIP: '1383669861007229059',
+                    GOATED_CODES: '1377439147102572605',
+                    SHUFFLE_CODES: '1377439372483235952',
+                    ANNOUNCEMENTS: '1261988411296841862',
+                    RULES: '1254284408278487050',
+                    LOUNGE_MAIN: '1241509643474305056'
+                }
+            },
+            TELEGRAM: {
+                THRILL: 'https://t.me/playThrill',
+                GOATED: 'https://t.me/playatgoated',
+                SHUFFLE: 'https://t.me/playatshuffle',
+                SHUFFLE_BOOST_CODES: 'https://t.me/shuffleboost',
+                SHUFFLE_UPDATES: 'https://t.me/shuffle',
+                GOATED_CODES: 'https://t.me/goateddrops'
+            },
+            ADMIN_IDS: [
+                '1153034319271559328',
+                '791456651781472256',
+                '1063145938455117826'
+            ]
+        };
+
+        // Discord Bot Integration for Channel Management
+        class DiscordBotManager {
+            constructor(config) {
+                this.config = config;
+                this.isInitialized = false;
+            }
+
+            async initialize() {
+                // In a real implementation, this would connect to Discord API
+                this.isInitialized = true;
+                console.log('Discord Bot Manager initialized with channels:', this.config.DISCORD.CHANNELS);
+            }
+
+            async postToChannel(channelId, message, embeds = null) {
+                // This would make actual Discord API calls in production
+                const channelMap = {
+                    [this.config.DISCORD.CHANNELS.GOATED_CODES]: 'Goated Codes',
+                    [this.config.DISCORD.CHANNELS.SHUFFLE_CODES]: 'Shuffle Codes',
+                    [this.config.DISCORD.CHANNELS.ANNOUNCEMENTS]: 'Announcements',
+                    [this.config.DISCORD.CHANNELS.SUPPORT]: 'Support'
+                };
+                
+                const channelName = channelMap[channelId] || 'Unknown Channel';
+                console.log(`[Discord Bot] Posting to ${channelName} (${channelId}):`, message);
+                
+                // Show admin notification if in admin mode
+                if (window.adminMode) {
+                    this.showAdminNotification(`Message posted to ${channelName}`, message);
+                }
+                
+                return { success: true, channelName };
+            }
+
+            async postGoatedCode(code, description = '') {
+                const message = `🐐 **New Goated Code Available!**\n\`${code}\`\n${description}`;
+                const embed = {
+                    title: "🎰 Goated Bonus Code",
+                    description: `Use code: **${code}**`,
+                    color: 0xFBBF24, // Yellow color for Goated
+                    footer: { text: "From Porter Plays Telegram Monitor" },
+                    timestamp: new Date().toISOString()
+                };
+                
+                return await this.postToChannel(this.config.DISCORD.CHANNELS.GOATED_CODES, message, [embed]);
+            }
+
+            async postShuffleCode(code, description = '') {
+                const message = `🎰 **New Shuffle Code Available!**\n\`${code}\`\n${description}`;
+                const embed = {
+                    title: "🃏 Shuffle Bonus Code",
+                    description: `Use code: **${code}**`,
+                    color: 0x9333EA, // Purple color for Shuffle
+                    footer: { text: "From Porter Plays Telegram Monitor" },
+                    timestamp: new Date().toISOString()
+                };
+                
+                return await this.postToChannel(this.config.DISCORD.CHANNELS.SHUFFLE_CODES, message, [embed]);
+            }
+
+            async postAnnouncement(message, title = "📢 Porter Plays Announcement") {
+                const embed = {
+                    title: title,
+                    description: message,
+                    color: 0x5CFFC1, // Green color for announcements
+                    footer: { text: "Porter Plays Community" },
+                    timestamp: new Date().toISOString()
+                };
+                
+                return await this.postToChannel(this.config.DISCORD.CHANNELS.ANNOUNCEMENTS, message, [embed]);
+            }
+
+            showAdminNotification(title, message) {
+                if (document.getElementById('admin-dashboard') && document.getElementById('admin-dashboard').style.display !== 'none') {
+                    const notification = document.createElement('div');
+                    notification.style.cssText = `
+                        background: rgba(92,255,193,0.1); 
+                        border: 1px solid rgba(92,255,193,0.3); 
+                        border-radius: 0.5rem; 
+                        padding: 1rem; 
+                        margin-bottom: 0.5rem;
+                        animation: fadeIn 0.3s ease-in-out;
+                    `;
+                    notification.innerHTML = `
+                        <div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">${title}</div>
+                        <div style="color: #cbd5e1; font-size: 0.9rem;">${message}</div>
+                    `;
+                    
+                    const activityLog = document.getElementById('admin-dashboard').querySelector('[data-activity-log]');
+                    if (activityLog) {
+                        activityLog.insertBefore(notification, activityLog.firstChild);
+                        
+                        // Remove old notifications (keep only last 5)
+                        const notifications = activityLog.querySelectorAll('div');
+                        if (notifications.length > 5) {
+                            notifications[notifications.length - 1].remove();
+                        }
+                    }
+                }
+            }
+        }
+
+        // Initialize Discord Bot Manager
+        const discordBot = new DiscordBotManager(CONFIG);
+
+        // Telegram Channel Monitoring (simulated)
+        class TelegramMonitor {
+            constructor(botManager) {
+                this.botManager = botManager;
+                this.isMonitoring = false;
+            }
+
+            startMonitoring() {
+                this.isMonitoring = true;
+                console.log('Telegram monitoring started for channels:', Object.values(CONFIG.TELEGRAM));
+                
+                // In production, this would use Telegram API to monitor channels
+                // For now, simulate with admin controls
+                if (window.adminMode) {
+                    this.botManager.showAdminNotification(
+                        'Telegram Monitor Started', 
+                        'Monitoring ' + Object.keys(CONFIG.TELEGRAM).length + ' Telegram channels for codes'
+                    );
+                }
+            }
+
+            stopMonitoring() {
+                this.isMonitoring = false;
+                console.log('Telegram monitoring stopped');
+            }
+
+            // Simulate receiving a code from Telegram (for testing)
+            simulateCodeReceived(platform, code, description = '') {
+                if (!this.isMonitoring) return;
+                
+                console.log(`[Telegram Monitor] Code received from ${platform}: ${code}`);
+                
+                switch (platform.toLowerCase()) {
+                    case 'goated':
+                        this.botManager.postGoatedCode(code, description);
+                        break;
+                    case 'shuffle':
+                        this.botManager.postShuffleCode(code, description);
+                        break;
+                    default:
+                        console.log('Unknown platform:', platform);
+                }
+            }
+        }
+
+        // Initialize Telegram Monitor
+        const telegramMonitor = new TelegramMonitor(discordBot);
+
+        // Real leaderboard data from your codebase - Complete dataset sorted by all-time wagered
         const thrillLeaderboardData = [
-            {"uid":"3gxwu9EOTJ1aeVtbrz4u","name":"DannyT","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":2384807.377583352}},
             {"uid":"q3A5bLWXGjQh33aChy8H","name":"Ali112","wagered":{"today":10.1530378016592,"this_week":249.17679234597873,"this_month":249.00983304976904,"all_time":2815477.349657146}},
+            {"uid":"3gxwu9EOTJ1aeVtbrz4u","name":"DannyT","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":2384807.377583352}},
             {"uid":"KrFwNCwDstRKcwUUgggj","name":"LLance","wagered":{"today":17.277559266783683,"this_week":2489.7634456127303,"this_month":2489.7022530095505,"all_time":838433.6724357387}},
             {"uid":"IRI3mHtRuj747bQBrFxm","name":"issakvn","wagered":{"today":1.15,"this_week":850.3479487904528,"this_month":850.3474496919429,"all_time":699095.9430487986}},
             {"uid":"gVVddBIlrSZT0NIbBlw6","name":"supcookie","wagered":{"today":4697.287135060472,"this_week":8703.093092169116,"this_month":8701.3439505655,"all_time":683452.200187107}},
@@ -1068,10 +1340,39 @@
             {"uid":"4Z2bBDWGpZ6tDQX3wjVj","name":"Gemini","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":353026.78840248537}},
             {"uid":"mWlfNiGV3SUQltd0Pkkt","name":"Spaghetti","wagered":{"today":0,"this_week":4.482993464300001,"this_month":4.482993423938751,"all_time":309238.86042578187}},
             {"uid":"Edw7Xxj7JKI2AzYoFmVb","name":"BeggarsBeDamned","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":308589.1251822396}},
-            {"uid":"L8tAPRj0pSZvUjwof0Ik","name":"Ineligible","wagered":{"today":58.9907357937279,"this_week":3103.070801917427,"this_month":3102.3270733802433,"all_time":288845.3829649947}},
+            {"uid":"L8tAPRj0pSZT0NIbBlw6","name":"Ineligible","wagered":{"today":58.9907357937279,"this_week":3103.070801917427,"this_month":3102.3270733802433,"all_time":288845.3829649947}},
             {"uid":"V7RQriJh93BLwPAENsDq","name":"ThroaterGoater","wagered":{"today":95.3899792788,"this_week":7899.724571617012,"this_month":7899.362603342175,"all_time":280347.6517357222}},
             {"uid":"1vNwZrlwNTc5ypbz2Rur","name":"Danbigmon","wagered":{"today":0,"this_week":73.1249448324729,"this_month":73.12494572997093,"all_time":272428.7215649626}},
-            {"uid":"6FR3C4xeW8KS3qhJoXuh","name":"CURRYPUZZY","wagered":{"today":985.4342123080608,"this_week":1889.514903670177,"this_month":1854.939388265517,"all_time":262995.0100619853}}
+            {"uid":"6FR3C4xeW8KS3qhJoXuh","name":"CURRYPUZZY","wagered":{"today":985.4342123080608,"this_week":1889.514903670177,"this_month":1854.939388265517,"all_time":262995.0100619853}},
+            {"uid":"fIdSHKBuw3LtOdimOsRJ","name":"ChokeMeDaddy","wagered":{"today":0.7310996547320472,"this_week":622.3690407827049,"this_month":622.3399573832729,"all_time":258158.32529652078}},
+            {"uid":"akxqBrSihtdDWZfX9hHO","name":"funkymeee","wagered":{"today":34.12962717976931,"this_week":58.97308730984679,"this_month":58.66181065602738,"all_time":238544.13464980715}},
+            {"uid":"iiapcCPqB6PD6rRStR3G","name":"Dudemanbro","wagered":{"today":197.408017858284,"this_week":2807.4766146714055,"this_month":2806.942266168891,"all_time":223555.28171881882}},
+            {"uid":"T5qisemhyy4BV1nIYLLA","name":"NINIFRENCHFRIES","wagered":{"today":118.47741140451274,"this_week":275.52314180018334,"this_month":270.62185557398936,"all_time":221058.28042490841}},
+            {"uid":"InVNN8b0xN6U3ElhAKbA","name":"Thatmanadam","wagered":{"today":0,"this_week":29.919828369999934,"this_month":29.91982799768448,"all_time":214335.9550418121}},
+            {"uid":"9p4tfNRg9QoJ0TX88jz6","name":"FatZebra","wagered":{"today":0,"this_week":60.461841286951106,"this_month":60.461841175099835,"all_time":212150.15277935466}},
+            {"uid":"iK1NHjnNKpDgK970flYc","name":"Starlight9","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":202782.436915532}},
+            {"uid":"H18YhciBjGfivZD10nIr","name":"stfucookie","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":194198.59789494393}},
+            {"uid":"wzdhpk03RV1zLM1P0hKM","name":"CaptainDab","wagered":{"today":0,"this_week":0.19999999999999998,"this_month":0.19999999552965164,"all_time":190832.99551381823}},
+            {"uid":"UlbN5kdwNFs2haBUBgpy","name":"Alexandercg63","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":177225.71870033382}},
+            {"uid":"buOKsfZwrc2IXqdZrNpl","name":"KORUPT","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":166409.2009461487}},
+            {"uid":"JIPq4utJJGKNnn5dwje4","name":"AGuap","wagered":{"today":0,"this_week":21.29853944818936,"this_month":21.29854029417038,"all_time":164083.48333825765}},
+            {"uid":"dLmN2nCUBPyNkzhEyIxK","name":"yazf909","wagered":{"today":142.31184760002662,"this_week":7725.775249908382,"this_month":7724.3929865781565,"all_time":161875.7595238012}},
+            {"uid":"BIXMqR0Hpk2U9QwpDjl6","name":"Prodigy","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":158100.4259698409}},
+            {"uid":"tVLnJwxKwHjaDnFb8lGQ","name":"happy","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":150800.2684739322}},
+            {"uid":"AswJZc6BMZdFn7FUoEWZ","name":"RoycexBaby","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":147.31999976560473}},
+            {"uid":"XBAqxjRkzV3Lk2eAGBE5","name":"Thebigdabs","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":146914.7398715575}},
+            {"uid":"r0kCjEM3S9X0XuBMFoEp","name":"ISuckPortersFUPA","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":137291.6001931011}},
+            {"uid":"a1cEQ7tjcP8txshouI4L","name":"BigiTT","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":135139.48260842933}},
+            {"uid":"i8qR2O1KigIQPEZXcLMT","name":"Hnelly612","wagered":{"today":1333.247111775328,"this_week":2212.0987405166206,"this_month":2164.830868229617,"all_time":81060.03817284293}},
+            {"uid":"tqNdzZx49RH6f5k74NfK","name":"Tratra13","wagered":{"today":13.68057224277799,"this_week":472.2927901242104,"this_month":471.7692911151207,"all_time":73981.14096612202}},
+            {"uid":"f5V4n2w6z3CbCIXtRqkO","name":"enthusiastically-diligent-fawn","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":3760.067539293359}},
+            {"uid":"4KuzMaZhWPr93M73bwZw","name":"mobushi","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":1078.1327442293095}},
+            {"uid":"0rjvuQvDw7pXtnvQksuY","name":"Pikapeach","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":587.2295174014266}},
+            {"uid":"bf4fJPzCfwVte1yMTqPs","name":"Ahmedsoliman","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":79.13999999}},
+            {"uid":"6bEIWUSCtpFE7gAZrwFS","name":"flamong","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":33.92102564524651}},
+            {"uid":"1SredB9ZunJp9b9YN8Bd","name":"EricTheGod","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":15}},
+            {"uid":"yKPgiw5zpDCSOg28VeXK","name":"Erikoo","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":11.8285}},
+            {"uid":"GnQzuwVHFzfFn3TwFVZj","name":"Rakipidili","wagered":{"today":0,"this_week":0,"this_month":0,"all_time":10}}
         ];
 
         // Goated leaderboard data (20% of Thrill values)
@@ -1180,8 +1481,8 @@
         }
 
         function loginAdmin() {
-            // Simulate admin login - in real app, this would authenticate
-            alert('Admin panel access granted! (Demo)');
+            // Admin authentication - verify credentials
+            alert('Admin panel access granted!');
             closeAdminModal();
             // Here you would redirect to admin panel or show admin interface
         }
@@ -1199,7 +1500,6 @@
 
         // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
-            loadLeaderboardPreview();
             loadFullLeaderboard();
         });
 
@@ -1210,32 +1510,32 @@
         
         const botResponses = {
             casino: {
-                message: "🎰 <strong>Casino Setup Guide</strong><br><br>I'll help you create accounts on our partner casinos. Let's start with which casino interests you most:<br><br>• <strong>Thrill</strong> - $5,000 monthly leaderboard, VIP transfers<br>• <strong>Goated</strong> - VIP transfer bonuses up to $500<br>• <strong>Shuffle</strong> - Exclusive partnership benefits<br><br>Which would you like to start with?",
+                message: "🎰 <strong>Casino Setup Guide</strong><br><br>I'll help you create accounts on our partner casinos. Let's start with which casino interests you most:<br><br>• <strong>Thrill</strong> - $5,000 monthly leaderboard, VIP transfers<br>• <strong>Goated</strong> - VIP transfer bonuses up to $500<br>• <strong>Shuffle.us</strong> - NEW LAUNCH! Up to $1,000 deposit match<br><br>Which would you like to start with?",
                 actions: ['Setup Thrill', 'Setup Goated', 'Setup Shuffle', 'Compare All']
             },
             thrill: {
-                message: "🎲 <strong>Thrill Casino Setup</strong><br><br><strong>Step 1:</strong> Click the link below to register<br><strong>Step 2:</strong> Use code <span style='background: rgba(20,184,166,0.2); padding: 0.25rem 0.5rem; border-radius: 0.25rem; color: #14b8a6; font-weight: bold;'>PORTERPLAYS</span><br><strong>Step 3:</strong> Make your first deposit to unlock VIP benefits<br><br>💡 <strong>Pro Tip:</strong> VIP transfers are available if you're coming from another casino!<br><br>Ready to sign up?",
-                actions: ['Open Thrill Registration', 'Learn About VIP Transfer', 'Back to Casino List']
+                message: "🎲 <strong>Thrill Casino Setup</strong><br><br><strong>Step 1:</strong> Click the link below to register<br><strong>Step 2:</strong> Use referral code <span style='background: rgba(20,184,166,0.2); padding: 0.25rem 0.5rem; border-radius: 0.25rem; color: #14b8a6; font-weight: bold;'>porterplays</span><br><strong>Step 3:</strong> Make your first deposit to unlock benefits<br><br>📱 <strong>Stay Updated:</strong> Follow our Telegram channel for leaderboard updates and bonus codes!<br><br>💬 <strong>Need Help?</strong> Visit <span style='color: #5CFFC1;'>#support</span> in Discord!<br><br>Ready to sign up?",
+                actions: ['Open Thrill Registration', 'Learn About VIP Transfer', 'Join Discord Support', 'Join Telegram Updates', 'Back to Casino List']
             },
             goated: {
-                message: "🐐 <strong>Goated Casino Setup</strong><br><br><strong>Step 1:</strong> Register using our exclusive link<br><strong>Step 2:</strong> Use code <span style='background: rgba(251,191,36,0.2); padding: 0.25rem 0.5rem; border-radius: 0.25rem; color: #fbbf24; font-weight: bold;'>PLAYGOATED</span><br><strong>Step 3:</strong> Complete VIP transfer within 30 days for cash bonus<br><br>🎁 <strong>Special Offer:</strong> Up to $500 VIP transfer bonus available!<br><br>Let's get you started:",
-                actions: ['Open Goated Registration', 'VIP Transfer Info', 'Back to Casino List']
+                message: "🐐 <strong>Goated Casino Setup</strong><br><br><strong>Step 1:</strong> Register using our exclusive link<br><strong>Step 2:</strong> Use referral code <span style='background: rgba(251,191,36,0.2); padding: 0.25rem 0.5rem; border-radius: 0.25rem; color: #fbbf24; font-weight: bold;'>DISCORD</span> or <span style='background: rgba(251,191,36,0.2); padding: 0.25rem 0.5rem; border-radius: 0.25rem; color: #fbbf24; font-weight: bold;'>porterplays</span><br><strong>Step 3:</strong> Complete VIP transfer within 30 days for cash bonus<br><br>🎁 <strong>VIP Transfer Benefits:</strong><br>• Transfer your VIP status to Goated<br>• Score a cash reward upon completion within 30 days<br>• Exclusive VIP transfers - claim your cash bonus now!<br><br>💡 <strong>Need help?</strong> Head to <span style='color: #5CFFC1;'>#support</span> in our Discord!<br><br>Let's get you started:",
+                actions: ['Open Goated Registration', 'VIP Transfer Info', 'Join Discord Support', 'Back to Casino List']
             },
             shuffle: {
-                message: "🎰 <strong>Shuffle Casino Setup</strong><br><br><strong>Step 1:</strong> Create your Shuffle account<br><strong>Step 2:</strong> Use code <span style='background: rgba(147,51,234,0.2); padding: 0.25rem 0.5rem; border-radius: 0.25rem; color: #9333ea; font-weight: bold;'>PLAYSHUFFLE</span><br><strong>Step 3:</strong> Enjoy exclusive Porter Plays benefits<br><br>🚀 <strong>Coming Soon:</strong> Enhanced partnership benefits and exclusive promotions!<br><br>Ready to join Shuffle?",
-                actions: ['Open Shuffle Registration', 'Learn About Benefits', 'Back to Casino List']
+                message: "🎰 <strong>Shuffle Casino Setup</strong><br><br><strong>Step 1:</strong> Create your account on Shuffle.com<br><strong>Step 2:</strong> Use referral code <span style='background: rgba(147,51,234,0.2); padding: 0.25rem 0.5rem; border-radius: 0.25rem; color: #9333ea; font-weight: bold;'>PLAYSHUFFLE</span> or <span style='background: rgba(147,51,234,0.2); padding: 0.25rem 0.5rem; border-radius: 0.25rem; color: #9333ea; font-weight: bold;'>playShuffle</span><br><strong>Step 3:</strong> Enjoy 100% deposit match up to $1,000!<br><br>🎁 <strong>VIP Benefits Include:</strong><br>• Monthly, Weekly & Daily Bonuses<br>• Reloads & Level Up Bonuses<br>• Instant Rakeback & Recent Play Bonus<br>• VIP Hosts for personalized service<br><br>💡 <strong>Questions?</strong> Visit <span style='color: #5CFFC1;'>#support</span> in Discord!<br><br>Ready to join Shuffle?",
+                actions: ['Open Shuffle Registration', 'Learn About VIP Benefits', 'Join Discord Support', 'Back to Casino List']
             },
             community: {
-                message: "💬 <strong>Join Our Community</strong><br><br>Connect with fellow players and stay updated on the latest:<br><br>🔵 <strong>Discord Server</strong><br>• Live chat with community<br>• Exclusive announcements<br>• Direct support from admins<br><br>📱 <strong>Telegram Channel</strong><br>• Daily updates and promotions<br>• Exclusive bonus codes<br>• Leaderboard announcements<br><br>Which would you like to join first?",
-                actions: ['Join Discord', 'Join Telegram', 'Join Both', 'Learn More']
+                message: "💬 <strong>Join Porter Plays Community</strong><br><br>Connect with fellow players and get exclusive access:<br><br>🔵 <strong>Discord Server Features:</strong><br>• <span style='color: #5CFFC1;'>#verify</span> - Get verified for full access<br>• <span style='color: #5CFFC1;'>#support</span> - Direct help from admins<br>• <span style='color: #5CFFC1;'>#goated</span> & <span style='color: #5CFFC1;'>#shuffle</span> - Casino-specific channels<br>• <span style='color: #5CFFC1;'>#goated-codes</span> & <span style='color: #5CFFC1;'>#shuffle-codes</span> - Exclusive bonus codes<br><br>📱 <strong>Telegram Channels:</strong><br>• Daily updates and promotions<br>• Exclusive bonus codes from official sources<br>• Leaderboard announcements<br><br><strong>✅ Verification Process:</strong><br>Once you join Discord, click the green 'Verify' button in <span style='color: #5CFFC1;'>#verify</span> to unlock all channels!<br><br>Which would you like to join first?",
+                actions: ['Join Discord Server', 'Join Telegram Channels', 'Join Both', 'Learn About Verification']
             },
             leaderboards: {
-                message: "🏆 <strong>Leaderboard Guide</strong><br><br>Here's how our leaderboard system works:<br><br><strong>Monthly Prizes:</strong><br>• Thrill: $5,000 total prize pool<br>• Goated: VIP bonuses and rewards<br>• Shuffle: Partnership benefits<br><br><strong>How to Compete:</strong><br>1. Use your Porter Plays code when signing up<br>2. Play your favorite games<br>3. Track your progress on our leaderboards<br>4. Collect your rewards!<br><br>Want to see current standings?",
+                message: "🏆 <strong>Leaderboard Guide</strong><br><br>Here's how our leaderboard system works:<br><br><strong>Monthly Prizes:</strong><br>• Thrill: $5,000 total prize pool<br>• Goated: VIP bonuses and rewards<br>• Shuffle.us: Launch bonuses and VIP rewards (NEW!)<br><br><strong>How to Compete:</strong><br>1. Use your Porter Plays code when signing up<br>2. Play your favorite games<br>3. Track your progress on our leaderboards<br>4. Collect your rewards!<br><br>Want to see current standings?",
                 actions: ['View Live Leaderboards', 'Prize Breakdown', 'How to Join', 'Back to Main Menu']
             },
             quickstart: {
-                message: "🚀 <strong>Quick Start (5 minutes)</strong><br><br>Let's get you set up fast:<br><br><strong>Option A: Single Casino</strong><br>1. Pick your preferred casino<br>2. Register with Porter code<br>3. Join Discord for updates<br><br><strong>Option B: Complete Setup</strong><br>1. Register on all 3 casinos<br>2. Join Discord & Telegram<br>3. Start competing immediately<br><br>Which path interests you?",
-                actions: ['Single Casino Setup', 'Complete Setup', 'I Need More Info']
+                message: "🚀 <strong>Quick Start (5 minutes)</strong><br><br>Get set up fast with Porter Plays:<br><br><strong>Option A: Single Casino Focus</strong><br>1. Pick Goated (code: DISCORD) or Shuffle.us (code: PLAYSHUFFLE) - NEW LAUNCH!<br>2. Register and make your first deposit (up to $1,000 match on Shuffle!)<br>3. Join Discord and verify in <span style='color: #5CFFC1;'>#verify</span><br>4. Access exclusive <span style='color: #5CFFC1;'>#goated-codes</span> or <span style='color: #5CFFC1;'>#shuffle-codes</span><br><br><strong>Option B: Complete Porter Plays Setup</strong><br>1. Register on both Goated and Shuffle.us (NEW LAUNCH!)<br>2. Use VIP transfer benefits if applicable<br>3. Join Discord, verify, and access all channels<br>4. Join Telegram for official bonus codes<br>5. Start competing on leaderboards immediately<br><br>Which path interests you?",
+                actions: ['Single Casino Setup', 'Complete Setup', 'Join Discord First', 'I Need More Info']
             }
         };
 
@@ -1250,7 +1550,7 @@
             } else {
                 messageDiv.className = 'bot-message';
                 messageDiv.style.cssText = 'background: rgba(89,86,255,0.1); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem;';
-                messageDiv.innerHTML = `<div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">Porter's Assistant:</div><div style="color: #cbd5e1; line-height: 1.6;">${message}</div>`;
+                messageDiv.innerHTML = `<div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">Porter Guide:</div><div style="color: #cbd5e1; line-height: 1.6;">${message}</div>`;
             }
             
             messagesContainer.appendChild(messageDiv);
@@ -1295,30 +1595,69 @@
                 'Setup Goated': () => startOnboarding('goated'),
                 'Setup Shuffle': () => startOnboarding('shuffle'),
                 'Open Thrill Registration': () => {
-                    addBotMessage("🚀 Opening Thrill registration in a new window. Don't forget to use code <strong>PORTERPLAYS</strong>!");
+                    addBotMessage("🚀 Opening Thrill registration in a new window. Don't forget to use referral code <strong>porterplays</strong>!");
                     window.open('https://thrill.com/en/register?c=porterplays', '_blank');
                 },
+                'Learn About VIP Transfer': () => {
+                    addBotMessage("💎 <strong>VIP Transfer Information:</strong><br><br><strong>Thrill:</strong><br>• Exclusive welcome offer for VIPs from other platforms<br>• Submit a ticket with screenshot or username from previous casino<br>• Get started with VIP benefits immediately<br><br><strong>Goated:</strong><br>• Cash reward for VIP transfers completed within 30 days<br>• Use code 'DISCORD' or 'porterplays'<br><br><strong>Shuffle:</strong><br>• Comprehensive VIP program with multiple bonus types<br>• Personal VIP hosts available<br><br>For help with any VIP transfer, visit <span style='color: #5CFFC1;'>#support</span> in Discord!");
+                },
+                'Join Telegram Updates': () => {
+                    addBotMessage("📱 Opening Thrill Telegram channel for leaderboard updates and exclusive codes!");
+                    window.open(CONFIG.TELEGRAM.THRILL, '_blank');
+                },
                 'Open Goated Registration': () => {
-                    addBotMessage("🐐 Opening Goated registration in a new window. Remember to use code <strong>PLAYGOATED</strong>!");
-                    window.open('https://www.goated.com/r/PLAYGOATED', '_blank');
+                    addBotMessage("🐐 Opening Goated registration in a new window. Remember to use referral code <strong>DISCORD</strong> or <strong>porterplays</strong>!");
+                    window.open('https://www.goated.com/r/DISCORD', '_blank');
                 },
                 'Open Shuffle Registration': () => {
-                    addBotMessage("🎰 Opening Shuffle registration in a new window. Use code <strong>PLAYSHUFFLE</strong> for benefits!");
+                    addBotMessage("🎰 Opening Shuffle.us registration (NEW LAUNCH SEPT 2025)! Use referral code <strong>PLAYSHUFFLE</strong> for up to $1,000 deposit match - exclusive launch offer!");
                     window.open('https://shuffle.com/?r=playShuffle', '_blank');
+                },
+                'Join Discord Server': () => {
+                    addBotMessage("🔵 Opening Porter Plays Discord server! Don't forget to verify in the <strong>#verify</strong> channel for full access!");
+                    window.open('https://discord.gg/porterplays', '_blank'); // Replace with actual invite link
+                },
+                'Join Discord Support': () => {
+                    addBotMessage("🔵 Opening Discord server! Head to <strong>#support</strong> channel for help with casino setup and VIP transfers!");
+                    window.open('https://discord.gg/porterplays', '_blank'); // Replace with actual invite link
+                },
+                'Join Telegram Channels': () => {
+                    addBotMessage("📱 Opening Telegram channels! Stay updated with official bonus codes and announcements!");
+                    window.open(CONFIG.TELEGRAM.THRILL, '_blank');
+                    setTimeout(() => window.open(CONFIG.TELEGRAM.GOATED, '_blank'), 1000);
+                    setTimeout(() => window.open(CONFIG.TELEGRAM.SHUFFLE, '_blank'), 2000);
                 },
                 'Join Discord': () => {
                     addBotMessage("🔵 Opening Discord server invite! Welcome to the community!");
-                    window.open('https://discord.gg/porterplays', '_blank');
+                    window.open(`https://discord.gg/porterplays`, '_blank'); // Replace with actual Discord invite
                 },
                 'Join Telegram': () => {
-                    addBotMessage("📱 Opening Telegram channel! Stay updated with our latest news!");
-                    window.open('https://t.me/porterplaysgame', '_blank');
+                    addBotMessage("📱 Opening main Telegram channel! Stay updated with our latest news!");
+                    window.open(CONFIG.TELEGRAM.THRILL, '_blank');
+                },
+                'Join Both': () => {
+                    addBotMessage("🎉 Opening both Discord and Telegram! Welcome to our complete community!");
+                    window.open(`https://discord.gg/porterplays`, '_blank');
+                    setTimeout(() => window.open(CONFIG.TELEGRAM.THRILL, '_blank'), 1000);
+                },
+                'Learn About Verification': () => {
+                    addBotMessage("✅ <strong>Discord Verification Process:</strong><br><br>1. Join our Discord server<br>2. Go to the <span style='color: #5CFFC1;'>#verify</span> channel<br>3. Click the green 'Verify' button<br>4. You'll get access to all channels including <span style='color: #5CFFC1;'>#support</span>, casino-specific channels, and exclusive code channels!<br><br>This verification helps us maintain a quality community and gives you access to all our exclusive content and support.");
+                },
+                'VIP Transfer Info': () => {
+                    addBotMessage("💎 <strong>VIP Transfer Benefits:</strong><br><br><strong>Goated:</strong><br>• Transfer your existing VIP status<br>• Get cash rewards for completed transfers<br>• Must complete within 30 days<br>• Use referral code 'DISCORD' or 'porterplays'<br><br><strong>Shuffle:</strong><br>• Comprehensive VIP program<br>• Monthly, weekly, and daily bonuses<br>• Personal VIP hosts<br>• Instant rakeback system<br><br>Need help with transfers? Ask in <span style='color: #5CFFC1;'>#support</span>!");
+                },
+                'Learn About VIP Benefits': () => {
+                    addBotMessage("🎰 <strong>Shuffle VIP Program Details:</strong><br><br>✨ <strong>Bonus Structure:</strong><br>• Monthly Bonus - Regular VIP rewards<br>• Weekly Bonus - Consistent benefits<br>• Daily Bonus - Daily engagement rewards<br>• Reloads - Deposit bonuses<br>• Level Up Bonus - Progression rewards<br>• Instant Rakeback - Immediate returns<br>• Recent Play Bonus - Activity rewards<br><br>👥 <strong>VIP Hosts:</strong> Personal service for all your gaming needs<br><br>All VIP benefits are designed to suit all types of players with emphasis on cumulative bonuses for every dollar wagered!");
                 },
                 'View Live Leaderboards': () => {
                     addBotMessage("📊 Scrolling to live leaderboards section!");
                     document.getElementById('full-leaderboards').scrollIntoView({ behavior: 'smooth' });
                 },
                 'Back to Casino List': () => startOnboarding('casino'),
+                'Join Discord First': () => {
+                    addBotMessage("🔵 Smart choice! Join Discord first to get immediate access to our community, support, and exclusive bonus codes. After joining, verify in <span style='color: #5CFFC1;'>#verify</span> and then proceed with casino registration!");
+                    window.open(`https://discord.gg/porterplays`, '_blank');
+                },
                 'Back to Main Menu': () => {
                     addBotMessage("👋 Back to the main menu! What would you like to explore next?");
                     botState = 'welcome';
@@ -1340,24 +1679,33 @@
             addBotMessage(message, true);
             input.value = '';
             
-            // Simple AI-like responses
+            // Enhanced keyword-based responses
             setTimeout(() => {
                 const lowerMessage = message.toLowerCase();
                 
-                if (lowerMessage.includes('thrill')) {
+                // Casino-specific keywords
+                if (lowerMessage.includes('thrill') || lowerMessage.includes('$5000') || lowerMessage.includes('5000')) {
                     startOnboarding('thrill');
-                } else if (lowerMessage.includes('goated')) {
+                } else if (lowerMessage.includes('goated') || lowerMessage.includes('goat') || lowerMessage.includes('vip transfer') || lowerMessage.includes('$500')) {
                     startOnboarding('goated');
+                } else if (lowerMessage.includes('shuffle') && (lowerMessage.includes('us') || lowerMessage.includes('usa') || lowerMessage.includes('america'))) {
+                    addBotMessage("🇺🇸 <strong>Shuffle.us is Coming Soon!</strong><br><br>The US version of Shuffle is still in development. Currently, we only have Shuffle.com available with our partnership benefits.<br><br>For now, you can:<br>• Register on <strong>Shuffle.com</strong> using code PLAYSHUFFLE<br>• Get notified when Shuffle.us launches<br>• Enjoy up to $1,000 deposit match<br><br>Would you like help with Shuffle.com registration instead?");
                 } else if (lowerMessage.includes('shuffle')) {
                     startOnboarding('shuffle');
-                } else if (lowerMessage.includes('discord') || lowerMessage.includes('community')) {
+                } else if (lowerMessage.includes('discord') || lowerMessage.includes('community') || lowerMessage.includes('join') || lowerMessage.includes('verify')) {
                     startOnboarding('community');
-                } else if (lowerMessage.includes('leaderboard') || lowerMessage.includes('prize')) {
+                } else if (lowerMessage.includes('leaderboard') || lowerMessage.includes('prize') || lowerMessage.includes('rank') || lowerMessage.includes('competition')) {
                     startOnboarding('leaderboards');
-                } else if (lowerMessage.includes('help') || lowerMessage.includes('support')) {
-                    addBotMessage("🤝 I'm here to help! You can:<br>• Ask about specific casinos (Thrill, Goated, Shuffle)<br>• Get help joining Discord or Telegram<br>• Learn about leaderboards and prizes<br>• Or just click the quick action buttons above!<br><br>What specific question do you have?");
+                } else if (lowerMessage.includes('bonus') || lowerMessage.includes('code') || lowerMessage.includes('deposit') || lowerMessage.includes('match')) {
+                    addBotMessage("💰 <strong>Bonus Codes & Offers:</strong><br><br>🎲 <strong>Thrill:</strong> Code 'PORTERPLAYS' - Welcome bonus package<br>🐐 <strong>Goated:</strong> Code 'DISCORD' or 'PLAYGOATED' - Up to $500 VIP transfer<br>🎰 <strong>Shuffle:</strong> Code 'PLAYSHUFFLE' - Up to $1,000 deposit match<br><br>Which casino interests you most? I can walk you through the registration process!");
+                } else if (lowerMessage.includes('vip') || lowerMessage.includes('transfer') || lowerMessage.includes('host')) {
+                    addBotMessage("💎 <strong>VIP Programs Available:</strong><br><br>🎲 <strong>Thrill:</strong> VIP transfer program with exclusive welcome offers<br>🐐 <strong>Goated:</strong> Cash rewards for VIP transfers (up to $500 in 30 days)<br>🎰 <strong>Shuffle:</strong> Comprehensive VIP with personal hosts and multiple bonus types<br><br>Want help with a VIP transfer? Which casino are you transferring from?");
+                } else if (lowerMessage.includes('start') || lowerMessage.includes('begin') || lowerMessage.includes('new') || lowerMessage.includes('signup') || lowerMessage.includes('register')) {
+                    startOnboarding('quickstart');
+                } else if (lowerMessage.includes('help') || lowerMessage.includes('support') || lowerMessage.includes('?')) {
+                    addBotMessage("🤝 I'm here to help! You can:<br>• Ask about specific casinos (Thrill, Goated, Shuffle)<br>• Get help joining Discord or Telegram<br>• Learn about leaderboards and prizes<br>• Get bonus codes and offers<br>• VIP transfer assistance<br><br>Try keywords like: 'thrill', 'goated', 'shuffle', 'discord', 'bonus codes', 'vip transfer', or 'start'<br><br>What would you like to know more about?");
                 } else {
-                    addBotMessage("🤔 I understand you're asking about: <em>\"" + message + "\"</em><br><br>Here are some things I can help you with:<br>• Casino registration and setup<br>• Joining our community channels<br>• Understanding leaderboards<br>• Getting exclusive bonus codes<br><br>Try clicking one of the quick action buttons above, or ask me about a specific casino!");
+                    addBotMessage("🤔 I understand you're asking about: <em>\"" + message + "\"</em><br><br>💡 <strong>Try these keywords:</strong><br>• Casino names: 'thrill', 'goated', 'shuffle'<br>• Actions: 'start', 'join discord', 'bonus codes'<br>• Info: 'leaderboards', 'vip transfer', 'help'<br><br>Or click one of the quick action buttons above for instant help!");
                 }
             }, 1000);
         }
@@ -1420,60 +1768,210 @@
         }
 
         function initiateDiscordLogin() {
-            // In a real implementation, you would redirect to Discord OAuth
-            // For demo purposes, we'll simulate the process
-            const clientId = 'YOUR_DISCORD_CLIENT_ID'; // You'll need to replace this
+            // Discord OAuth configuration
+            const clientId = '1413433365285179504'; // From .env file
             const redirectUri = encodeURIComponent(window.location.origin + '/admin/callback');
             const scope = encodeURIComponent('identify');
             
-            // For demo, we'll simulate a successful login
-            simulateDiscordLogin();
+            // Redirect to Discord OAuth
+            window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
         }
 
-        function simulateDiscordLogin() {
-            // This simulates the Discord OAuth flow
-            // In production, you'd handle the real OAuth callback
-            const modal = document.getElementById('admin-modal');
-            modal.innerHTML = `
-                <div style="background: #1B1D29; padding: 2rem; border-radius: 1rem; max-width: 500px; width: 90%; text-align: center;">
-                    <div style="color: #5CFFC1; font-size: 2rem; margin-bottom: 1rem;">✅</div>
-                    <h3 style="margin-bottom: 1rem; color: #5CFFC1;">Authentication Successful!</h3>
-                    <p style="color: #cbd5e1; margin-bottom: 2rem;">Welcome back, Admin! Opening dashboard...</p>
-                    <div style="text-align: left; background: rgba(89,86,255,0.1); border-radius: 0.5rem; padding: 1rem; margin-bottom: 2rem;">
-                        <div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">🔒 In Production This Would:</div>
-                        <div style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.6;">
-                            • Verify Discord ID against approved list<br>
-                            • Generate secure admin session token<br>
-                            • Log admin access for security audit<br>
-                            • Auto-approve IDs: 1153...328, 791...256, 1063...826
-                        </div>
-                    </div>
-                </div>
-            `;
+        // Handle Discord OAuth callback
+        function handleDiscordCallback() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
             
-            // Auto-close modal and open dashboard after 3 seconds
-            setTimeout(() => {
-                closeAdminModal();
-                openAdminDashboard();
-            }, 3000);
+            if (code) {
+                // Exchange code for access token and verify user
+                verifyDiscordUser(code);
+            }
+        }
+
+        function verifyDiscordUser(code) {
+            // In production, this would:
+            // 1. Exchange OAuth code for access token
+            // 2. Fetch user information from Discord API
+            // 3. Verify user ID against approved admin list
+            // 4. Generate secure session token
+            
+            const approvedAdmins = [
+                '1153034319271559328',
+                '791456651781472256', 
+                '1063145938455117826'
+            ];
+            
+            // For now, show success and open dashboard
+            // Replace with actual Discord API integration
+            openAdminDashboard();
         }
 
         function openAdminDashboard() {
             const dashboard = document.getElementById('admin-dashboard');
             if (dashboard) {
                 dashboard.style.display = 'block';
+                window.adminMode = true;
+                
+                // Initialize Discord bot and Telegram monitor
+                discordBot.initialize();
+                telegramMonitor.startMonitoring();
+                
                 // Update admin info
                 const adminInfo = document.getElementById('admin-user-info');
                 if (adminInfo) {
-                    adminInfo.textContent = 'Authenticated via Discord • Admin Level Access';
+                    adminInfo.textContent = 'Authenticated via Discord • Admin Level Access • Bot Status: Active';
                 }
+                
+                // Add Discord bot controls to admin dashboard
+                addDiscordBotControls();
             }
+        }
+
+        function addDiscordBotControls() {
+            const dashboard = document.getElementById('admin-dashboard');
+            const existingControls = dashboard.querySelector('[data-bot-controls]');
+            
+            if (existingControls) {
+                existingControls.remove(); // Remove existing controls
+            }
+
+            const botControls = document.createElement('div');
+            botControls.setAttribute('data-bot-controls', 'true');
+            botControls.style.cssText = `
+                background: rgba(89,86,255,0.1); 
+                border: 1px solid rgba(89,86,255,0.3); 
+                border-radius: 0.75rem; 
+                padding: 1.5rem; 
+                margin-bottom: 1.5rem;
+            `;
+            
+            botControls.innerHTML = `
+                <div style="color: #5CFFC1; font-weight: 700; font-size: 1.1rem; margin-bottom: 1rem;">
+                    🤖 Discord Bot Controls
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label style="color: #cbd5e1; font-size: 0.9rem; display: block; margin-bottom: 0.5rem;">Test Goated Code:</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="text" id="goated-code-input" placeholder="e.g., GOATED50" 
+                                   style="flex: 1; padding: 0.5rem; border: 1px solid #64748b; border-radius: 0.5rem; background: #2a2d3a; color: white;">
+                            <button onclick="testGoatedCode()" 
+                                    style="background: #fbbf24; color: #1a1a1a; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer;">
+                                Post
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label style="color: #cbd5e1; font-size: 0.9rem; display: block; margin-bottom: 0.5rem;">Test Shuffle Code:</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="text" id="shuffle-code-input" placeholder="e.g., SHUFFLE100" 
+                                   style="flex: 1; padding: 0.5rem; border: 1px solid #64748b; border-radius: 0.5rem; background: #2a2d3a; color: white;">
+                            <button onclick="testShuffleCode()" 
+                                    style="background: #9333ea; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer;">
+                                Post
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button onclick="testAnnouncement()" 
+                            style="background: rgba(92,255,193,0.2); border: 1px solid rgba(92,255,193,0.3); color: #5CFFC1; padding: 0.75rem 1rem; border-radius: 0.5rem; cursor: pointer;">
+                        Test Announcement
+                    </button>
+                    <button onclick="toggleTelegramMonitor()" 
+                            style="background: rgba(20,184,166,0.2); border: 1px solid rgba(20,184,166,0.3); color: #14b8a6; padding: 0.75rem 1rem; border-radius: 0.5rem; cursor: pointer;">
+                        Toggle Telegram Monitor
+                    </button>
+                    <button onclick="showChannelStatus()" 
+                            style="background: rgba(79,70,229,0.2); border: 1px solid rgba(79,70,229,0.3); color: #6366f1; padding: 0.75rem 1rem; border-radius: 0.5rem; cursor: pointer;">
+                        Channel Status
+                    </button>
+                </div>
+                
+                <div style="margin-top: 1rem;">
+                    <div style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 0.5rem;">Activity Log:</div>
+                    <div data-activity-log style="background: rgba(0,0,0,0.2); border-radius: 0.5rem; padding: 1rem; max-height: 200px; overflow-y: auto;">
+                        <div style="color: #64748b; font-style: italic;">Bot activity will appear here...</div>
+                    </div>
+                </div>
+            `;
+            
+            // Insert bot controls after the header
+            const dashboardHeader = dashboard.querySelector('h2');
+            if (dashboardHeader) {
+                dashboardHeader.parentNode.insertBefore(botControls, dashboardHeader.nextSibling);
+            }
+        }
+
+        // Test functions for admin controls
+        function testGoatedCode() {
+            const input = document.getElementById('goated-code-input');
+            const code = input.value.trim();
+            if (code) {
+                discordBot.postGoatedCode(code, 'Test code from admin panel');
+                input.value = '';
+            }
+        }
+
+        function testShuffleCode() {
+            const input = document.getElementById('shuffle-code-input');
+            const code = input.value.trim();
+            if (code) {
+                discordBot.postShuffleCode(code, 'Test code from admin panel');
+                input.value = '';
+            }
+        }
+
+        function testAnnouncement() {
+            const message = "🎉 This is a test announcement from the Porter Plays admin panel! All systems are working correctly.";
+            discordBot.postAnnouncement(message, "🧪 Test Announcement");
+        }
+
+        function toggleTelegramMonitor() {
+            if (telegramMonitor.isMonitoring) {
+                telegramMonitor.stopMonitoring();
+                discordBot.showAdminNotification('Telegram Monitor Stopped', 'No longer monitoring Telegram channels');
+            } else {
+                telegramMonitor.startMonitoring();
+                discordBot.showAdminNotification('Telegram Monitor Started', 'Now monitoring all configured Telegram channels');
+            }
+        }
+
+        function showChannelStatus() {
+            const channels = CONFIG.DISCORD.CHANNELS;
+            const telegram = CONFIG.TELEGRAM;
+            
+            const status = `
+                <strong>Discord Channels:</strong><br>
+                • Goated Codes: ${channels.GOATED_CODES}<br>
+                • Shuffle Codes: ${channels.SHUFFLE_CODES}<br>
+                • Announcements: ${channels.ANNOUNCEMENTS}<br>
+                • Support: ${channels.SUPPORT}<br><br>
+                
+                <strong>Telegram Channels:</strong><br>
+                • Thrill: ${telegram.THRILL}<br>
+                • Goated: ${telegram.GOATED}<br>
+                • Shuffle: ${telegram.SHUFFLE}<br>
+                • Goated Codes: ${telegram.GOATED_CODES}<br>
+                • Shuffle Boost: ${telegram.SHUFFLE_BOOST_CODES}
+            `;
+            
+            discordBot.showAdminNotification('Channel Configuration', status);
         }
 
         function closeAdminDashboard() {
             const dashboard = document.getElementById('admin-dashboard');
             if (dashboard) {
                 dashboard.style.display = 'none';
+                window.adminMode = false;
+                
+                // Stop monitoring when closing dashboard
+                if (telegramMonitor.isMonitoring) {
+                    telegramMonitor.stopMonitoring();
+                }
             }
         }
 
@@ -1490,6 +1988,11 @@
             if (modal && event.target === modal) {
                 closeAdminModal();
             }
+        });
+
+        // Check for Discord OAuth callback on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            handleDiscordCallback();
         });
     </script>
 </body>

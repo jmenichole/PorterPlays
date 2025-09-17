@@ -8,6 +8,8 @@ The official hub for Porter Plays leaderboards - track your performance, compete
 
 🔗 **Live Site**: [https://jmenichole.github.io/PorterPlays/](https://jmenichole.github.io/PorterPlays/)
 
+🔗 **Standalone Landing (static HTML)**: [https://jmenichole.github.io/PorterPlays/porter-plays-landing.html](https://jmenichole.github.io/PorterPlays/porter-plays-landing.html)
+
 ## Features
 
 - **Leaderboard Tracking**: Monitor your performance across multiple gaming platforms
