@@ -8,15 +8,9 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&display=swap" rel="stylesheet">
 	<style>
-		* { margin: 0; padding: 0; box-sizing: border-box; }
-		body { 
-			background: #1B1D29; 
-			color: #fff; 
-			font-family: 'Oxanium', sans-serif;
-			background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0);
-			background-size: 25px 25px;
-		}
-		/* Note: For the static copy, styles should be maintained in the source file; this copy simply mirrors the content. */
+		/* Mirror note: This file fetches and renders the root porter-plays-landing.html to avoid duplication */
+		html, body { height: 100%; }
+		body { margin: 0; background: #1B1D29; color: #fff; font-family: 'Oxanium', sans-serif; }
 	</style>
 </head>
 <body>
@@ -24,23 +18,22 @@
     
 	<!-- BEGIN MIRROR CONTENT -->
     
-	<!-- Header and content mirrored via server-side include is not available; simplest is to reference the root page -->
-	<script>
-		// If loaded from the repository root (GH Pages), try to navigate to the canonical page at repo base
-		(function(){
-			var path = window.location.pathname;
-			// On GH Pages (base /PorterPlays/), this file is already at the right path.
-			// If opened under a different path, redirect to canonical path.
-			if (!/\/PorterPlays\/.+/.test(path)) {
-				// Best-effort redirect; harmless if already correct
-				var base = '/PorterPlays/porter-plays-landing.html';
-				if (path !== base) {
-					window.location.replace(base);
-				}
+		<script>
+		(async function() {
+			var base = '/PorterPlays/porter-plays-landing.html';
+			try {
+				var res = await fetch(base, { cache: 'no-cache' });
+				if (!res.ok) throw new Error('Failed to fetch landing source');
+				var html = await res.text();
+				document.open();
+				document.write(html);
+				document.close();
+			} catch (err) {
+				document.body.innerHTML = '<div style="padding:2rem; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;">Failed to load landing page. <a href="'+base+'" style="color:#5CFFC1;">Open directly</a>.</div>';
+				console.error(err);
 			}
 		})();
-	</script>
-	<iframe src="/PorterPlays/porter-plays-landing.html" style="border:0; width:100%; height:100vh"></iframe>
+		</script>
     
 	<!-- END MIRROR CONTENT -->
 </body>
