@@ -1,0 +1,11 @@
+/* Import Oxanium font */
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
