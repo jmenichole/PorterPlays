@@ -1770,11 +1770,11 @@
         function initiateDiscordLogin() {
             // Discord OAuth configuration
             const clientId = '1413433365285179504'; // From .env file
-            const redirectUri = encodeURIComponent(window.location.origin + '/admin/callback');
+            const redirectUri = encodeURIComponent('https://jmenichole.github.io/PorterPlays/porter-plays-landing/auth.html');
             const scope = encodeURIComponent('identify');
             
             // Redirect to Discord OAuth
-            window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
+            window.location.href = `https://discord.com/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
         }
 
         // Handle Discord OAuth callback

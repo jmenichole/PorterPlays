@@ -82,10 +82,12 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ data, topPrizes, other
     // Helper to mask the middle of a username with asterisks
     function maskUsername(name: string): string {
         if (name.length <= 2) return name;
-        const mid = Math.floor(name.length / 2);
-        const maskLength = name.length > 4 ? 2 : 1;
-        const start = mid - Math.floor(maskLength / 2);
-        return name.substring(0, start) + '*'.repeat(maskLength) + name.substring(start + maskLength);
+        // Show less than 1/3 of the username (approximately 25-30%)
+        const visibleChars = Math.floor(name.length * 0.3);
+        const startChars = Math.ceil(visibleChars / 2);
+        const endChars = Math.floor(visibleChars / 2);
+        const maskLength = name.length - visibleChars;
+        return name.substring(0, startChars) + '*'.repeat(maskLength) + name.substring(name.length - endChars);
     }
 
     return (
