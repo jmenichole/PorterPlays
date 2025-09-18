@@ -1545,10 +1545,8 @@
 
         function maskUsername(name) {
             if (name.length <= 2) return name;
-            const mid = Math.floor(name.length / 2);
-            const maskLength = name.length > 4 ? 2 : 1;
-            const start = mid - Math.floor(maskLength / 2);
-            return name.substring(0, start) + '*'.repeat(maskLength) + name.substring(start + maskLength);
+            const visibleLength = Math.max(1, Math.floor(name.length * 0.2));
+            return name.substring(0, visibleLength) + '*'.repeat(name.length - visibleLength);
         }
 
         function formatCurrency(amount) {
