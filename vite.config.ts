@@ -5,10 +5,7 @@ export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
       base: process.env.NODE_ENV === 'production' ? '/PorterPlays/' : '/',
-      define: {
-        'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-        'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
-      },
+      // Avoid inlining secrets into the client bundle. If needed, use server-side proxies.
       resolve: {
         alias: {
           '@': path.resolve(__dirname, '.'),
