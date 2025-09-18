@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -338,22 +339,24 @@
         .social-links { 
             display: flex; 
             justify-content: center; 
-            gap: 2rem; 
+            gap: 1.5rem; 
             margin-top: 3rem; 
             flex-wrap: wrap;
         }
         .social-links a { 
             background: linear-gradient(145deg, rgba(89,86,255,0.2), rgba(89,86,255,0.1)); 
-            padding: 1.25rem 2rem; 
+            padding: 1rem; 
             border-radius: 1rem; 
             color: #5956FF; 
             text-decoration: none; 
-            font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.5rem;
             transition: all 0.3s ease;
             border: 2px solid rgba(89,86,255,0.3);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
         }
         .social-links a:hover { 
             background: linear-gradient(145deg, rgba(89,86,255,0.3), rgba(89,86,255,0.2)); 
@@ -582,10 +585,10 @@
         <nav class="nav">
             <div class="logo">PorterPlays</div>
             <div class="social-links">
-                <a href="https://discord.gg/porterplays" target="_blank">Discord</a>
-                <a href="https://t.me/porterplays" target="_blank">Telegram</a>
-                <a href="https://x.com/porterplays_" target="_blank">Twitter</a>
-                <a href="https://kick.com/porterplays" target="_blank">Kick</a>
+                <a href="https://discord.gg/porterplays" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+                <a href="https://t.me/porterplays" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+                <a href="https://x.com/porterplays_" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://kick.com/porterplays" target="_blank" title="Kick"><i class="fas fa-play-circle"></i></a>
             </div>
         </nav>
     </header>
