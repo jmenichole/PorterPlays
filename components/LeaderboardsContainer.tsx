@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Leaderboard } from './Leaderboard';
-import { Countdown } from './Countdown';
 import { leaderboardData } from '../data/leaderboardData';
 import { goatedLeaderboardData } from '../data/goatedLeaderboardData';
 import { GoatedLogo, ThrillLogo, ShuffleLogo, ExternalLinkIcon } from './icons';
@@ -153,13 +152,6 @@ export const LeaderboardsContainer: React.FC = () => {
                                 </a>
                             </div>
                         </div>
-
-                        {activeTabData.endDate && (
-                            <div className="mb-8">
-                                <h4 className="text-center text-xl font-bold uppercase text-slate-400 mb-4">Competition Ends In</h4>
-                                <Countdown targetDate={activeTabData.endDate} />
-                            </div>
-                        )}
                         
                         {activeTabData.leaderboardData ? (
                             <Leaderboard data={activeTabData.leaderboardData} topPrizes={activeTabData.topPrizes} otherPrizes={activeTabData.otherPrizes} />
