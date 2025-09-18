@@ -19,20 +19,8 @@
 	<!-- BEGIN MIRROR CONTENT -->
     
 		<script>
-		(async function() {
-			var base = '/PorterPlays/porter-plays-landing.html';
-			try {
-				var res = await fetch(base, { cache: 'no-cache' });
-				if (!res.ok) throw new Error('Failed to fetch landing source');
-				var html = await res.text();
-				document.open();
-				document.write(html);
-				document.close();
-			} catch (err) {
-				document.body.innerHTML = '<div style="padding:2rem; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;">Failed to load landing page. <a href="'+base+'" style="color:#5CFFC1;">Open directly</a>.</div>';
-				console.error(err);
-			}
-		})();
+		// Simple redirect to root since GitHub Pages serves the main file there
+		window.location.href = '/PorterPlays/';
 		</script>
     
 	<!-- END MIRROR CONTENT -->
