@@ -18,23 +18,6 @@ const formatCurrency = (amount: number) => {
     }).format(amount);
 };
 
-const TimeframeButton: React.FC<{
-    label: string;
-    isActive: boolean;
-    onClick: () => void;
-}> = ({ label, isActive, onClick }) => (
-    <button
-        onClick={onClick}
-        className={`px-4 py-2 rounded-lg font-bold transition-all text-sm md:text-base ${
-            isActive
-                ? 'bg-brand-primary text-white shadow-lg'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-        }`}
-    >
-        {label}
-    </button>
-);
-
 const SkeletonRow: React.FC = () => (
      <div className="grid grid-cols-12 gap-4 items-center rounded-lg px-4 py-3 my-1 bg-slate-900/60">
         <div className="col-span-2 h-6 bg-slate-700/50 rounded-md animate-pulse"></div>
@@ -60,7 +43,6 @@ const LeaderboardSkeleton: React.FC = () => (
 
 
 export const Leaderboard: React.FC<LeaderboardProps> = ({ data, topPrizes, otherPrizes }) => {
-    const [activeTimeframe, setActiveTimeframe] = useState<Timeframe>(Timeframe.ALL_TIME);
     const [loading, setLoading] = useState(true);
     const { user, isLoggedIn } = useAuth();
 
@@ -70,12 +52,12 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ data, topPrizes, other
             setLoading(false);
         }, 500);
         return () => clearTimeout(timer);
-    }, [activeTimeframe, data]);
+    }, [data]);
 
 
     const sortedData = useMemo(() => {
-        return [...data].sort((a, b) => b.wagered[activeTimeframe] - a.wagered[activeTimeframe]);
-    }, [data, activeTimeframe]);
+        return [...data].sort((a, b) => b.wagered[Timeframe.ALL_TIME] - a.wagered[Timeframe.ALL_TIME]);
+    }, [data]);
 
     const leaderboardToDisplay = sortedData.slice(0, 15);
 
@@ -92,12 +74,6 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ data, topPrizes, other
 
     return (
         <div>
-            <div className="flex justify-center gap-2 md:gap-4 mb-8">
-                <TimeframeButton label="Today" isActive={activeTimeframe === Timeframe.TODAY} onClick={() => setActiveTimeframe(Timeframe.TODAY)} />
-                <TimeframeButton label="This Week" isActive={activeTimeframe === Timeframe.WEEK} onClick={() => setActiveTimeframe(Timeframe.WEEK)} />
-                <TimeframeButton label="This Month" isActive={activeTimeframe === Timeframe.MONTH} onClick={() => setActiveTimeframe(Timeframe.MONTH)} />
-                <TimeframeButton label="All Time" isActive={activeTimeframe === Timeframe.ALL_TIME} onClick={() => setActiveTimeframe(Timeframe.ALL_TIME)} />
-            </div>
 
             {loading ? <LeaderboardSkeleton /> : (
                 <div className="p-1 rounded-xl border border-brand-primary/20 shadow-[0_0_40px_rgba(89,86,255,0.3)] animate-pulse-glow" style={{animationIterationCount: 1, animationDuration: '3s'}}>
@@ -140,7 +116,7 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ data, topPrizes, other
                                 <div key={player.uid} className={rowClasses}>
                                     <div className="col-span-2">{rankDisplay}</div>
                                     <div className="col-span-5 font-semibold text-base truncate">{maskUsername(player.name)}</div>
-                                    <div className="col-span-3 text-right font-bold text-lg text-brand-highlight">{formatCurrency(player.wagered[activeTimeframe])}</div>
+                                    <div className="col-span-3 text-right font-bold text-lg text-brand-highlight">{formatCurrency(player.wagered[Timeframe.ALL_TIME])}</div>
                                     <div className="col-span-2 text-right font-bold text-slate-300">{prize ? `$${prize.toLocaleString()}` : '-'}</div>
                                 </div>
                             )
