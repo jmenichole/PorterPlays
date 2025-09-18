@@ -612,105 +612,21 @@
         </div>
     </section>
 
-    <!-- Onboarding Bot Section -->
-    <section id="onboarding" class="onboarding-section" style="padding: 6rem 0; background: linear-gradient(135deg, rgba(89,86,255,0.1), rgba(92,255,193,0.05)); position: relative;">
+    <!-- Full Leaderboards - Social Proof -->
+    <section id="full-leaderboards" class="leaderboard-preview" style="padding: 6rem 0; background: linear-gradient(135deg, rgba(251,191,36,0.08), rgba(245,158,11,0.04));">
         <div class="container">
             <div style="text-align: center; margin-bottom: 3rem;">
-                <h2 class="section-title">Porter's <span class="accent">Onboarding Guide</span></h2>
-                <p class="section-description">Get personalized guidance through your complete setup - from casino registration to joining our community channels.</p>
+                <div style="display: inline-block; background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(245,158,11,0.1)); border: 1px solid rgba(251,191,36,0.3); color: #fbbf24; padding: 0.5rem 1.5rem; border-radius: 25px; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem;">🏆 Live Competition</div>
+                <h2 class="section-title">Real Players, <span class="accent">Real Prizes</span></h2>
+                <p class="section-description">See who's leading the pack and what they're winning. Join the competition and climb the ranks!</p>
             </div>
-            
-            <!-- Bot Interface -->
-            <div class="bot-container" style="max-width: 800px; margin: 0 auto; background: linear-gradient(145deg, rgba(27,29,41,0.8), rgba(35,38,58,0.6)); border: 2px solid rgba(89,86,255,0.2); border-radius: 1.5rem; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
-                <!-- Bot Header -->
-                <div class="bot-header" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(89,86,255,0.2);">
-                    <div class="bot-avatar" style="width: 50px; height: 50px; background: linear-gradient(135deg, #5956FF, #5CFFC1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🤖</div>
-                    <div>
-                        <div style="color: #5CFFC1; font-weight: 700; font-size: 1.1rem;">Porter Guide</div>
-                        <div style="color: #94a3b8; font-size: 0.9rem;" id="bot-status">Ready to help you get started!</div>
-                    </div>
-                    <div style="margin-left: auto;">
-                        <button class="btn-secondary" onclick="resetBot()" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Reset</button>
-                    </div>
-                </div>
-                
-                <!-- Bot Messages -->
-                <div id="bot-messages" class="bot-messages" style="min-height: 300px; max-height: 400px; overflow-y: auto; margin-bottom: 1.5rem; padding-right: 0.5rem;">
-                    <div class="bot-message" style="background: rgba(89,86,255,0.1); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem;">
-                        <div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">👋 Welcome to Porter Plays!</div>
-                        <div style="color: #cbd5e1; line-height: 1.6;">
-                            I'm here to help you get the most out of your Porter Plays experience. I can guide you through:
-                            <br><br>
-                            • 🎰 Setting up accounts on Thrill, Goated & Shuffle
-                            <br>• 💬 Joining our Discord and Telegram communities  
-                            <br>• 🏆 Understanding leaderboards and rewards
-                            <br>• 🎁 Claiming exclusive bonuses and codes
-                            <br><br>
-                            What would you like to start with?
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Bot Quick Actions -->
-                <div class="bot-actions" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-                    <button class="bot-action-btn" onclick="startOnboarding('casino')" style="background: linear-gradient(135deg, rgba(20,184,166,0.2), rgba(20,184,166,0.1)); border: 1px solid rgba(20,184,166,0.3); color: #14b8a6; padding: 1rem; border-radius: 0.75rem; font-weight: 600; transition: all 0.3s ease; cursor: pointer;">
-                        🎰 Casino Setup
-                    </button>
-                    <button class="bot-action-btn" onclick="startOnboarding('community')" style="background: linear-gradient(135deg, rgba(147,51,234,0.2), rgba(147,51,234,0.1)); border: 1px solid rgba(147,51,234,0.3); color: #9333ea; padding: 1rem; border-radius: 0.75rem; font-weight: 600; transition: all 0.3s ease; cursor: pointer;">
-                        💬 Join Community
-                    </button>
-                    <button class="bot-action-btn" onclick="startOnboarding('leaderboards')" style="background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(251,191,36,0.1)); border: 1px solid rgba(251,191,36,0.3); color: #fbbf24; padding: 1rem; border-radius: 0.75rem; font-weight: 600; transition: all 0.3s ease; cursor: pointer;">
-                        🏆 Leaderboard Guide
-                    </button>
-                    <button class="bot-action-btn" onclick="startOnboarding('help')" style="background: linear-gradient(135deg, rgba(92,255,193,0.2), rgba(92,255,193,0.1)); border: 1px solid rgba(92,255,193,0.3); color: #5CFFC1; padding: 1rem; border-radius: 0.75rem; font-weight: 600; transition: all 0.3s ease; cursor: pointer;">
-                        ❓ Get Help
-                    </button>
-                </div>
-                
-                <!-- Bot Input -->
-                <div class="bot-input-container" style="display: flex; gap: 1rem; align-items: center;">
-                    <input type="text" id="bot-input" placeholder="Type a message or question..." style="flex: 1; background: rgba(30,32,48,0.8); border: 1px solid rgba(89,86,255,0.3); border-radius: 0.75rem; padding: 1rem; color: white; font-size: 1rem;" onkeypress="handleBotInput(event)">
-                    <button onclick="sendBotMessage()" style="background: linear-gradient(135deg, #5956FF, #5CFFC1); color: white; border: none; border-radius: 0.75rem; padding: 1rem 1.5rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Send</button>
-                </div>
-            </div>
-            
-            <!-- Quick Links -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
-                <div class="quick-link-card" style="background: linear-gradient(135deg, rgba(89,86,255,0.1), rgba(92,255,193,0.05)); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 2rem; text-align: center; transition: all 0.3s ease;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">🚀</div>
-                    <h3 style="color: #5CFFC1; font-weight: 700; margin-bottom: 1rem;">Quick Start</h3>
-                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">Get set up in under 5 minutes with our guided tour.</p>
-                    <button onclick="startOnboarding('quickstart')" class="btn-primary" style="padding: 0.75rem 1.5rem;">Start Now</button>
-                </div>
-                
-                <div class="quick-link-card" style="background: linear-gradient(135deg, rgba(89,86,255,0.1), rgba(92,255,193,0.05)); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 2rem; text-align: center; transition: all 0.3s ease;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">📚</div>
-                    <h3 style="color: #5CFFC1; font-weight: 700; margin-bottom: 1rem;">Learn More</h3>
-                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">Dive deep into strategies, bonuses, and advanced features.</p>
-                    <button onclick="startOnboarding('advanced')" class="btn-secondary" style="padding: 0.75rem 1.5rem;">Explore</button>
-                </div>
-                
-                <div class="quick-link-card" style="background: linear-gradient(135deg, rgba(89,86,255,0.1), rgba(92,255,193,0.05)); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 2rem; text-align: center; transition: all 0.3s ease;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">💬</div>
-                    <h3 style="color: #5CFFC1; font-weight: 700; margin-bottom: 1rem;">Need Help?</h3>
-                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">Connect with our community for personalized support.</p>
-                    <a href="https://discord.gg/porterplays" target="_blank" class="btn-primary" style="padding: 0.75rem 1.5rem; text-decoration: none; display: inline-block;">Join Discord</a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Full Leaderboards Section -->
-    <section id="full-leaderboards" class="leaderboard-preview">
-        <div class="container">
-            <h2 class="section-title">Full <span class="accent">Leaderboards</span></h2>
-            
             <!-- Leaderboard Tabs -->
             <div class="leaderboard-tabs" style="text-align: center; margin-bottom: 2rem;">
                 <button id="thrill-tab" class="leaderboard-tab active" onclick="switchLeaderboard('thrill')">Thrill Leaderboard</button>
                 <button id="goated-tab" class="leaderboard-tab" onclick="switchLeaderboard('goated')">Goated Leaderboard</button>
             </div>
-            
+
             <div class="leaderboard-card">
                 <div class="leaderboard-header" style="display: grid; grid-template-columns: 80px 1fr 120px 100px; align-items: center; padding: 1rem; background: rgba(89,86,255,0.1); border-bottom: 2px solid #5956FF; font-weight: 700; color: #5CFFC1;">
                     <div>Rank</div>
@@ -720,21 +636,23 @@
                 </div>
                 <div id="full-leaderboard-rows"></div>
             </div>
-            
+
             <!-- Play Now Button -->
             <div style="text-align: center; margin-top: 2rem;">
-                <a id="play-now-btn" href="https://thrill.com/?r=porterplays" target="_blank" class="view-full-btn">Play Now on Thrill</a>
+                <a id="play-now-btn" href="https://thrill.com/?r=porterplays" target="_blank" class="view-full-btn">Join the Competition</a>
             </div>
         </div>
     </section>
 
+    <!-- Get Started - Final Call to Action -->
+    <!-- Full Leaderboards Section -->
     <!-- Play Now Casino Cards -->
     <section class="casino-cards-section" style="padding: 8rem 0; background: linear-gradient(145deg, rgba(35,38,58,0.6), rgba(30,32,48,0.4)); border-radius: 2rem; margin: 4rem auto; max-width: 1400px; position: relative;">
         <div class="container">
             <div style="text-align: center; margin-bottom: 4rem;">
                 <div style="display: inline-block; background: linear-gradient(135deg, rgba(89,86,255,0.15), rgba(92,255,193,0.15)); border: 1px solid rgba(89,86,255,0.2); color: #5CFFC1; padding: 0.5rem 1.5rem; border-radius: 25px; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem;">🎯 Exclusive Access</div>
-                <h2 class="section-title" style="margin-bottom: 1rem;">Choose Your <span class="accent">Casino</span></h2>
-                <p class="section-description" style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">Select your preferred platform and unlock exclusive Porter Plays benefits, bonuses, and VIP rewards.</p>
+                <h2 class="section-title" style="margin-bottom: 1rem;">Pick Your <span class="accent">Winning Platform</span></h2>
+                <p class="section-description" style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">Choose your casino, claim your exclusive bonuses, and start climbing the leaderboards for massive monthly prizes!</p>
             </div>
             
             <div class="casino-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; margin-top: 4rem; max-width: 1200px; margin-left: auto; margin-right: auto; justify-items: center;">
@@ -945,8 +863,8 @@
     <!-- Community Section -->
     <section id="community" class="community-section">
         <div class="container">
-            <h2 class="section-title">Join The <span class="accent">Community</span></h2>
-            <p class="section-description">Connect with the heart of our community through our feeds and social channels.</p>
+            <h2 class="section-title">Join <span class="accent">5,000+ Winners</span></h2>
+            <p class="section-description">Connect with fellow champions, get exclusive bonus codes, and stay updated on the latest competitions and prizes.</p>
             
             <div class="community-feed">
                 <div class="feed-item">
@@ -1009,6 +927,95 @@
             </div>
             
 
+        </div>
+    </section>
+
+    <!-- Get Started - Final Call to Action -->
+    <section id="onboarding" class="onboarding-section" style="padding: 6rem 0; background: linear-gradient(135deg, rgba(89,86,255,0.1), rgba(92,255,193,0.05)); position: relative;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <div style="display: inline-block; background: linear-gradient(135deg, rgba(92,255,193,0.2), rgba(89,86,255,0.1)); border: 1px solid rgba(92,255,193,0.3); color: #5CFFC1; padding: 0.5rem 1.5rem; border-radius: 25px; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem;">🚀 Ready to Start?</div>
+                <h2 class="section-title">Your Journey <span class="accent">Begins Here</span></h2>
+                <p class="section-description">Join thousands of players competing for massive prizes. Get personalized guidance every step of the way.</p>
+            </div>
+
+            <!-- Bot Interface -->
+            <div class="bot-container" style="max-width: 800px; margin: 0 auto; background: linear-gradient(145deg, rgba(27,29,41,0.8), rgba(35,38,58,0.6)); border: 2px solid rgba(89,86,255,0.2); border-radius: 1.5rem; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                <!-- Bot Header -->
+                <div class="bot-header" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(89,86,255,0.2);">
+                    <div class="bot-avatar" style="width: 50px; height: 50px; background: linear-gradient(135deg, #5956FF, #5CFFC1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🤖</div>
+                    <div>
+                        <div style="color: #5CFFC1; font-weight: 700; font-size: 1.1rem;">Porter Guide</div>
+                        <div style="color: #94a3b8; font-size: 0.9rem;" id="bot-status">Ready to help you get started!</div>
+                    </div>
+                    <div style="margin-left: auto;">
+                        <button class="btn-secondary" onclick="resetBot()" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Bot Messages -->
+                <div id="bot-messages" class="bot-messages" style="min-height: 300px; max-height: 400px; overflow-y: auto; margin-bottom: 1.5rem; padding-right: 0.5rem;">
+                    <div class="bot-message" style="background: rgba(89,86,255,0.1); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem;">
+                        <div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">👋 Welcome to Porter Plays!</div>
+                        <div style="color: #cbd5e1; line-height: 1.6;">
+                            I'm here to help you get the most out of your Porter Plays experience. I can guide you through:
+                            <br><br>
+                            • 🎰 Setting up accounts on Thrill, Goated & Shuffle
+                            <br>• 💬 Joining our Discord and Telegram communities
+                            <br>• 🏆 Understanding leaderboards and rewards
+                            <br>• 🎁 Claiming exclusive bonuses and codes
+                            <br><br>
+                            What would you like to start with?
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bot Quick Actions -->
+                <div class="bot-actions" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                    <button class="bot-action-btn" onclick="startOnboarding('casino')" style="background: linear-gradient(135deg, rgba(20,184,166,0.2), rgba(20,184,166,0.1)); border: 1px solid rgba(20,184,166,0.3); color: #14b8a6; padding: 1rem; border-radius: 0.75rem; font-weight: 600; transition: all 0.3s ease; cursor: pointer;">
+                        🎰 Casino Setup
+                    </button>
+                    <button class="bot-action-btn" onclick="startOnboarding('community')" style="background: linear-gradient(135deg, rgba(147,51,234,0.2), rgba(147,51,234,0.1)); border: 1px solid rgba(147,51,234,0.3); color: #9333ea; padding: 1rem; border-radius: 0.75rem; font-weight: 600; transition: all 0.3s ease; cursor: pointer;">
+                        💬 Join Community
+                    </button>
+                    <button class="bot-action-btn" onclick="startOnboarding('leaderboards')" style="background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(251,191,36,0.1)); border: 1px solid rgba(251,191,36,0.3); color: #fbbf24; padding: 1rem; border-radius: 0.75rem; font-weight: 600; transition: all 0.3s ease; cursor: pointer;">
+                        🏆 Leaderboard Guide
+                    </button>
+                    <button class="bot-action-btn" onclick="startOnboarding('help')" style="background: linear-gradient(135deg, rgba(92,255,193,0.2), rgba(92,255,193,0.1)); border: 1px solid rgba(92,255,193,0.3); color: #5CFFC1; padding: 1rem; border-radius: 0.75rem; font-weight: 600; transition: all 0.3s ease; cursor: pointer;">
+                        ❓ Get Help
+                    </button>
+                </div>
+
+                <!-- Bot Input -->
+                <div class="bot-input-container" style="display: flex; gap: 1rem; align-items: center;">
+                    <input type="text" id="bot-input" placeholder="Type a message or question..." style="flex: 1; background: rgba(30,32,48,0.8); border: 1px solid rgba(89,86,255,0.3); border-radius: 0.75rem; padding: 1rem; color: white; font-size: 1rem;" onkeypress="handleBotInput(event)">
+                    <button onclick="sendBotMessage()" style="background: linear-gradient(135deg, #5956FF, #5CFFC1); color: white; border: none; border-radius: 0.75rem; padding: 1rem 1.5rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Send</button>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div class="quick-link-card" style="background: linear-gradient(135deg, rgba(89,86,255,0.1), rgba(92,255,193,0.05)); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 2rem; text-align: center; transition: all 0.3s ease;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🚀</div>
+                    <h3 style="color: #5CFFC1; font-weight: 700; margin-bottom: 1rem;">Quick Start</h3>
+                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">Get set up in under 5 minutes with our guided tour.</p>
+                    <button onclick="startOnboarding('quickstart')" class="btn-primary" style="padding: 0.75rem 1.5rem;">Start Now</button>
+                </div>
+
+                <div class="quick-link-card" style="background: linear-gradient(135deg, rgba(89,86,255,0.1), rgba(92,255,193,0.05)); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 2rem; text-align: center; transition: all 0.3s ease;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🏆</div>
+                    <h3 style="color: #5CFFC1; font-weight: 700; margin-bottom: 1rem;">View Leaderboards</h3>
+                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">See who's winning and join the competition for massive prizes.</p>
+                    <button onclick="document.getElementById('full-leaderboards').scrollIntoView({ behavior: 'smooth' })" class="btn-secondary" style="padding: 0.75rem 1.5rem;">Check Rankings</button>
+                </div>
+
+                <div class="quick-link-card" style="background: linear-gradient(135deg, rgba(89,86,255,0.1), rgba(92,255,193,0.05)); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 2rem; text-align: center; transition: all 0.3s ease;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">💬</div>
+                    <h3 style="color: #5CFFC1; font-weight: 700; margin-bottom: 1rem;">Need Help?</h3>
+                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">Connect with our community for personalized support.</p>
+                    <a href="https://discord.gg/porterplays" target="_blank" class="btn-primary" style="padding: 0.75rem 1.5rem; text-decoration: none; display: inline-block;">Join Discord</a>
+                </div>
+            </div>
         </div>
     </section>
 
