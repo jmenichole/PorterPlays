@@ -1,12 +1,10 @@
 import React from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
-import { ThrillSection } from '../components/ThrillSection';
-import { VipTransferSection } from '../components/VipTransferSection';
-import { AffiliateSites } from '../components/AffiliateSites';
 import { LeaderboardPreview } from '../components/LeaderboardPreview';
+import { AffiliateSites } from '../components/AffiliateSites';
 import { DiscordSection } from '../components/DiscordSection';
-import { Feedback } from '../components/Feedback';
+import { ChatBubble } from '../components/ChatBubble';
 
 const HomePage: React.FC = () => {
   return (
@@ -14,73 +12,85 @@ const HomePage: React.FC = () => {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="relative text-center max-w-6xl mx-auto pt-20 md:pt-32 pb-16 md:pb-24 px-4">
-          {/* Background decoration */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-primary/5 to-transparent pointer-events-none"></div>
-          <div className="absolute top-20 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-gradient-to-r from-brand-highlight/10 to-brand-primary/10 rounded-full blur-3xl opacity-30 pointer-events-none"></div>
-          
-          <div className="relative z-10">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold uppercase tracking-wider !leading-tight mb-8">
-              Your Arena For <br />
-              <span className="bg-gradient-to-r from-brand-highlight to-brand-primary bg-clip-text text-transparent">
-                Competitive Play.
+        <section className="text-center max-w-6xl mx-auto pt-20 md:pt-32 pb-16 md:pb-20 px-6">
+          <div className="relative">
+            {/* Background glow effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/20 via-brand-highlight/10 to-brand-primary/20 blur-3xl -z-10"></div>
+            
+            <h1 className="text-4xl md:text-7xl font-extrabold uppercase tracking-wider leading-tight mb-8">
+              YOUR ARENA FOR{' '}
+              <span className="bg-gradient-to-r from-brand-highlight via-brand-primary to-brand-highlight bg-clip-text text-transparent">
+                COMPETITIVE PLAY.
               </span>
             </h1>
-            <p className="mt-6 text-lg md:text-xl text-slate-300 max-w-4xl mx-auto leading-relaxed">
+            
+            <p className="text-lg md:text-xl text-slate-300 max-w-4xl mx-auto mb-12 leading-relaxed">
               Welcome to the official hub for Porter Plays leaderboards. Track your performance, 
               compete for exclusive prize pools, and secure your place at the top.
             </p>
           </div>
         </section>
 
-        {/* New Elite Bonuses Section */}
-        <section className="relative py-16 md:py-24">
-          <div className="max-w-6xl mx-auto px-4 text-center">
-            <div className="bg-gradient-to-r from-brand-dark/80 to-slate-900/80 backdrop-blur-xl rounded-3xl p-12 md:p-16 border border-brand-highlight/20 shadow-2xl">
-              <div className="inline-block bg-gradient-to-r from-brand-highlight/20 to-brand-primary/20 border border-brand-highlight/30 rounded-full px-6 py-2 mb-6">
-                <span className="text-brand-highlight font-semibold text-sm uppercase tracking-wider">
-                  New to Porter Plays?
+        {/* NEW TO PORTER PLAYS Section */}
+        <section className="max-w-6xl mx-auto py-16 px-6">
+          <div className="bg-gradient-to-br from-slate-800/50 via-slate-700/30 to-slate-800/50 rounded-2xl border border-brand-highlight/20 p-8 md:p-12 relative overflow-hidden">
+            {/* Background pattern */}
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/5 to-brand-highlight/5 opacity-50"></div>
+            
+            <div className="relative z-10 text-center">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 bg-brand-primary/20 border border-brand-primary/40 rounded-full px-4 py-2 mb-6">
+                <span className="text-brand-primary text-sm font-semibold uppercase tracking-wider">
+                  NEW TO PORTER PLAYS?
                 </span>
               </div>
               
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-wider !leading-tight mb-8">
-                Claim Your Exclusive <br />
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                Claim Your Exclusive{' '}
                 <span className="bg-gradient-to-r from-brand-highlight to-brand-primary bg-clip-text text-transparent">
                   Elite Bonuses
                 </span>
               </h2>
               
-              <p className="text-lg md:text-xl text-slate-300 max-w-4xl mx-auto leading-relaxed mb-10">
+              <p className="text-lg md:text-xl text-slate-300 max-w-4xl mx-auto mb-8 leading-relaxed">
                 Unlock massive welcome packages and ongoing exclusive promotions that regular players 
                 can't access. Join the Porter supporter community and dominate with special challenges, 
                 premium rakeback rates, and VIP treatment that puts you ahead of the competition.
               </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
-                <button className="bg-gradient-to-r from-brand-highlight to-brand-primary text-brand-dark px-8 py-4 rounded-xl text-lg font-bold uppercase tracking-wider hover:scale-105 transition transform shadow-lg hover:shadow-brand-highlight/25">
-                  Claim Elite Status
-                </button>
-                <button className="border-2 border-brand-highlight text-brand-highlight px-8 py-4 rounded-xl text-lg font-bold uppercase tracking-wider hover:bg-brand-highlight hover:text-brand-dark transition duration-300">
-                  Learn More
-                </button>
+
+              {/* Feature highlights */}
+              <div className="grid md:grid-cols-3 gap-6 mt-12 mb-8">
+                <div className="bg-brand-dark/50 rounded-xl p-6 border border-brand-highlight/10">
+                  <div className="text-brand-highlight text-3xl mb-4">💰</div>
+                  <h3 className="text-lg font-semibold mb-2 text-brand-light">Exclusive Welcome Packages</h3>
+                  <p className="text-slate-400 text-sm">Get access to bonuses unavailable to regular players</p>
+                </div>
+                <div className="bg-brand-dark/50 rounded-xl p-6 border border-brand-highlight/10">
+                  <div className="text-brand-highlight text-3xl mb-4">🎯</div>
+                  <h3 className="text-lg font-semibold mb-2 text-brand-light">VIP Treatment</h3>
+                  <p className="text-slate-400 text-sm">Premium support and exclusive tournament access</p>
+                </div>
+                <div className="bg-brand-dark/50 rounded-xl p-6 border border-brand-highlight/10">
+                  <div className="text-brand-highlight text-3xl mb-4">🏆</div>
+                  <h3 className="text-lg font-semibold mb-2 text-brand-light">Special Challenges</h3>
+                  <p className="text-slate-400 text-sm">Compete in Porter-exclusive events with bigger prizes</p>
+                </div>
               </div>
+
+              <button className="px-8 py-4 bg-gradient-to-r from-brand-highlight to-brand-primary hover:from-brand-highlight/90 hover:to-brand-primary/90 text-brand-dark font-bold rounded-xl text-lg transition-all hover:scale-105 transform shadow-lg">
+                Get Started Now
+              </button>
             </div>
           </div>
         </section>
-        
-        <ThrillSection />
-        
-        <VipTransferSection />
-        
+
         <LeaderboardPreview />
-
         <AffiliateSites />
-        
         <DiscordSection />
-
       </main>
+      
       <Footer />
-      <Feedback />
+      <ChatBubble />
     </div>
   );
 };
