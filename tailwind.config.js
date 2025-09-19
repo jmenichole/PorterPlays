@@ -2,11 +2,12 @@
 export default {
   content: [
     "./index.html",
-    "./App.tsx",
+    "./App.tsx", 
     "./index.tsx",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./contexts/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -15,7 +16,7 @@ export default {
       },
       colors: {
         'brand-dark': '#1B1D29',
-        'brand-highlight': '#5CFFC1',
+        'brand-highlight': '#5CFFC1', 
         'brand-primary': '#5956FF',
         'brand-light': '#FFFFFF',
       },
