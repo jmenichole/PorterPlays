@@ -54,18 +54,20 @@ const SiteCard: React.FC<{ site: Site }> = ({ site }) => {
 
 export const AffiliateSites: React.FC = () => {
   return (
-    <div className="mt-20">
-      <div className="text-center max-w-4xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-extrabold uppercase tracking-wider">
-          More Ways to <span className="text-brand-primary">Play & Win</span>
-        </h2>
-        <p className="mt-4 text-lg text-slate-300 max-w-2xl mx-auto">
-          Support the community by playing on our partner sites. Use our links for exclusive bonuses.
-        </p>
+    <section className="py-20 md:py-24">
+      <div className="container mx-auto px-4">
+        <div className="text-center max-w-4xl mx-auto mb-12">
+          <h2 className="text-4xl md:text-5xl font-extrabold uppercase tracking-wider">
+            More Ways to <span className="text-brand-primary">Play & Win</span>
+          </h2>
+          <p className="mt-4 text-lg text-slate-300 max-w-2xl mx-auto">
+            Support the community by playing on our partner sites. Use our links for exclusive bonuses.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-8">
+          {sites.map(site => <SiteCard key={site.name} site={site} />)}
+        </div>
       </div>
-      <div className="grid md:grid-cols-3 gap-8 mt-12">
-        {sites.map(site => <SiteCard key={site.name} site={site} />)}
-      </div>
-    </div>
+    </section>
   );
 };

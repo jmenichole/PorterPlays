@@ -2,6 +2,7 @@ import React from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { CommunitySection } from '../components/CommunitySection';
+import { VipTransferSection } from '../components/VipTransferSection';
 import { Feedback } from '../components/Feedback';
 import { VisionSection } from '../components/VisionSection';
 
@@ -11,6 +12,7 @@ const CommunityPage: React.FC = () => {
       <Header />
       <main>
         <VisionSection />
+        <VipTransferSection />
         <CommunitySection />
       </main>
       <Footer />
