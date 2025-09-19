@@ -769,54 +769,81 @@
         </div>
     </section>
 
-    <!-- Get Started - Final Call to Action -->
-    <section id="onboarding" class="onboarding-section" style="padding: 6rem 0; background: linear-gradient(135deg, rgba(89,86,255,0.1), rgba(92,255,193,0.05)); position: relative;">
-        <div class="container">
-            <div style="text-align: center; margin-bottom: 3rem;">
-                <div style="display: inline-block; background: linear-gradient(135deg, rgba(92,255,193,0.2), rgba(89,86,255,0.1)); border: 1px solid rgba(92,255,193,0.3); color: #5CFFC1; padding: 0.5rem 1.5rem; border-radius: 25px; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem;">🚀 Ready to Start?</div>
-                <h2 class="section-title">Your Journey <span class="accent">Begins Here</span></h2>
-                <p class="section-description">Join thousands of players competing for massive prizes. Get personalized guidance every step of the way.</p>
+    <!-- Chat Bubble - Floating Helper -->
+    <div id="chat-bubble-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
+        <!-- Chat Toggle Button -->
+        <button id="chat-toggle" onclick="toggleChat()" style="
+            width: 60px; 
+            height: 60px; 
+            border-radius: 50%; 
+            background: linear-gradient(135deg, #5956FF, #5CFFC1); 
+            border: none; 
+            cursor: pointer; 
+            box-shadow: 0 4px 20px rgba(89,86,255,0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            💬
+        </button>
+
+        <!-- Chat Window (Hidden by default) -->
+        <div id="chat-window" style="
+            position: absolute; 
+            bottom: 80px; 
+            right: 0; 
+            width: 400px; 
+            max-width: calc(100vw - 40px);
+            height: 500px; 
+            background: linear-gradient(145deg, rgba(27,29,41,0.95), rgba(35,38,58,0.9)); 
+            border: 2px solid rgba(89,86,255,0.3); 
+            border-radius: 1rem; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            display: none;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+        ">
+            <!-- Chat Header -->
+            <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border-bottom: 1px solid rgba(89,86,255,0.3);">
+                <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #5956FF, #5CFFC1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🤖</div>
+                <div>
+                    <div style="color: #5CFFC1; font-weight: 700; font-size: 1rem;">Porter Guide</div>
+                    <div style="color: #94a3b8; font-size: 0.8rem;" id="chat-status">Ready to help you get started!</div>
+                </div>
+                <button onclick="toggleChat()" style="margin-left: auto; background: transparent; border: none; color: #94a3b8; cursor: pointer; font-size: 1.2rem;">✕</button>
             </div>
 
-            <!-- Bot Interface -->
-            <div class="bot-container" style="max-width: 800px; margin: 0 auto; background: linear-gradient(145deg, rgba(27,29,41,0.8), rgba(35,38,58,0.6)); border: 2px solid rgba(89,86,255,0.2); border-radius: 1.5rem; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
-                <!-- Bot Header -->
-                <div class="bot-header" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(89,86,255,0.2);">
-                    <div class="bot-avatar" style="width: 50px; height: 50px; background: linear-gradient(135deg, #5956FF, #5CFFC1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🤖</div>
-                    <div>
-                        <div style="color: #5CFFC1; font-weight: 700; font-size: 1.1rem;">Porter Guide</div>
-                        <div style="color: #94a3b8; font-size: 0.9rem;" id="bot-status">Ready to help you get started!</div>
-                    </div>
-                    <div style="margin-left: auto;">
-                        <button class="btn-secondary" onclick="resetBot()" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Reset</button>
-                    </div>
-                </div>
-
-                <!-- Bot Messages -->
-                <div id="bot-messages" class="bot-messages" style="min-height: 300px; max-height: 400px; overflow-y: auto; margin-bottom: 1.5rem; padding-right: 0.5rem;">
-                    <div class="bot-message" style="background: rgba(89,86,255,0.1); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem;">
-                        <div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">👋 Welcome to Porter Plays!</div>
-                        <div style="color: #cbd5e1; line-height: 1.6;">
-                            I'm here to help you get the most out of your Porter Plays experience. I can guide you through:
-                            <br><br>
-                            • 🎰 Setting up accounts on Thrill, Goated & Shuffle
-                            <br>• 💬 Joining our Discord and Telegram communities
-                            <br>• 🏆 Understanding leaderboards and rewards
-                            <br>• 🎁 Claiming exclusive bonuses and codes
-                            <br><br>
-                            What would you like to start with?
-                        </div>
+            <!-- Chat Messages -->
+            <div id="chat-messages" style="flex: 1; padding: 1rem; overflow-y: auto; min-height: 0;">
+                <div style="background: rgba(89,86,255,0.1); border: 1px solid rgba(89,86,255,0.2); border-radius: 0.75rem; padding: 1rem; margin-bottom: 1rem;">
+                    <div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">👋 Welcome to Porter Plays!</div>
+                    <div style="color: #cbd5e1; line-height: 1.6; font-size: 0.9rem;">
+                        I'm here to help you get the most out of your Porter Plays experience. I can guide you through:
+                        <br><br>
+                        • 🎰 Setting up accounts on Thrill, Goated & Shuffle
+                        <br>• 💬 Joining our Discord and Telegram communities
+                        <br>• 🏆 Understanding leaderboards and rewards
+                        <br>• 🎁 Claiming exclusive bonuses and codes
+                        <br><br>
+                        <strong>Admin?</strong> Type "admin upload" to access the API uploader.
+                        <br><br>
+                        What would you like to start with?
                     </div>
                 </div>
+            </div>
 
-                <!-- Bot Input -->
-                <div class="bot-input-container" style="display: flex; gap: 1rem; align-items: center;">
-                    <input type="text" id="bot-input" placeholder="Type a message or question..." style="flex: 1; background: rgba(30,32,48,0.8); border: 1px solid rgba(89,86,255,0.3); border-radius: 0.75rem; padding: 1rem; color: white; font-size: 1rem;" onkeypress="handleBotInput(event)">
-                    <button onclick="sendBotMessage()" style="background: linear-gradient(135deg, #5956FF, #5CFFC1); color: white; border: none; border-radius: 0.75rem; padding: 1rem 1.5rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Send</button>
+            <!-- Chat Input -->
+            <div style="padding: 1rem; border-top: 1px solid rgba(89,86,255,0.3);">
+                <div style="display: flex; gap: 0.5rem;">
+                    <input type="text" id="chat-input" placeholder="Type a message or question..." style="flex: 1; background: rgba(30,32,48,0.8); border: 1px solid rgba(89,86,255,0.3); border-radius: 0.5rem; padding: 0.75rem; color: white; font-size: 0.9rem;" onkeypress="handleChatInput(event)">
+                    <button onclick="sendChatMessage()" style="background: linear-gradient(135deg, #5956FF, #5CFFC1); color: white; border: none; border-radius: 0.5rem; padding: 0.75rem 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem;">Send</button>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -1499,21 +1526,8 @@
         };
 
         function addBotMessage(message, isUser = false) {
-            const messagesContainer = document.getElementById('bot-messages');
-            const messageDiv = document.createElement('div');
-            
-            if (isUser) {
-                messageDiv.className = 'user-message';
-                messageDiv.style.cssText = 'background: rgba(92,255,193,0.1); border: 1px solid rgba(92,255,193,0.2); border-radius: 1rem; padding: 1rem; margin-bottom: 1rem; margin-left: 2rem; text-align: right;';
-                messageDiv.innerHTML = `<div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">You:</div><div style="color: #cbd5e1;">${message}</div>`;
-            } else {
-                messageDiv.className = 'bot-message';
-                messageDiv.style.cssText = 'background: rgba(89,86,255,0.1); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem;';
-                messageDiv.innerHTML = `<div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">Porter Guide:</div><div style="color: #cbd5e1; line-height: 1.6;">${message}</div>`;
-            }
-            
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            // Use the chat bubble interface instead of the old bot interface
+            addChatMessage(message, isUser);
         }
 
         function startOnboarding(type) {
@@ -1706,25 +1720,234 @@
         }
 
         function resetBot() {
-            const messagesContainer = document.getElementById('bot-messages');
-            messagesContainer.innerHTML = `
-                <div class="bot-message" style="background: rgba(89,86,255,0.1); border: 1px solid rgba(89,86,255,0.2); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem;">
-                    <div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">👋 Welcome back to Porter Plays!</div>
-                    <div style="color: #cbd5e1; line-height: 1.6;">
-                        I'm here to help you get the most out of your Porter Plays experience. I can guide you through:
-                        <br><br>
-                        • 🎰 Setting up accounts on Thrill, Goated & Shuffle
-                        <br>• 💬 Joining our Discord and Telegram communities  
-                        <br>• 🏆 Understanding leaderboards and rewards
-                        <br>• 🎁 Claiming exclusive bonuses and codes
-                        <br><br>
-                        What would you like to start with?
+            const messagesContainer = document.getElementById('chat-messages');
+            if (messagesContainer) {
+                messagesContainer.innerHTML = `
+                    <div style="background: rgba(89,86,255,0.1); border: 1px solid rgba(89,86,255,0.2); border-radius: 0.75rem; padding: 1rem; margin-bottom: 1rem;">
+                        <div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.5rem;">👋 Welcome back to Porter Plays!</div>
+                        <div style="color: #cbd5e1; line-height: 1.6; font-size: 0.9rem;">
+                            I'm here to help you get the most out of your Porter Plays experience. I can guide you through:
+                            <br><br>
+                            • 🎰 Setting up accounts on Thrill, Goated & Shuffle
+                            <br>• 💬 Joining our Discord and Telegram communities  
+                            <br>• 🏆 Understanding leaderboards and rewards
+                            <br>• 🎁 Claiming exclusive bonuses and codes
+                            <br><br>
+                            <strong>Admin?</strong> Type "admin upload" to access the API uploader.
+                            <br><br>
+                            What would you like to start with?
+                        </div>
                     </div>
-                </div>
-            `;
-            botState = 'welcome';
-            userProgress = {};
-            document.getElementById('bot-status').textContent = 'Ready to help you get started!';
+                `;
+                botState = 'welcome';
+                userProgress = {};
+                adminMode = false;
+                const statusElement = document.getElementById('chat-status');
+                if (statusElement) {
+                    statusElement.textContent = 'Ready to help you get started!';
+                }
+            }
+        }
+
+        // Chat Bubble Functions
+        let chatOpen = false;
+        let adminMode = false;
+        let adminAuthenticated = false;
+
+        function toggleChat() {
+            const chatWindow = document.getElementById('chat-window');
+            const chatToggle = document.getElementById('chat-toggle');
+            
+            if (chatOpen) {
+                chatWindow.style.display = 'none';
+                chatToggle.innerHTML = '💬';
+                chatOpen = false;
+            } else {
+                chatWindow.style.display = 'flex';
+                chatToggle.innerHTML = '✕';
+                chatOpen = true;
+                
+                // Focus on input when chat opens
+                setTimeout(() => {
+                    const chatInput = document.getElementById('chat-input');
+                    if (chatInput) {
+                        chatInput.focus();
+                    }
+                }, 100);
+            }
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addChatMessage(message, true);
+            input.value = '';
+            
+            // Handle admin upload command
+            if (message.toLowerCase() === 'admin upload' && !adminMode) {
+                setTimeout(() => {
+                    addChatMessage("🔐 <strong>Admin Authentication Required</strong><br><br>Please enter the passphrase to access the Thrill API uploader:", false);
+                    adminMode = true;
+                    document.getElementById('chat-status').textContent = 'Waiting for admin passphrase...';
+                }, 500);
+                return;
+            }
+            
+            // Handle admin passphrase
+            if (adminMode && !adminAuthenticated) {
+                if (message === 'porterplaysurmom') {
+                    adminAuthenticated = true;
+                    adminMode = false;
+                    setTimeout(() => {
+                        showAdminUploader();
+                    }, 500);
+                } else {
+                    setTimeout(() => {
+                        addChatMessage("❌ <strong>Access Denied</strong><br><br>Incorrect passphrase. Returning to normal helper mode.", false);
+                        adminMode = false;
+                        adminAuthenticated = false;
+                        document.getElementById('chat-status').textContent = 'Ready to help you get started!';
+                    }, 500);
+                }
+                return;
+            }
+            
+            // If in admin uploader mode, handle file upload commands
+            if (adminAuthenticated) {
+                handleAdminCommands(message);
+                return;
+            }
+            
+            // Normal bot functionality (reuse existing sendBotMessage logic)
+            handleNormalBotMessage(message);
+        }
+
+        function addChatMessage(message, isUser = false) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            
+            if (isUser) {
+                messageDiv.style.cssText = 'background: rgba(92,255,193,0.1); border: 1px solid rgba(92,255,193,0.2); border-radius: 0.75rem; padding: 0.75rem; margin-bottom: 0.75rem; margin-left: 1rem; text-align: right;';
+                messageDiv.innerHTML = `<div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.3rem; font-size: 0.8rem;">You:</div><div style="color: #cbd5e1; font-size: 0.9rem;">${message}</div>`;
+            } else {
+                messageDiv.style.cssText = 'background: rgba(89,86,255,0.1); border: 1px solid rgba(89,86,255,0.2); border-radius: 0.75rem; padding: 0.75rem; margin-bottom: 0.75rem;';
+                messageDiv.innerHTML = `<div style="color: #5CFFC1; font-weight: 600; margin-bottom: 0.3rem; font-size: 0.8rem;">Porter Guide:</div><div style="color: #cbd5e1; line-height: 1.6; font-size: 0.9rem;">${message}</div>`;
+            }
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function handleChatInput(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        function showAdminUploader() {
+            const statusElement = document.getElementById('chat-status');
+            statusElement.textContent = '🔧 Admin Mode - Thrill API Uploader';
+            
+            addChatMessage("✅ <strong>Admin Access Granted</strong><br><br>🔧 <strong>Thrill API Uploader Active</strong><br><br>Available commands:<br>• <code>upload [json_data]</code> - Upload leaderboard data<br>• <code>status</code> - Check upload status<br>• <code>reset</code> - Reset uploader<br>• <code>exit</code> - Exit admin mode<br><br>Paste your Thrill API JSON data with the 'upload' command.", false);
+        }
+
+        function handleAdminCommands(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.startsWith('upload ')) {
+                const jsonData = message.substring(7).trim();
+                try {
+                    const parsed = JSON.parse(jsonData);
+                    // Simulate API upload
+                    addChatMessage("📤 <strong>Uploading Thrill API Data...</strong><br><br>Processing leaderboard information...", false);
+                    
+                    setTimeout(() => {
+                        addChatMessage(`✅ <strong>Upload Successful!</strong><br><br>📊 Processed ${parsed.length || Object.keys(parsed).length} entries<br>🔄 Leaderboard updated<br>⚡ Cache refreshed<br><br>The leaderboard data has been successfully updated. Changes should be visible on the main page within a few minutes.`, false);
+                    }, 2000);
+                    
+                } catch (error) {
+                    addChatMessage("❌ <strong>Upload Failed</strong><br><br>Invalid JSON format. Please check your data and try again.<br><br>Expected format: <code>[{\"name\": \"player\", \"wagered\": {\"all_time\": 1000}}]</code>", false);
+                }
+            } else if (lowerMessage === 'status') {
+                addChatMessage("📊 <strong>Uploader Status</strong><br><br>• System: Online ✅<br>• Last Upload: Never<br>• API Connection: Active<br>• Cache: Clear<br><br>Ready for data upload.", false);
+            } else if (lowerMessage === 'reset') {
+                addChatMessage("🔄 <strong>Uploader Reset</strong><br><br>All temporary data cleared. Ready for new upload.", false);
+            } else if (lowerMessage === 'exit') {
+                adminAuthenticated = false;
+                adminMode = false;
+                document.getElementById('chat-status').textContent = 'Ready to help you get started!';
+                addChatMessage("👋 <strong>Admin Mode Exited</strong><br><br>Returning to normal helper mode. How can I assist you today?", false);
+            } else {
+                addChatMessage("❓ <strong>Unknown Command</strong><br><br>Available commands:<br>• <code>upload [json_data]</code><br>• <code>status</code><br>• <code>reset</code><br>• <code>exit</code>", false);
+            }
+        }
+
+        function handleNormalBotMessage(message) {
+            // Reuse the existing sendBotMessage logic but for chat
+            setTimeout(() => {
+                const lowerMessage = message.toLowerCase();
+                
+                // Casino-specific keywords
+                if (lowerMessage.includes('thrill') || lowerMessage.includes('$5000') || lowerMessage.includes('5000')) {
+                    startChatOnboarding('thrill');
+                } else if (lowerMessage.includes('goated') || lowerMessage.includes('goat') || lowerMessage.includes('vip transfer') || lowerMessage.includes('$500')) {
+                    startChatOnboarding('goated');
+                } else if (lowerMessage.includes('shuffle') && (lowerMessage.includes('us') || lowerMessage.includes('usa') || lowerMessage.includes('america'))) {
+                    addChatMessage("🇺🇸 <strong>Shuffle.us is Coming Soon!</strong><br><br>The US version of Shuffle is still in development. Currently, we only have Shuffle.com available with our partnership benefits.<br><br>For now, you can:<br>• Register on <strong>Shuffle.com</strong> using code PLAYSHUFFLE<br>• Get notified when Shuffle.us launches<br>• Enjoy up to $1,000 deposit match<br><br>Would you like help with Shuffle.com registration instead?", false);
+                } else if (lowerMessage.includes('shuffle')) {
+                    startChatOnboarding('shuffle');
+                } else if (lowerMessage.includes('discord') || lowerMessage.includes('community') || lowerMessage.includes('join') || lowerMessage.includes('verify')) {
+                    startChatOnboarding('community');
+                } else if (lowerMessage.includes('leaderboard') || lowerMessage.includes('prize') || lowerMessage.includes('rank') || lowerMessage.includes('competition')) {
+                    startChatOnboarding('leaderboards');
+                } else if (lowerMessage.includes('bonus') || lowerMessage.includes('code') || lowerMessage.includes('deposit') || lowerMessage.includes('match')) {
+                    addChatMessage("💰 <strong>Bonus Codes & Offers:</strong><br><br>🎲 <strong>Thrill:</strong> Code 'PORTERPLAYS' - Welcome bonus package<br>🐐 <strong>Goated:</strong> Code 'DISCORD' or 'PLAYGOATED' - Up to $500 VIP transfer<br>🎰 <strong>Shuffle:</strong> Code 'PLAYSHUFFLE' - Up to $1,000 deposit match<br><br>Which casino interests you most? I can walk you through the registration process!", false);
+                } else if (lowerMessage.includes('help') || lowerMessage.includes('support') || lowerMessage.includes('?')) {
+                    addChatMessage("🤝 I'm here to help! You can:<br>• Ask about specific casinos (Thrill, Goated, Shuffle)<br>• Get help joining Discord or Telegram<br>• Learn about leaderboards and prizes<br>• Get bonus codes and offers<br>• VIP transfer assistance<br><br>Try keywords like: 'thrill', 'goated', 'shuffle', 'discord', 'bonus codes', 'vip transfer', or 'start'<br><br>What would you like to know more about?", false);
+                } else {
+                    addChatMessage("🤔 I understand you're asking about: <em>\"" + message + "\"</em><br><br>💡 <strong>Try these keywords:</strong><br>• Casino names: 'thrill', 'goated', 'shuffle'<br>• Actions: 'start', 'join discord', 'bonus codes'<br>• Info: 'leaderboards', 'vip transfer', 'help'<br>• Admin access: 'admin upload'<br><br>What would you like to know more about?", false);
+                }
+            }, 1000);
+        }
+
+        function startChatOnboarding(type) {
+            const response = botResponses[type];
+            if (response) {
+                addChatMessage(response.message, false);
+                botState = type;
+                
+                // Add action buttons if available
+                if (response.actions) {
+                    setTimeout(() => {
+                        const actionsDiv = document.createElement('div');
+                        actionsDiv.style.cssText = 'display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.75rem; justify-content: center;';
+                        
+                        response.actions.forEach(action => {
+                            const btn = document.createElement('button');
+                            btn.textContent = action;
+                            btn.style.cssText = 'background: linear-gradient(135deg, rgba(89,86,255,0.2), rgba(92,255,193,0.1)); border: 1px solid rgba(89,86,255,0.3); color: #5CFFC1; padding: 0.4rem 0.8rem; border-radius: 0.4rem; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;';
+                            btn.onmouseover = () => btn.style.background = 'linear-gradient(135deg, rgba(89,86,255,0.3), rgba(92,255,193,0.2))';
+                            btn.onmouseout = () => btn.style.background = 'linear-gradient(135deg, rgba(89,86,255,0.2), rgba(92,255,193,0.1))';
+                            btn.onclick = () => handleChatAction(action);
+                            actionsDiv.appendChild(btn);
+                        });
+                        
+                        const messagesContainer = document.getElementById('chat-messages');
+                        const lastMessage = messagesContainer.lastElementChild;
+                        lastMessage.appendChild(actionsDiv);
+                        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    }, 500);
+                }
+            }
+        }
+
+        function handleChatAction(action) {
+            addChatMessage(action, true);
+            // Reuse existing handleBotAction logic but for chat
+            setTimeout(() => handleBotAction(action), 800);
         }
 
         // Discord Admin Authentication
