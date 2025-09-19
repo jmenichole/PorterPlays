@@ -6,6 +6,7 @@ import ForbiddenPage from './pages/ForbiddenPage';
 import UpdatesPage from './pages/UpdatesPage';
 import LeaderboardsPage from './pages/LeaderboardsPage';
 import CommunityPage from './pages/CommunityPage';
+import StreamPage from './pages/StreamPage';
 
 const App: React.FC = () => {
   const { isAdmin, isLoggedIn } = useAuth();
@@ -46,6 +47,10 @@ const App: React.FC = () => {
 
   if (route === '/community') {
     return <CommunityPage />;
+  }
+
+  if (route === '/stream') {
+    return <StreamPage />;
   }
 
   // Default to home page
