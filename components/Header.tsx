@@ -12,18 +12,18 @@ export const Header: React.FC = () => {
   return (
     <header className="bg-brand-dark/95 backdrop-blur-sm sticky top-0 z-50 border-b border-brand-highlight/10 shadow-lg">
       <div className="flex justify-between items-center py-4 px-6 max-w-7xl mx-auto">
-        {/* Logo with P icon */}
+        {/* Logo with P icon - keeping the enhanced design */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-brand-highlight rounded-lg flex items-center justify-center">
-            <span className="text-brand-dark text-xl font-bold">P</span>
+          <div className="bg-gradient-to-br from-brand-highlight to-brand-primary p-2 rounded-lg">
+            <span className="text-brand-dark font-bold text-xl">P</span>
           </div>
-          <span className="text-xl font-bold uppercase tracking-wider text-brand-light">
-            PORTER PLAYS
+          <span className="text-xl font-extrabold uppercase tracking-wider text-brand-light">
+            Porter Plays
           </span>
         </div>
 
-        {/* Navigation */}
-        <nav className="flex items-center gap-8">
+        {/* Navigation - using proper navigation handling from main */}
+        <nav className="hidden md:flex items-center gap-8">
           <button 
             onClick={() => handleNavigation('/')}
             className="font-semibold hover:text-brand-highlight transition-colors text-brand-light hover:-translate-y-0.5 transform duration-300"
@@ -80,23 +80,29 @@ export const Header: React.FC = () => {
             </a>
           </div>
 
-          {/* Login Button */}
+          {/* Login Button - keeping the enhanced gradient design */}
           {isLoggedIn ? (
             <div className="flex items-center gap-3">
-              <span className="text-brand-light text-sm">
-                {user?.name || 'User'}
-              </span>
-              <button 
+              <span className="text-brand-light font-medium">Welcome, {user?.name || 'User'}</span>
+              {isAdmin && (
+                <button
+                  onClick={() => handleNavigation('/admin')}
+                  className="text-brand-highlight hover:text-brand-light transition-colors"
+                >
+                  Admin
+                </button>
+              )}
+              <button
                 onClick={logout}
-                className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-brand-light rounded-lg transition-colors text-sm font-medium"
+                className="bg-brand-primary hover:bg-brand-primary/80 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
               >
                 Logout
               </button>
             </div>
           ) : (
-            <button 
+            <button
               onClick={login}
-              className="px-6 py-2 bg-brand-highlight hover:bg-brand-highlight/90 text-brand-dark rounded-lg font-semibold transition-all hover:scale-105 transform"
+              className="bg-gradient-to-r from-brand-highlight to-brand-primary text-brand-dark px-6 py-2.5 rounded-lg font-semibold hover:scale-105 transition transform"
             >
               Login
             </button>
