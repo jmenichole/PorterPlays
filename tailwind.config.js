@@ -19,6 +19,13 @@ export default {
         'brand-primary': '#5956FF',
         'brand-light': '#FFFFFF',
       },
+      backgroundSize: {
+        '200': '200% 200%',
+      },
+      backgroundPosition: {
+        'pos-0': '0% 50%',
+        'pos-100': '100% 50%',
+      },
       animation: {
         'float-in': 'floatIn 0.3s ease-out',
         'fade-in': 'fadeIn 0.5s ease-out',
