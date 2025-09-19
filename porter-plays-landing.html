@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -25,12 +26,12 @@
             background: rgba(27,29,41,0.95); 
             backdrop-filter: blur(10px);
             z-index: 1000;
-            padding: 1.5rem 0;
+            padding: 0.75rem 0;
             border-bottom: 1px solid rgba(92,255,193,0.1);
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
-        .nav { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
-        .logo { font-size: 1.75rem; font-weight: 800; color: #5CFFC1; text-shadow: 0 0 10px rgba(92,255,193,0.3); }
+        .nav { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
+        .logo { font-size: 1.25rem; font-weight: 800; color: #5CFFC1; text-shadow: 0 0 10px rgba(92,255,193,0.3); }
         .nav-links { display: flex; gap: 3rem; list-style: none; }
         .nav-links a { 
             color: #fff; 
@@ -338,22 +339,24 @@
         .social-links { 
             display: flex; 
             justify-content: center; 
-            gap: 2rem; 
+            gap: 1rem; 
             margin-top: 3rem; 
             flex-wrap: wrap;
         }
         .social-links a { 
             background: linear-gradient(145deg, rgba(89,86,255,0.2), rgba(89,86,255,0.1)); 
-            padding: 1.25rem 2rem; 
+            padding: 0.75rem; 
             border-radius: 1rem; 
             color: #5956FF; 
             text-decoration: none; 
-            font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.25rem;
             transition: all 0.3s ease;
             border: 2px solid rgba(89,86,255,0.3);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
         }
         .social-links a:hover { 
             background: linear-gradient(145deg, rgba(89,86,255,0.3), rgba(89,86,255,0.2)); 
@@ -543,8 +546,8 @@
             /* Tabs wrap and are easier to tap */
             .leaderboard-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
             .leaderboard-tab { padding: 0.75rem 1rem; margin: 0.25rem; font-size: 0.95rem; }
-            .social-links { gap: 1rem; }
-            .social-links a { padding: 1rem 1.5rem; font-size: 1rem; }
+            .social-links { gap: 0.75rem; }
+            .social-links a { padding: 0.5rem; font-size: 1rem; width: 35px; height: 35px; }
             .casino-feature-card { margin-bottom: 2rem; }
             .casino-feature-card > div:first-child { padding: 1.5rem 1rem 0.5rem; }
             .hero-stats { gap: 2rem; }
@@ -581,12 +584,12 @@
     <header class="header">
         <nav class="nav">
             <div class="logo">PorterPlays</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#full-leaderboards">Leaderboards</a></li>
-                <li><a href="#community">Community</a></li>
-                <li><a href="#updates">Updates</a></li>
-            </ul>
+            <div class="social-links">
+                <a href="https://discord.gg/porterplays" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+                <a href="https://t.me/porterplays" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+                <a href="https://x.com/porterplays_" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://kick.com/porterplays" target="_blank" title="Kick"><i class="fas fa-play-circle"></i></a>
+            </div>
         </nav>
     </header>
 
@@ -766,23 +769,6 @@
         </div>
     </section>
 
-    <!-- Community Section -->
-    <section id="community" class="community-section">
-        <div class="container">
-            <h2 class="section-title">Join <span class="accent">5,000+ Winners</span></h2>
-            <p class="section-description">Connect with fellow champions, get exclusive bonus codes, and stay updated on the latest competitions and prizes.</p>
-            
-            <div class="social-links">
-                <a href="https://discord.gg/porterplays" target="_blank">Discord</a>
-                <a href="https://t.me/porterplays" target="_blank">Telegram</a>
-                <a href="https://x.com/porterplays_" target="_blank">Twitter</a>
-                <a href="https://kick.com/porterplays" target="_blank">Kick</a>
-            </div>
-            
-
-        </div>
-    </section>
-
     <!-- Get Started - Final Call to Action -->
     <section id="onboarding" class="onboarding-section" style="padding: 6rem 0; background: linear-gradient(135deg, rgba(89,86,255,0.1), rgba(92,255,193,0.05)); position: relative;">
         <div class="container">
@@ -847,7 +833,7 @@
                 A VPN may be required to access Thrill, Goated, and Shuffle.com depending on your location.
             </p>
             <div style="margin-top: 2rem; text-align: center;">
-                <a href="https://jmenichole.github.io/Portfolio/" target="_blank" style="color: #94a3b8; font-size: 0.8rem; text-decoration: none; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.25rem; text-shadow: 2px 2px 0px #ff0080, -2px -2px 0px #00ffff, 2px -2px 0px #ffff00, -2px 2px 0px #ff00ff, 0px 2px 0px #00ff00, 2px 0px 0px #0000ff, 0px -2px 0px #ff0000, -2px 0px 0px #800080; font-family: 'Courier New', monospace; letter-spacing: 1px;">
+                <a href="https://jmenichole.github.io/Portfolio/" target="_blank" style="color: #94a3b8; font-size: 0.8rem; text-decoration: none; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.25rem; font-family: 'Courier New', monospace; letter-spacing: 1px;">
                     made for degens by degens <span style="color: #e11d48;">♥</span>
                 </a>
             </div>
