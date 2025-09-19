@@ -61,11 +61,8 @@ export const SiteSection: React.FC<SiteSectionProps> = ({
   const isLeaderboardSection = !!(leaderboardData || topPrizes);
   const [activeTab, setActiveTab] = useState('announcements');
 
-  // Force updates page to use original layout instead of the new tabbed layout
-  const useOriginalLayout = isLeaderboardSection || id === 'updates';
-
-  // New layout for non-leaderboard sections like Announcements (except updates page)
-  if (!useOriginalLayout) {
+  // New layout for non-leaderboard sections like Announcements
+  if (!isLeaderboardSection) {
     return (
       <section id={id} className="py-20 md:py-24">
         <div className="container mx-auto px-4">
