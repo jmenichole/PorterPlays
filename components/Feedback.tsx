@@ -4,7 +4,7 @@ import { FeedbackIcon, CloseIcon } from './icons';
 const DISCORD_USER_ID = '1153034319271559328';
 // IMPORTANT: This URL must be set in your environment variables for Discord integration to work.
 // For example, in a Vercel/Netlify environment, you would set a variable named DISCORD_WEBHOOK_URL.
-const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL; 
+const DISCORD_WEBHOOK_URL = import.meta.env?.VITE_DISCORD_WEBHOOK_URL; 
 
 export const Feedback: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
