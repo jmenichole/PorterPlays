@@ -30,7 +30,7 @@ export const LeaderboardPreview: React.FC = () => {
         <section className="py-16 md:py-20">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-3xl mx-auto">
-                    <h2 className="text-3xl md:text-4xl font-extrabold uppercase tracking-wider">
+                    <h2 className="text-3xl md:text-4xl font-extrabold uppercase tracking-wider text-brand-light">
                         Leaderboard <span className="text-brand-primary">Snapshot</span>
                     </h2>
                     <p className="mt-4 text-lg text-slate-300">
@@ -54,7 +54,7 @@ export const LeaderboardPreview: React.FC = () => {
                                         {getRankDisplay(rank)}
                                         <span className="font-bold text-xl text-slate-300 hidden sm:inline">#{rank}</span>
                                     </div>
-                                    <div className="col-span-6 font-semibold text-lg truncate">{player.name}</div>
+                                    <div className="col-span-6 font-semibold text-lg truncate text-brand-light">{player.name}</div>
                                     <div className="col-span-4 text-right font-bold text-xl text-brand-highlight">{formatCurrency(player.wagered[Timeframe.ALL_TIME])}</div>
                                 </div>
                             );
@@ -65,7 +65,7 @@ export const LeaderboardPreview: React.FC = () => {
                 <div className="text-center mt-10">
                     <a 
                         href="/leaderboards" 
-                        className="inline-flex items-center justify-center bg-slate-700 hover:bg-slate-600 transition-colors text-white font-bold py-3 px-8 rounded-lg text-lg uppercase"
+                        className="inline-flex items-center justify-center bg-gradient-to-r from-brand-highlight to-brand-primary text-brand-dark hover:scale-105 transition-transform font-bold py-3 px-8 rounded-lg text-lg uppercase"
                     >
                         View Full Leaderboards
                     </a>
