@@ -17,7 +17,7 @@ const StreamPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-brand-dark min-h-screen text-brand-light font-oxanium">
+    <div className="bg-brand-dark min-h-screen text-brand-light font-modern">
       <Header />
       
       <main className="max-w-7xl mx-auto px-6 py-12">

@@ -161,7 +161,7 @@ const AdminPage: React.FC = () => {
     );
 
     return (
-        <div className="bg-brand-dark min-h-screen text-brand-light font-oxanium" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)', backgroundSize: '25px 25px'}}>
+        <div className="bg-brand-dark min-h-screen text-brand-light font-modern" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)', backgroundSize: '25px 25px'}}>
             <div className="flex">
                 <aside className="w-64 bg-slate-900/80 backdrop-blur-sm h-screen sticky top-0 flex flex-col p-4 border-r border-slate-800">
                     <a href="/" className="flex items-center gap-2 text-xl font-bold uppercase tracking-widest px-3 mb-6">

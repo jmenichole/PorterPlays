@@ -6,7 +6,7 @@ import { Feedback } from '../components/Feedback';
 
 const LeaderboardsPage: React.FC = () => {
   return (
-    <div className="bg-brand-dark min-h-screen text-brand-light font-oxanium overflow-hidden">
+    <div className="bg-brand-dark min-h-screen text-brand-light font-modern overflow-hidden">
       <Header />
       <main>
         <LeaderboardsContainer />

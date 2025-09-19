@@ -8,7 +8,7 @@ import { ChatBubble } from '../components/ChatBubble';
 
 const HomePage: React.FC = () => {
   return (
-    <div className="bg-brand-dark min-h-screen text-brand-light font-oxanium">
+    <div className="bg-brand-dark min-h-screen text-brand-light font-modern">
       <Header />
       <main>
         {/* Hero Section */}

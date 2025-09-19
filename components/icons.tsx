@@ -103,25 +103,25 @@ export const CodeIcon: React.FC = () => (
 );
 
 export const GoatedLogo: React.FC<{className?: string}> = ({ className }) => (
-    <svg className={className ?? "h-12 w-auto"} viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg" fontFamily="Oxanium, sans-serif" fontSize="30" fontWeight="bold" fill="#5CFFC1">
+    <svg className={className ?? "h-12 w-auto"} viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg" fontFamily="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif" fontSize="30" fontWeight="bold" fill="#5CFFC1">
         <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle">GOATED</text>
     </svg>
 );
 
 export const ThrillLogo: React.FC<{className?: string}> = ({ className }) => (
-    <svg className={className ?? "h-12 w-auto"} viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg" fontFamily="Oxanium, sans-serif" fontSize="30" fontWeight="bold" fill="#22d3ee">
+    <svg className={className ?? "h-12 w-auto"} viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg" fontFamily="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif" fontSize="30" fontWeight="bold" fill="#22d3ee">
         <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle">THRILL</text>
     </svg>
 );
 
 export const ShuffleLogo: React.FC<{className?: string}> = ({ className }) => (
-    <svg className={className ?? "h-12 w-auto"} viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg" fontFamily="Oxanium, sans-serif" fontSize="30" fontWeight="bold" fill="#10B981">
+    <svg className={className ?? "h-12 w-auto"} viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg" fontFamily="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif" fontSize="30" fontWeight="bold" fill="#10B981">
         <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle">SHUFFLE</text>
     </svg>
 );
 
 export const AnnouncementsLogo: React.FC<{className?: string}> = ({ className }) => (
-    <svg className={className ?? "h-12 w-auto"} viewBox="0 0 400 40" xmlns="http://www.w3.org/2000/svg" fontFamily="Oxanium, sans-serif" fontSize="30" fontWeight="bold" fill="#5CFFC1">
+    <svg className={className ?? "h-12 w-auto"} viewBox="0 0 400 40" xmlns="http://www.w3.org/2000/svg" fontFamily="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif" fontSize="30" fontWeight="bold" fill="#5CFFC1">
         <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle">ANNOUNCEMENTS</text>
     </svg>
 );

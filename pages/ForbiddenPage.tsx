@@ -2,7 +2,7 @@ import React from 'react';
 
 const ForbiddenPage: React.FC = () => {
     return (
-        <div className="bg-brand-dark min-h-screen text-brand-light font-oxanium flex items-center justify-center text-center" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)', backgroundSize: '25px 25px'}}>
+        <div className="bg-brand-dark min-h-screen text-brand-light font-modern flex items-center justify-center text-center" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)', backgroundSize: '25px 25px'}}>
             <div>
                 <h1 className="text-6xl font-extrabold text-red-500">403</h1>
                 <h2 className="text-4xl font-bold mt-2">Access Denied</h2>

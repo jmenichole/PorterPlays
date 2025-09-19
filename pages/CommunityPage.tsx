@@ -8,7 +8,7 @@ import { VisionSection } from '../components/VisionSection';
 
 const CommunityPage: React.FC = () => {
   return (
-    <div className="bg-brand-dark min-h-screen text-brand-light font-oxanium overflow-hidden">
+    <div className="bg-brand-dark min-h-screen text-brand-light font-modern overflow-hidden">
       <Header />
       <main>
         <VisionSection />

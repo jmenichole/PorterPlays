@@ -12,7 +12,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'oxanium': ['Oxanium', 'sans-serif'],
+        'modern': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       colors: {
         'brand-dark': '#1B1D29',
