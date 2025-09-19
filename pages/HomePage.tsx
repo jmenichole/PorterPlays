@@ -2,6 +2,7 @@ import React from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { ThrillSection } from '../components/ThrillSection';
+import { VipTransferSection } from '../components/VipTransferSection';
 import { LeaderboardPreview } from '../components/LeaderboardPreview';
 import { DiscordSection } from '../components/DiscordSection';
 import { Feedback } from '../components/Feedback';
@@ -26,6 +27,8 @@ const HomePage: React.FC = () => {
         </section>
         
         <ThrillSection />
+        
+        <VipTransferSection />
         
         <LeaderboardPreview />
         
