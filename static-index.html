@@ -217,11 +217,27 @@
             background: linear-gradient(135deg, rgba(89,86,255,0.2), rgba(92,255,193,0.1));
             border-bottom: 2px solid #5956FF;
             box-shadow: 0 2px 10px rgba(89,86,255,0.3);
+            display: grid !important;
+            grid-template-columns: 80px 1fr 120px 100px !important;
+            align-items: center !important;
+            padding: 1rem !important;
+            font-weight: 700 !important;
+            color: #5CFFC1 !important;
+            gap: 1rem !important;
+        }
+        .leaderboard-header > div:nth-child(3),
+        .leaderboard-header > div:nth-child(4) {
+            text-align: right;
         }
         .leaderboard-row { 
+            display: grid;
+            grid-template-columns: 80px 1fr 120px 100px;
+            align-items: center;
+            padding: 1rem;
             border-bottom: 1px solid rgba(203,213,225,0.08);
             transition: all 0.3s ease;
             backdrop-filter: blur(5px);
+            gap: 1rem;
         }
         .leaderboard-row:last-child { border-bottom: none; }
         .leaderboard-row:hover {
@@ -527,6 +543,7 @@
             color: #5CFFC1; 
             font-weight: 800;
             text-shadow: 0 0 10px rgba(92,255,193,0.5);
+            text-align: right;
         }
         
         @media (max-width: 768px) {
@@ -535,17 +552,37 @@
             .nav { padding: 0 1rem; }
             .hero { padding: 8rem 1rem 4rem; }
             .container { padding: 0 1rem; }
-            /* Ensure leaderboard grid aligns and fits: hide prize column and reduce to 3 columns */
-            .leaderboard-row { grid-template-columns: 60px 1fr 100px !important; padding: 0.75rem; }
-            .rank { font-size: 1.25rem; }
-            .username { font-size: 1rem; }
-            .wagered { font-size: 1rem; }
-            .leaderboard-header { grid-template-columns: 60px 1fr 100px !important; }
+            /* Improved leaderboard grid layout for mobile */
+            .leaderboard-row { 
+                grid-template-columns: 70px 1fr 110px !important; 
+                padding: 1rem 0.75rem !important; 
+                gap: 0.75rem !important;
+            }
+            .rank { font-size: 1.1rem; }
+            .username { font-size: 0.95rem; }
+            .wagered { font-size: 0.9rem; }
+            .leaderboard-header { 
+                grid-template-columns: 70px 1fr 110px !important; 
+                gap: 0.75rem !important;
+            }
             .leaderboard-header > div:last-child { display: none; }
             .prize-column { display: none; }
-            /* Tabs wrap and are easier to tap */
-            .leaderboard-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
-            .leaderboard-tab { padding: 0.75rem 1rem; margin: 0.25rem; font-size: 0.95rem; }
+            /* Improved tabs layout */
+            .leaderboard-tabs { 
+                display: flex; 
+                flex-wrap: wrap; 
+                gap: 0.75rem; 
+                justify-content: center; 
+                margin-bottom: 2rem;
+            }
+            .leaderboard-tab { 
+                padding: 0.75rem 1.25rem; 
+                margin: 0; 
+                font-size: 0.9rem; 
+                flex: 1;
+                min-width: 120px;
+                max-width: 200px;
+            }
             .social-links { gap: 0.75rem; }
             .social-links a { padding: 0.5rem; font-size: 1rem; width: 35px; height: 35px; }
             .casino-feature-card { margin-bottom: 2rem; }
@@ -554,8 +591,8 @@
             .stat-number { font-size: 2rem; }
             .section-title { font-size: 2.5rem; }
             .casino-cards-section { padding: 4rem 0; margin: 2rem 1rem; }
-            /* Make casino grid adapt better on tablets */
-            .casino-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+            /* Better casino grid for tablets */
+            .casino-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important; }
             .casino-grid { justify-items: stretch; }
             .coming-soon-section { padding: 3rem 0; margin: 2rem 1rem; }
             .vip-highlight-section { padding: 3rem 0; margin: 2rem 1rem; }
@@ -571,9 +608,25 @@
             .casino-feature-card { max-width: 100%; }
             .bot-chat { padding: 1rem; }
             .hero-stats { flex-direction: column; gap: 1rem; text-align: center; }
-            /* Smaller text for numbers; keep readability */
-            .wagered { font-size: 0.9rem; }
-            .leaderboard-tab { padding: 0.6rem 0.9rem; font-size: 0.9rem; }
+            /* Better mobile leaderboard layout */
+            .leaderboard-row { 
+                grid-template-columns: 50px 1fr 90px !important; 
+                padding: 0.75rem 0.5rem !important;
+                gap: 0.5rem !important;
+            }
+            .leaderboard-header { 
+                grid-template-columns: 50px 1fr 90px !important;
+                padding: 0.75rem 0.5rem !important;
+                gap: 0.5rem !important;
+            }
+            .rank { font-size: 1rem; }
+            .username { font-size: 0.85rem; }
+            .wagered { font-size: 0.8rem; }
+            .leaderboard-tab { 
+                padding: 0.6rem 1rem; 
+                font-size: 0.85rem; 
+                min-width: 100px;
+            }
             /* Single column casino cards on very small screens */
             .casino-grid { grid-template-columns: 1fr !important; }
         }
@@ -617,8 +670,8 @@
 
     <!-- Full Leaderboards - Social Proof -->
     <section id="full-leaderboards" class="leaderboard-preview" style="padding: 6rem 0; background: linear-gradient(135deg, rgba(251,191,36,0.08), rgba(245,158,11,0.04));">
-        <div class="container">
-            <div style="text-align: center; margin-bottom: 3rem;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div style="text-align: center; margin-bottom: 4rem;">
                 <div style="display: inline-block; background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(245,158,11,0.1)); border: 1px solid rgba(251,191,36,0.3); color: #fbbf24; padding: 0.5rem 1.5rem; border-radius: 25px; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem;">🏆 Live Competition</div>
                 <h2 class="section-title">Real Players, <span class="accent">Real Prizes</span></h2>
                 <p class="section-description">See who's leading the pack and what they're winning. Join the competition and climb the ranks!</p>
@@ -630,18 +683,18 @@
                 <button id="goated-tab" class="leaderboard-tab" onclick="switchLeaderboard('goated')">Goated Leaderboard</button>
             </div>
 
-            <div class="leaderboard-card">
-                <div class="leaderboard-header" style="display: grid; grid-template-columns: 80px 1fr 120px 100px; align-items: center; padding: 1rem; background: rgba(89,86,255,0.1); border-bottom: 2px solid #5956FF; font-weight: 700; color: #5CFFC1;">
+            <div class="leaderboard-card" style="max-width: 900px; margin: 0 auto;">
+                <div class="leaderboard-header">
                     <div>Rank</div>
                     <div>Username</div>
-                    <div style="text-align: right;">Wagered</div>
-                    <div style="text-align: right;">Prize</div>
+                    <div>Wagered</div>
+                    <div>Prize</div>
                 </div>
                 <div id="full-leaderboard-rows"></div>
             </div>
 
             <!-- Play Now Button -->
-            <div style="text-align: center; margin-top: 2rem;">
+            <div style="text-align: center; margin-top: 3rem;">
                 <a id="play-now-btn" href="https://thrill.com/?r=porterplays" target="_blank" class="view-full-btn">Join the Competition</a>
             </div>
         </div>
@@ -1391,14 +1444,14 @@
                 const rank = index + 1;
                 const prize = getPrize(rank, currentLeaderboard);
                 return `
-                    <div class="leaderboard-row ${getRankClass(rank)}" style="display: grid; grid-template-columns: 80px 1fr 120px 100px; align-items: center; padding: 1rem; border-bottom: 1px solid rgba(203,213,225,0.1);">
+                    <div class="leaderboard-row ${getRankClass(rank)}">
                         <div class="rank">
                             <span class="medal">${getMedalIcon(rank)}</span>
                             #${rank}
                         </div>
                         <div class="username">${maskUsername(player.name)}</div>
                         <div class="wagered">${formatCurrency(player.wagered.all_time)}</div>
-                        <div class="prize-column" style="text-align: right;">${prize > 0 ? formatCurrency(prize) : '-'}</div>
+                        <div class="prize-column">${prize > 0 ? formatCurrency(prize) : '-'}</div>
                     </div>
                 `;
             }).join('');
